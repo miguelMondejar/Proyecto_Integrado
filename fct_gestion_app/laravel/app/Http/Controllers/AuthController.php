@@ -25,7 +25,7 @@ class AuthController extends Controller
             'apellidos' => 'required|string|max:30',
             'fecha_nacimiento' => 'required|date',
             'dni' => 'required|string|min:9|max:10',
-            'email' => 'required|unique:posts|email',
+            'email' => 'required|email',
             'telefono' => 'required|string|max:9',
             'password' => 'required|string|min:8|max:20',
             'rol_id' => 'required|numeric'

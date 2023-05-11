@@ -36,21 +36,39 @@
             <p class="lead mb-0">Gestione, crea y edita a su alumnado.</p>
         </section>
 
-        <!-- Botón crear usuario -->
+        <!-- formulario -->
+        <section class="bg-light text-center">
+            <div class="container" id="formularioRegister">
+                <p>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre">
+
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos">
+                </p>
+                <p>
+                    <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                    <input type="text" id="fecha_nacimiento" name="fecha_nacimiento">
+
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni">
+                </p>
+                <p>
+                    <label for="correo">Correo eléctronico</label>
+                    <input type="email" id="correo" name="correo">
+
+                    <label for="dni">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono">
+                </p>
+            </div>
+        </section>
+
+        <!-- Botón post -->
         <div class="container text-center">
             <form action="gestion_alumnos_form.html">
-                <input type="submit" value="Crear nuevo alumno" class="btn btn-primary">
+                <input type="submit" value="Enviar" class="btn btn-primary">
             </form>
-        </div>
-
-        <!-- Datos usuarios -->
-        <section class="features-icons bg-light text-center">
-            <form action="">
-                <div class="container" id="usuarios">
-                    <script>getUsuarios(2)</script>
-                </div>       
-            </form>       
-        </section>
+        </div><br><br>
 
         <!-- Masthead-->
         <header class="masthead">

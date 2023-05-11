@@ -10,3 +10,7 @@ const limpiarOutput = (elementName) => {
         elementNode.removeChild(elementNode.firstChild)
     }
 }
+
+const mensajeConfirmacion = (elemento) => {
+    confirm("¿Está seguro que desea eliminar a este " + elemento + " ?")
+}

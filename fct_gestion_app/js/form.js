@@ -1,5 +1,3 @@
-const API_BASE_URL = "http://127.0.0.1:8000/api";
-
 // Mensajes
 const mensajeVacio = "Los campos no pueden estar vacíos."
 const mensajeVacioRegistro = "Los campos 'Nombre' y 'Apellidos' no pueden estar vacíos."
@@ -49,7 +47,7 @@ function loginUsuario() {
   
     form.addEventListener('submit', async (event) => {
         event.preventDefault() // prevenir que el formulario se envíe por defecto
-    
+
         // datos del login
         const email = document.getElementById('correo').value
         const password = document.getElementById('pass').value
@@ -72,10 +70,93 @@ function loginUsuario() {
             redirect: 'follow'
         };
 
-        // hacemos el fetch
+        // hacemos el fetch y guardamos el token
         fetch(`${API_BASE_URL}/login`, requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+            .then(response => {
+                // Verifica si la respuesta del servidor es 200 OK
+                if (!response.ok) {
+                    alert('Error al iniciar sesión')
+                    throw new Error('Error al iniciar sesión')
+                }
+                // Extrae el token del cuerpo de respuesta de la solicitud
+                return response.json()
+            })
+            .then(data => {
+                // Almacenar el token en una variable
+                const token = data.token
+                // Configurar los encabezados para la solicitud user POST
+                let headers = new Headers()
+                headers.append('Authorization', `Bearer ${token}`)
+                headers.append('Content-Type', 'application/json')
+
+                // Configurar la solicitud user POST
+                let userRequestOptions = {
+                    method: 'POST',
+                    headers: headers,
+                    redirect: 'follow'
+                }
+
+                // Hacer la solicitud user POST
+                fetch(`${API_BASE_URL}/user`, userRequestOptions)
+                    .then(response => {
+                        // Verifica si la respuesta del servidor es 200 OK
+                        if (!response.ok) {
+                            throw new Error('Error al obtener usuario')
+                        }
+                        // Extrae los datos del usuario del cuerpo de respuesta de la solicitud
+                        return response.json()
+                    })
+                    .then(result => {
+                        // dependiendo del rol del usuario irá a una página u otra
+                        if (result.usuario.rol_id == 1) {
+                            // guardamos token en localStorage
+                            localStorage.setItem('token', token)
+                            // enviamos a inicio de la página profesor
+                            window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_profesor.html";
+                        } else if (result.usuario.rol_id == 2) {
+                            // guardamos token en localStorage
+                            localStorage.setItem('token', token)
+                            // enviamos a inicio de la página profesor
+                            window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_alumno.html";
+                        } else {
+                            console.log('Rol no válido');
+                        }
+                    })
+                    .catch(error => console.log('Error al obtener usuario', error))
+            })
+            .catch(error => console.log('Error al iniciar sesión', error))
     })
+}
+
+async function consultarToken() {
+    let token = localStorage.getItem('token')
+
+    // Configurar los encabezados para la solicitud user POST
+    let headers = new Headers()
+    headers.append('Authorization', `Bearer ${token}`)
+    headers.append('Content-Type', 'application/json')
+
+    // Configurar la solicitud user POST
+    let userRequest = {
+        method: 'POST',
+        headers: headers,
+        redirect: 'follow'
+    }
+    
+    // Hacer la solicitud user POST
+    fetch(`${API_BASE_URL}/user`, userRequest)
+        .then(response => {
+            // Verifica si la respuesta del servidor es 200 OK
+            if (!response.ok) {
+                throw new Error('Error al obtener usuario')
+            }
+            // Extrae los datos del usuario del cuerpo de respuesta de la solicitud
+            return response.json()
+        })
+        .then(result => {
+            let nombreUsuario = result.usuario.nombre
+            document.getElementById("nombre-usuario").textContent = `Bienvenido/a, ${nombreUsuario}`
+            return result
+        })
+        .catch(error => console.log('Error al obtener usuario', error))
 }
