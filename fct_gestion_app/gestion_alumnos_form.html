@@ -14,9 +14,11 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/forms.css" rel="stylesheet">
 
         <script src="js/llamadasAPIs.js"></script>
+        <script src="js/form.js"></script>
         <script src="js/common.js"></script>
     </head>
     <body>
@@ -37,53 +39,35 @@
         </section>
 
         <!-- formulario -->
-        <section class="bg-light text-center">
-            <div class="container" id="formularioRegister">
-                <p>
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre">
-
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" id="apellidos" name="apellidos">
-                </p>
-                <p>
-                    <label for="fecha_nacimiento">Fecha Nacimiento</label>
-                    <input type="text" id="fecha_nacimiento" name="fecha_nacimiento">
-
-                    <label for="dni">DNI</label>
-                    <input type="text" id="dni" name="dni">
-                </p>
-                <p>
-                    <label for="correo">Correo eléctronico</label>
-                    <input type="email" id="correo" name="correo">
-
-                    <label for="dni">Teléfono</label>
-                    <input type="text" id="telefono" name="telefono">
-                </p>
+        <section class="features-icons bg-light text-center">
+                <div class="text-center" id="formularioRegister">
+                    <form action="gestion_alumnos.html">
+                        <div class="form-column">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre">
+                            <label for="password1">Contraseña</label>
+                            <input type="password" id="password1" name="password1">
+                            <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                            <input type="text" id="fecha_nacimiento" name="fecha_nacimiento">
+                            <label for="correo">Correo eléctronico</label>
+                            <input type="email" id="correo" name="correo">
+                        </div>
+                        <div class="form-column">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" name="apellidos">
+                            <label for="password2">Repetir contraseña</label>
+                            <input type="password" id="password2" name="password2">
+                            <label for="dni">DNI</label>
+                            <input type="text" id="dni" name="dni">
+                            <label for="dni">Teléfono</label>
+                            <input type="text" id="telefono" name="telefono">
+                        </div>
+                        <input type="submit" value="Enviar" class="btn btn-primary">
+                    </form>                  
+                </div>                                 
             </div>
         </section>
-
-        <!-- Botón post -->
-        <div class="container text-center">
-            <form action="gestion_alumnos_form.html">
-                <input type="submit" value="Enviar" class="btn btn-primary">
-            </form>
-        </div><br><br>
-
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                            <h1 class="mb-5">FCT GESTION APP</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-                
+     
         <!-- Footer-->
         <footer class="footer bg-dark">
             <div class="container">
@@ -127,4 +111,7 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
+
+    <script>consultarToken()</script>
+    <script>registerUsuario()</script>
 </html>

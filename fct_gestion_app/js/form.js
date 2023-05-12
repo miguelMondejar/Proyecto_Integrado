@@ -9,6 +9,7 @@ const mensajeIdioma = "Debe señalar un idioma correcto."
 const mensajeCookies = "Las cookies no están aceptadas. Acéptelas para que la página funcione correctamente."
 const mensajeMail = "El correo electrónico no es válido."
 const mensajeContrasenaLogin = "Contraseña no válida, compruebe también que las cookies estén aceptadas."
+const mensajeInicioSesion = "No ha iniciado sesión."
 
 // Expresion regular correo
 let emailExpresion = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
@@ -129,7 +130,13 @@ function loginUsuario() {
 }
 
 async function consultarToken() {
+    // consultamos el token
     let token = localStorage.getItem('token')
+    // si no existe, redirigimos al inicio de sesión
+    if(token == null || token == "") {
+        alert(mensajeInicioSesion)
+        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/login.html";
+    }
 
     // Configurar los encabezados para la solicitud user POST
     let headers = new Headers()

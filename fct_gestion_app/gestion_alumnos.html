@@ -17,6 +17,7 @@
         <link href="css/styles.css" rel="stylesheet" />
 
         <script src="js/llamadasAPIs.js"></script>
+        <script src="js/form.js"></script>
         <script src="js/common.js"></script>
     </head>
     <body>
@@ -36,15 +37,14 @@
             <p class="lead mb-0">Gestione, crea y edita a su alumnado.</p>
         </section>
 
-        <!-- Botón crear usuario -->
-        <div class="container text-center">
-            <form action="gestion_alumnos_form.html">
-                <input type="submit" value="Crear nuevo alumno" class="btn btn-primary">
-            </form>
-        </div>
-
         <!-- Datos usuarios -->
         <section class="features-icons bg-light text-center">
+            <!-- Botón crear usuario -->
+            <div class="container text-center">
+                <form action="gestion_alumnos_form.html">
+                    <input type="submit" value="Crear nuevo alumno" class="btn btn-primary">
+                </form>
+            </div><br><br>
             <form action="">
                 <div class="container" id="usuarios">
                     <script>getUsuarios(2)</script>
@@ -109,4 +109,6 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
+
+    <script>consultarToken()</script>
 </html>
