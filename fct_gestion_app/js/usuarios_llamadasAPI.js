@@ -1,15 +1,4 @@
-const API_BASE_URL = "http://127.0.0.1:8000/api"
-
-const nombre = document.getElementById('nombre').value
-const apellidos = document.getElementById('apellidos').value
-const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
-const dni = document.getElementById('dni').value
-const email = document.getElementById('email').value
-const telefono = document.getElementById('telefono').value
-const password1 = document.getElementById('password1').value
-const password2 = document.getElementById('password2').value
-
-// función para pintar usuarios en forma de tabla
+// Función para pintar usuarios en forma de tabla. Tipo de usuario es el rol
 async function getUsuarios(tipoUsuario) {
     let div = document.getElementById('usuarios')
 
@@ -55,6 +44,7 @@ async function getUsuarios(tipoUsuario) {
     }
 }
 
+// Función para registrar un usuario
 async function registerUsuario() {
     const form = document.getElementById('formularioRegister')
   
@@ -96,23 +86,30 @@ async function registerUsuario() {
     })
 }
 
+// Función para validar los campos de registros
 function validarRegistro() {
     if (nombre == "" || apellidos == "" || fecha_nacimiento == "" || dni == "" || 
     email == "" || telefono == "" || password1 == "" || password2 == "") {
-        alert('Todos los campos son obligatorios');
-        return false;
+        alert("Todos los campos son obligatorios")
+        return false
     }
 
     // Verificar si las contraseñas coinciden
     if (password1 !== password2) {
-        alert("Las contraseñas no coinciden");
-        return false;
+        alert("Las contraseñas no coinciden")
+        return false
     }
 
     // Si todo está correcto, enviar el formulario
-    return true;
+    return true
+}
+
+// Función para editar un usuario
+async function putUsuario(id) {
+    
 }
   
+// Función para eliminar un usuario
 async function deleteUsuario(id) {
     mensajeConfirmacion("usuario")
     let token = localStorage.getItem('token')
@@ -132,17 +129,90 @@ async function deleteUsuario(id) {
         .catch(error => console.log('error', error))
 }
 
-async function getEmpresas() {
-    let div = document.getElementById('empresas')
-    try {
-        const response = await fetch(`${API_BASE_URL}/empresas`)
-        const responseData = await response.json()
-        
-        // imprimimos todos los usuarios que estén en tendencia
-        responseData.forEach(usuario => {
-            div.innerHTML += "<p>" + usuario.id + " | "+ usuario.nombre + "</p>"
+// Función para cerrar sesión
+async function logout() {
+    let token = localStorage.getItem('token')
+
+    let miHeaders = new Headers()
+    miHeaders.append("Content-Type", "application/json")
+    
+    let datos = JSON.stringify({
+        "token": token
+    })
+    
+    let requestOptions = {
+        method: 'POST',
+        headers: miHeaders,
+        body: datos,
+        redirect: 'follow'
+    }
+    
+    fetch(`${API_BASE_URL}/logout`, requestOptions)
+        .then(response => {response.json()})
+        .then(result => {
+            console.log(result)
+            if(result.exito == true) {
+                localStorage.removeItem("token")
+            }
         })
-        
+        .catch(error => console.log('error', error))
+}
+
+// Función para consultar el token existente
+async function consultarToken() {
+    // consultamos el token
+    let token = localStorage.getItem('token')
+    // si no existe, redirigimos al inicio de sesión
+    if(token == null || token == "") {
+        console.log(mensajeInicioSesion)
+        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/login.html";
+    }
+
+    // Configurar los encabezados para la solicitud user POST
+    let headers = new Headers()
+    headers.append('Authorization', `Bearer ${token}`)
+    headers.append('Content-Type', 'application/json')
+
+    // Configurar la solicitud user POST
+    let userRequest = {
+        method: 'POST',
+        headers: headers,
+        redirect: 'follow'
+    }
+    
+    // Hacer la solicitud user POST
+    fetch(`${API_BASE_URL}/user`, userRequest)
+        .then(response => {
+            // Verifica si la respuesta del servidor es 200 OK
+            if (!response.ok) {
+                throw new Error('Error al obtener usuario')
+            }
+            // Extrae los datos del usuario del cuerpo de respuesta de la solicitud
+            return response.json()
+        })
+        .then(result => {
+            let nombreUsuario = result.usuario.nombre
+            document.getElementById("nombre-usuario").textContent = `Bienvenido/a ${nombreUsuario} 👋`
+            return result
+        })
+        .catch(error => console.log('Error al obtener usuario', error))
+}
+
+// Función que servirá para seleccionar a partir de una lista de los nombres de los usuarios
+async function getUsuariosNombre() {
+    let select = document.getElementById('select-usuarios')
+
+    // hacemos la llamada a la API y pintamos los usuarios
+    try {
+        const response = await fetch(`${API_BASE_URL}/usuarios`)
+        const responseData = await response.json()
+
+        responseData.forEach(usuario => {
+            if(usuario.rol_id == "2") {
+                select.innerHTML += `<option id='${usuario.id}'>${usuario.nombre}`
+            }
+        })
+
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
     }

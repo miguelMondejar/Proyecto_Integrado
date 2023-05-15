@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>FCT Gestion App - Profesor</title>
+        <title>FCT Gestion App - Perfil Usuario</title>
 
         <!-- Icono-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -38,65 +38,46 @@
                 <!-- menu-->
                 <div id="menu" style="display:none">
                     <ul>
-                        <li><a href="perfil_usuario.html">Perfil</a></li> 
-                        <li><a href="" onclick="logout()">Cerrar sesión</a></li>
+                        <li><a href="">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         
-        <!-- bienvenida-->
+        <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5" id="nombre-usuario">Bienvenido/a</h1>
-            <p class="lead mb-0">Sus alumnos y empresas les espera. Gestione fácilmente.</p>
+            <h1 class="mb-5">Edite su perfil</h1>
         </section>
 
-        <!-- Icons de gestion-->
+        <!-- formulario -->
         <section class="features-icons bg-light text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <a class="navbar-brand" href="gestion_alumnos.html">
-                                <img src="assets/img/inico_estudiantes.png" alt="icono estudiantes" width="200px">
-                                <p class="lead mb-0">Gestión de alumnos</p>     
-                            </a>  
+                <div class="text-center" id="formularioRegister">
+                    <form>
+                        <div class="form-column">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre">
+                            <label for="password1">Contraseña</label>
+                            <input type="password" id="password1" name="password1">
+                            <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                            <input type="text" id="fecha_nacimiento" name="fecha_nacimiento">
+                            <label for="correo">Correo eléctronico</label>
+                            <input type="email" id="correo" name="correo">
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <a class="navbar-brand" href="gestion_candidaturas.html">
-                                <img src="assets/img/inico_candidatura.png" alt="icono candidatura" width="200px">
-                                <p class="lead mb-0">Gestión de candidaturas</p>
-                            </a>
+                        <div class="form-column">
+                            <label for="apellidos">Apellidos</label>
+                            <input type="text" id="apellidos" name="apellidos">
+                            <label for="password2">Repetir contraseña</label>
+                            <input type="password" id="password2" name="password2">
+                            <label for="dni">DNI</label>
+                            <input type="text" id="dni" name="dni">
+                            <label for="dni">Teléfono</label>
+                            <input type="text" id="telefono" name="telefono">
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                            <a class="navbar-brand" href="gestion_empresas.html">
-                                <img src="assets/img/inico_empresa.png" alt="icono empresas" width="200px">
-                                <p class="lead mb-0">Gestión de empresas</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    </form>                  
+                </div>                                 
             </div>
         </section>
-
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                            <h1 class="mb-5">FCT GESTION APP</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-                
+     
         <!-- Footer-->
         <footer class="footer bg-dark">
             <div class="container">
@@ -139,8 +120,7 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-        
+
         <script>mostrarMenu()</script>
-        <script>consultarToken()</script>
     </body>    
 </html>

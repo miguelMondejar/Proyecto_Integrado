@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>FCT Gestion App - Profesor</title>
+        <title>FCT Gestion App - Gestión alumnos</title>
 
         <!-- Icono-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -25,6 +25,7 @@
         <script src="js/common.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
+        <script src="js/candidaturas_llamadasAPI.js"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -38,49 +39,32 @@
                 <!-- menu-->
                 <div id="menu" style="display:none">
                     <ul>
-                        <li><a href="perfil_usuario.html">Perfil</a></li> 
-                        <li><a href="" onclick="logout()">Cerrar sesión</a></li>
+                        <li><a href="">Perfil</a></li> 
+                        <li><a href="">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         
-        <!-- bienvenida-->
+        <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5" id="nombre-usuario">Bienvenido/a</h1>
-            <p class="lead mb-0">Sus alumnos y empresas les espera. Gestione fácilmente.</p>
+            <h1 class="mb-5">Gestion de candidaturas</h1>
+            <p class="lead mb-0">Gestione, crea y edita a su alumnado.</p>
         </section>
 
-        <!-- Icons de gestion-->
+        <!-- Datos usuarios -->
         <section class="features-icons bg-light text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <a class="navbar-brand" href="gestion_alumnos.html">
-                                <img src="assets/img/inico_estudiantes.png" alt="icono estudiantes" width="200px">
-                                <p class="lead mb-0">Gestión de alumnos</p>     
-                            </a>  
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <a class="navbar-brand" href="gestion_candidaturas.html">
-                                <img src="assets/img/inico_candidatura.png" alt="icono candidatura" width="200px">
-                                <p class="lead mb-0">Gestión de candidaturas</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                            <a class="navbar-brand" href="gestion_empresas.html">
-                                <img src="assets/img/inico_empresa.png" alt="icono empresas" width="200px">
-                                <p class="lead mb-0">Gestión de empresas</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Botón crear usuario -->
+            <div class="container text-center">
+                <form action="gestion_candidaturas_form.html">
+                    <input type="submit" value="Crear nueva candidatura" class="btn btn-primary">
+                </form>
+            </div><br><br>
+            <form action="">
+                <div class="container" id="candidaturas">
+                    <script>getCandidaturas()</script>
+                </div>  
+            </form>       
         </section>
 
         <!-- Masthead-->
@@ -139,8 +123,8 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-        
+
         <script>mostrarMenu()</script>
         <script>consultarToken()</script>
-    </body>    
+    </body>
 </html>

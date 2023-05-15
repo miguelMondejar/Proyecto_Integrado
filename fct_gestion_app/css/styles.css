@@ -68,10 +68,11 @@
   color: var(--bs-danger);
 }
 
-input[type=password], input[type=email]{
+input[type=password], input[type=email], input[type=date], option, select {
   text-align: center;
   margin-top: 1%;
-  width: 250px;
+  width: 100%;
+  height: 100%;
 }
 
 *,
@@ -385,7 +386,8 @@ select:disabled {
 button,
 [type=button],
 [type=reset],
-[type=submit] {
+[type=submit],
+[type=date], select, option {
   -webkit-appearance: button;
 }
 button:not(:disabled),

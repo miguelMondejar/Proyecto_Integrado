@@ -32,3 +32,31 @@
     float: left;
     padding-right: 5%;
 }
+
+/* Menú perfil */
+#menu {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+}
+  
+#menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+  
+#menu li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+  
+#menu li:last-child {
+    border-bottom: none;
+}
+  
