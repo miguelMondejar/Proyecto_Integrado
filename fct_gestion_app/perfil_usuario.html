@@ -38,7 +38,8 @@
                 <!-- menu-->
                 <div id="menu" style="display:none">
                     <ul>
-                        <li><a href="">Cerrar sesión</a></li>
+                        <li><a href="perfil_usuario.html">Perfil</a></li> 
+                        <li><a href="" onclick="logout()">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,36 +47,27 @@
         
         <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5">Edite su perfil</h1>
+            <h1 class="mb-5">Perfil de usuario</h1>
+            <p class="lead mb-0">Si desea editar sus datos de perfil, hagalo desde aquí.</p>
         </section>
 
         <!-- formulario -->
         <section class="features-icons bg-light text-center">
-                <div class="text-center" id="formularioRegister">
-                    <form>
-                        <div class="form-column">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre">
-                            <label for="password1">Contraseña</label>
-                            <input type="password" id="password1" name="password1">
-                            <label for="fecha_nacimiento">Fecha Nacimiento</label>
-                            <input type="text" id="fecha_nacimiento" name="fecha_nacimiento">
-                            <label for="correo">Correo eléctronico</label>
-                            <input type="email" id="correo" name="correo">
-                        </div>
-                        <div class="form-column">
-                            <label for="apellidos">Apellidos</label>
-                            <input type="text" id="apellidos" name="apellidos">
-                            <label for="password2">Repetir contraseña</label>
-                            <input type="password" id="password2" name="password2">
-                            <label for="dni">DNI</label>
-                            <input type="text" id="dni" name="dni">
-                            <label for="dni">Teléfono</label>
-                            <input type="text" id="telefono" name="telefono">
-                        </div>
-                    </form>                  
-                </div>                                 
+            <div class="text-center" class="perfil">
+                Nombre: <p id="nombre"></p>    
+                Apellidos: <p id="apellidos"></p>     
+                Fecha nacimiento: <p id="fecha_nacimiento"></p>  
+                DNI: <p id="dni"></p>       
+                Correo: <p id="email"></p>     
+                Teléfono: <p id="telefono"></p>                   
             </div>
+        </section>
+
+        <!-- Botón editar perfil -->
+        <section class="features-icons bg-light text-center">
+            <form action="">
+                <input type="submit" value="Editar perfil" class="btn btn-primary">
+            </form>
         </section>
      
         <!-- Footer-->
@@ -121,6 +113,7 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
+        <script>consultarToken()</script>
         <script>mostrarMenu()</script>
     </body>    
 </html>

@@ -136,9 +136,10 @@ async function logout() {
     let miHeaders = new Headers()
     miHeaders.append("Content-Type", "application/json")
     
+    // lo pasamos en formato JSON
     let datos = JSON.stringify({
         "token": token
-    })
+    });
     
     let requestOptions = {
         method: 'POST',
@@ -148,13 +149,8 @@ async function logout() {
     }
     
     fetch(`${API_BASE_URL}/logout`, requestOptions)
-        .then(response => {response.json()})
-        .then(result => {
-            console.log(result)
-            if(result.exito == true) {
-                localStorage.removeItem("token")
-            }
-        })
+        .then(response => response.text())
+        .then(localStorage.removeItem('token'))
         .catch(error => console.log('error', error))
 }
 
@@ -191,8 +187,11 @@ async function consultarToken() {
             return response.json()
         })
         .then(result => {
-            let nombreUsuario = result.usuario.nombre
-            document.getElementById("nombre-usuario").textContent = `Bienvenido/a ${nombreUsuario} 👋`
+            let resultadoUsuario = result.usuario
+            document.getElementById("nombre-usuario").textContent = `Bienvenido/a ${resultadoUsuario.nombre} 👋`
+            nombre.innerHTML = resultadoUsuario.nombre
+            apellidos.innerHTML = resultadoUsuario.apellidos
+
             return result
         })
         .catch(error => console.log('Error al obtener usuario', error))

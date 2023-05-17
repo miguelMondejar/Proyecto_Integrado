@@ -76,7 +76,7 @@ function loginUsuario() {
             .then(response => {
                 // Verifica si la respuesta del servidor es 200 OK
                 if (!response.ok) {
-                    alert('Error al iniciar sesión')
+                    document.getElementById('error-inicio-sesion').innerHTML = "Email/Contraseña no correcto. Inténtelo de nuevo."
                     throw new Error('Error al iniciar sesión')
                 }
                 // Extrae el token del cuerpo de respuesta de la solicitud
