@@ -22,9 +22,10 @@
 
         <!-- Scripts JS -->
         <script src="js/form.js"></script>
-        <script src="js/common.js"></script>
+        <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
+        <script src="js/candidaturas_llamadasAPI.js"></script>
     </head>
 
     <body>
@@ -56,6 +57,7 @@
         <section class="features-icons bg-light text-center">
             <h4 class="mb-5" id="nombre-usuario">Candidaturas</h4>
             <div class="candidaturas">
+                <script>getCandidaturaUsuario()</script>
                 <p class="lead mb-0"><i>No cuenta con candidaturas activas actualmente, espere o consulte a su docente.</i></p>
             </div>
         </section>
@@ -111,5 +113,6 @@
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     
         <script>mostrarMenu()</script>
+        <script>consultarToken()</script>
     </body>
 </html>

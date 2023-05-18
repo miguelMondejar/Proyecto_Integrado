@@ -1,7 +1,6 @@
 // Función para pintar las candidaturas de un usuario espefico
 async function getCandidaturaUsuario(id) {
     let div = document.getElementById('candidaturas')
-    limpiarOutput(div)
 
     // creamos la tabla
     let tabla = document.createElement('table')
@@ -32,7 +31,6 @@ async function getCandidaturaUsuario(id) {
                 <td>${candidatura.estado}</td>`
             tabla.appendChild(fila)
         })
-
         div.appendChild(tabla)
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
@@ -47,7 +45,7 @@ async function getCandidaturas() {
     let tabla = document.createElement('table')
     tabla.classList.add('table')
 
-    let encabezadosTabla = ['Fecha Inicio', 'Fecha Fin', 'Empresa', 'Estado']
+    let encabezadosTabla = ['Fecha Inicio', 'Fecha Fin', 'Empresa', 'Estado', 'Editar', 'Borrar']
     let encabezadosFilas = document.createElement('tr')
 
     // rellenamos el encabezado de la tabla
@@ -69,7 +67,9 @@ async function getCandidaturas() {
                 <td>${candidatura.fecha_inicio}</td>
                 <td>${candidatura.fecha_fin}</td>
                 <td>${candidatura.empresa_id}</td>
-                <td>${candidatura.estado}</td>`
+                <td>${candidatura.estado}</td>
+                <td><input type='submit' onclick='' value='✏' class='botonEditar'></td>
+                <td><input type='submit' onclick='deleteEmpresa(${candidatura.id})' value='❌' class='botonBorrar'></td>`
             tabla.appendChild(fila)
         })
 

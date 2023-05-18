@@ -28,8 +28,8 @@ async function getEmpresas() {
                 <td>${empresa.nombre}</td>
                 <td>${empresa.cif}</td>
                 <td>${empresa.email}</td>
-                <td><input type='submit' onclick='' value='✏'></td>
-                <td><input type='submit' onclick='deleteEmpresa(${empresa.id})' value='❌'></td>`
+                <td><input type='submit' onclick='' value='✏' class='botonEditar'></td>
+                <td><input type='submit' onclick='deleteEmpresa(${empresa.id})' value='❌' class='botonBorrar'></td>`
             tabla.appendChild(fila)
         })
 

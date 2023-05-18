@@ -22,7 +22,7 @@
 
         <!-- Scripts JS -->
         <script src="js/form.js"></script>
-        <script src="js/common.js"></script>
+        <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
     </head>
@@ -47,6 +47,7 @@
         
         <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
+            <img src="assets/img/inico_estudiantes.png" width="150px">
             <h1 class="mb-5">Gestion de alumnos</h1>
             <p class="lead mb-0">Gestione, crea y edita a su alumnado.</p>
         </section>
@@ -55,9 +56,9 @@
         <section class="features-icons bg-light text-center">
             <!-- Botón crear alumno -->
             <div class="container text-center">
-                <form action="gestion_alumnos_form.html">
-                    <input type="submit" value="Crear nuevo alumno" class="btn btn-primary">
-                </form>
+                <a href="gestion_alumnos_form.html">
+                    <input type="button" value="Crear nuevo alumno" class="btn btn-primary">
+                </a>
             </div><br><br>
             <form action="">
                 <div class="container" id="usuarios">

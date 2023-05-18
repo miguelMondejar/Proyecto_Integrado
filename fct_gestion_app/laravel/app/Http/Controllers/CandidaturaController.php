@@ -86,6 +86,29 @@ class CandidaturaController extends Controller
         }
 
         return response()->json(['data' => $candidatura], Response::HTTP_OK);
+
+        /*
+        // Buscamos la candidatura
+        $candidatura = Candidatura::findOrFail($id);
+
+        if($idAumno == 0) {
+            // comprobamos que exista
+            if(!$candidatura) {
+                return response()->json(['mensaje' => "Candidatura no encontrado"], 404);
+            }
+
+            return response()->json(['data' => $candidatura], Response::HTTP_OK);
+        }
+
+        // si existe idAlumno
+        $alumno = User::with("candidaturas")->findOrFail($idAumno);
+        // comprobamos que exista
+        if(!$alumno) {
+            return response()->json(['mensaje' => "Candidaturas con alumno no encontrada"], 404);
+        }
+
+        return response()->json(['data' => $alumno], Response::HTTP_OK);
+         */
     }
 
     /**

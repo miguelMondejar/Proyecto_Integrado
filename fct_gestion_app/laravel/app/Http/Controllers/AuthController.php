@@ -23,8 +23,8 @@ class AuthController extends Controller
         $validator = Validator::make($data, [
             'nombre' => 'required|string|max:25',
             'apellidos' => 'required|string|max:30',
-            'fecha_nacimiento' => 'required|date',
-            'dni' => 'required|string|min:9|max:10',
+            'fecha_nacimiento' => 'required|string',
+            'dni' => 'required|string|min:8|max:10',
             'email' => 'required|email',
             'telefono' => 'required|string|max:9',
             'password' => 'required|string|min:8|max:20',

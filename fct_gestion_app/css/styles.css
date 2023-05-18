@@ -64,7 +64,7 @@
   --bs-body-bg: #fff;
 }
 
-#errorMail, #errorVacio, #error-inicio-sesion {
+#errorMail, #errorVacio, #error-inicio-sesion, #errores {
   color: var(--bs-danger);
 }
 
@@ -335,6 +335,7 @@ tfoot,
 tr,
 td,
 th {
+  font-size: 20px;
   border-color: inherit;
   border-style: solid;
   border-width: 0;
@@ -346,6 +347,23 @@ label {
 
 button {
   border-radius: 0;
+}
+
+/* botones para la lista */
+.botonBorrar {
+  border: 0;
+}
+.botonBorrar:hover {
+  border-radius: 10px;
+  background-color: #ffb8b8;
+}
+
+.botonEditar {
+  border: 0;
+}
+.botonEditar:hover {
+  border-radius: 10px;
+  background-color: #ffffb8;
 }
 
 button:focus:not(:focus-visible) {
@@ -4071,6 +4089,7 @@ textarea.form-control-lg {
   text-decoration: none;
   white-space: nowrap;
 }
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -11314,6 +11333,11 @@ textarea.form-control-lg {
 }
 .features-icons .features-icons-item .features-icons-icon i {
   font-size: 4.5rem;
+}
+
+.features-icons-item:hover {
+  border-radius: 20px;
+  background-color: white;
 }
 
 header.masthead {

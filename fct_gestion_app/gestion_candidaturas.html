@@ -22,7 +22,7 @@
 
         <!-- Scripts JS -->
         <script src="js/form.js"></script>
-        <script src="js/common.js"></script>
+        <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
         <script src="js/candidaturas_llamadasAPI.js"></script>
@@ -48,17 +48,18 @@
         
         <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
+            <img src="assets/img/inico_candidatura.png" width="150px">
             <h1 class="mb-5">Gestion de candidaturas</h1>
             <p class="lead mb-0">Gestione, crea y edita a su alumnado.</p>
         </section>
 
         <!-- Datos usuarios -->
         <section class="features-icons bg-light text-center">
-            <!-- Botón crear usuario -->
+            <!-- Botón crear candidatura -->
             <div class="container text-center">
-                <form action="gestion_candidaturas_form.html">
-                    <input type="submit" value="Crear nueva candidatura" class="btn btn-primary">
-                </form>
+                <a href="gestion_candidaturas_form.html">
+                    <input type="button" value="Crear nueva candidatura" class="btn btn-primary">
+                </a>
             </div><br><br>
             <form action="">
                 <div class="container" id="candidaturas">

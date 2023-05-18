@@ -1,37 +1,22 @@
 <?php
 
+use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComentarioController;
 use Illuminate\Support\Facades\Route;
 
-// ruta index 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
 Route::get('/', function () {
    return view('index');
 });
-
-// ruta inicio sesión
-Route::get('/login', function () {
-   return view('login');
-});
-
-// PROFESOR
-// ruta index del profesor
-Route::get('/profesor', function () {
-   return view('inicio_profesor');
-});
-// ruta gestión alumnos
-Route::get('/profesor/gestion_alumnos', function () {
-   return view('gestion_alumnos');
-});
-// ruta gestión alumnos formulario
-Route::get('/profesor/gestion_alumnos/form', function () {
-   return view('gestion_alumnos_form');
-});
-
-// ALUMNO
-// ruta index del alumno
-Route::get('/alumno', function () {
-   return view('inicio_alumno');
-});
-
-
 

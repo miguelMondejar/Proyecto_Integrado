@@ -22,7 +22,7 @@
 
         <!-- Scripts JS -->
         <script src="js/form.js"></script>
-        <script src="js/common.js"></script>
+        <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
         <script src="js/empresas_llamadasAPI.js"></script>
@@ -45,20 +45,24 @@
                 </div>
             </div>
         </nav>
-        
+
         <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
+            <img src="assets/img/inico_empresa.png" width="150px">
             <h1 class="mb-5">Gestion de empresas</h1>
             <p class="lead mb-0">Gestione, crea y edita las empresas.</p>
         </section>
 
         <!-- Datos usuarios -->
         <section class="features-icons bg-light text-center">
-            <!-- Botón crear usuario -->
+            <!-- Botón crear empresa -->
             <div class="container text-center">
-                <form action="gestion_empresas_form.html">
-                    <input type="submit" value="Crear nueva empresa" class="btn btn-primary">
-                </form>
+                <a href="gestion_empresas_form.html">
+                    <input type="button" value="Crear nueva empresa" class="btn btn-primary">
+                </a>
+                <a href="gestion_sedes.html">
+                    <input type="button" value="Gestión de sedes" class="btn btn-primary">
+                </a>
             </div><br><br>
             <form action="">
                 <div class="container" id="empresas">

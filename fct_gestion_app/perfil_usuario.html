@@ -22,7 +22,7 @@
 
         <!-- Scripts JS -->
         <script src="js/form.js"></script>
-        <script src="js/common.js"></script>
+        <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
     </head>
@@ -45,21 +45,41 @@
             </div>
         </nav>
         
-        <!-- bienvenida -->
+        <!-- bienvenida-->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5">Perfil de usuario</h1>
-            <p class="lead mb-0">Si desea editar sus datos de perfil, hagalo desde aquí.</p>
+            <h1 class="mb-5" id="nombre-usuario">Bienvenido/a</h1>
+            <h3 class="mb-5">Perfil de usuario</h3>
         </section>
 
         <!-- formulario -->
         <section class="features-icons bg-light text-center">
             <div class="text-center" class="perfil">
-                Nombre: <p id="nombre"></p>    
-                Apellidos: <p id="apellidos"></p>     
-                Fecha nacimiento: <p id="fecha_nacimiento"></p>  
-                DNI: <p id="dni"></p>       
-                Correo: <p id="email"></p>     
-                Teléfono: <p id="telefono"></p>                   
+                <table class="table">
+                    <tr>
+                      <th>Nombre</th>
+                      <td id="nombre"></td>
+                    </tr>
+                    <tr>
+                      <th>Apellidos</th>
+                      <td id="apellidos"></td>
+                    </tr>
+                    <tr>
+                      <th>Fecha Nacimiento</th>
+                      <td id="fecha_nacimiento"></td>
+                    </tr>
+                    <tr>
+                      <th>DNI</th>
+                      <td id="dni"></td>
+                    </tr>
+                    <tr>
+                      <th>Correo electrónico</th>
+                      <td id="email"></td>
+                    </tr>
+                    <tr>
+                      <th>Teléfono</th>
+                      <td id="telefono"></td>
+                    </tr>
+                </table>                
             </div>
         </section>
 
