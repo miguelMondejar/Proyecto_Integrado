@@ -75,14 +75,14 @@ async function registerUsuario() {
             "telefono": `${document.getElementById('telefono').value}`,
             "password": `${document.getElementById('password2').value}`,
             "rol_id": "2"
-        });
+        })
 
         let requestRegistro = {
             method: 'POST',
             headers: miHeaders,
             body: datos,
             redirect: 'follow'
-        };
+        }
 
         fetch(`${API_BASE_URL}/register`, requestRegistro)
             .then(response => {
@@ -101,35 +101,29 @@ async function registerUsuario() {
 function validarRegistro() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
-    let validar = true
 
     if (!validarCamposVacios(document.getElementById('nombre').value) || !validarCamposVacios(document.getElementById('apellidos').value) || 
     !validarCamposVacios(document.getElementById('password1').value) || !validarCamposVacios(document.getElementById('password2').value) || 
     !validarCamposVacios(document.getElementById('fecha_nacimiento').value) || !validarCamposVacios(document.getElementById('dni').value) || 
     !validarCamposVacios(document.getElementById('telefono').value) || !validarCamposVacios(document.getElementById('correo').value)) {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
-        validar = false
     }
 
     if (!validarCorreo(document.getElementById('correo').value)) {
         campoErrores.innerHTML += `${mensajeCorreo} <br>`
-        validar = false
     }
 
     if (!validarPassword(document.getElementById('password1').value)) {
         campoErrores.innerHTML += `${mensajeContrasena} <br>`
-        validar = false
     }
 
     if (!validar2Password(document.getElementById('password1').value, document.getElementById('password2').value)) {
         campoErrores.innerHTML += `${mensajePassRepetida} <br>`
-        validar = false
     }
 
     if (!validarTamanio(document.getElementById('dni').value, 9, 9) ||
     !validarTamanio(document.getElementById('telefono').value, 9, 9)) {
         campoErrores.innerHTML += `${mensajeDNITelefono} <br>`
-        validar = false
     }
 }
 
@@ -141,7 +135,7 @@ async function putUsuario(id) {
 // Función para eliminar un usuario
 async function deleteUsuario(id) {
     let mensajeConfirmacion = confirm("¿Está seguro que desea eliminar a este usuario?")
-    if(mensajeConfirmacion) {
+    if (mensajeConfirmacion) {
         let token = localStorage.getItem('token')
 
         let miHeaders = new Headers()
@@ -235,7 +229,7 @@ async function consultarToken() {
         .catch(error => console.log('Error al obtener usuario', error))
 }
 
-// Función que servirá para seleccionar a partir de una lista de los nombres de los usuarios
+// Función que servirá para pintar un select con todos los nombre de alumnos
 async function getUsuariosNombre() {
     let select = document.getElementById('select-usuarios')
 
@@ -246,11 +240,23 @@ async function getUsuariosNombre() {
 
         responseData.forEach(usuario => {
             if(usuario.rol_id == "2") {
-                select.innerHTML += `<option id='${usuario.id}'>${usuario.nombre}`
+                select.innerHTML += `<option value='${usuario.id}'>${usuario.nombre}`
             }
         })
 
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
+    }
+}
+
+// Esta función será utilizada para que me devuelva el nombre de los alumnos un listado
+async function obtenerNombreAlumno(id) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/usuarios/${id}`)
+        const alumnoData = await response.json()
+        return alumnoData.data
+    } catch (error) {
+        console.log(`Error al obtener los datos del alumno con ID ${id}:`, error)
+        return null
     }
 }

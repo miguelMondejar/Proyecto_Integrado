@@ -39,7 +39,7 @@ function loginUsuario() {
             })
             .then(data => {
                 // Almacenar el token en una variable
-                const token = data.token
+                let token = data.token
                 // Configurar los encabezados para la solicitud user POST
                 let headers = new Headers()
                 headers.append('Authorization', `Bearer ${token}`)

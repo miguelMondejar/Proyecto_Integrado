@@ -66,13 +66,7 @@
 
 #errorMail, #errorVacio, #error-inicio-sesion, #errores {
   color: var(--bs-danger);
-}
-
-input[type=password], input[type=email], input[type=date], option, select {
-  text-align: center;
-  margin-top: 1%;
-  width: 100%;
-  height: 100%;
+  font-weight: bold;
 }
 
 *,

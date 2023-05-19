@@ -74,7 +74,7 @@ async function getEmpresasNombre() {
         const responseData = await response.json()
 
         responseData.forEach(empresas => {
-            select.innerHTML += `<option id='${empresas.id}'>${empresas.nombre}`
+            select.innerHTML += `<option value='${empresas.id}'>${empresas.nombre}`
         })
 
     } catch (error) {

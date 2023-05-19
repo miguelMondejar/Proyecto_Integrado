@@ -24,7 +24,7 @@ async function getSedes() {
         // Iteramos sobre cada sede y obtenemos los datos de la empresa
         for (let sede of responseData) {
             let fila = document.createElement('tr')
-            let empresaData = await obtenerDatosEmpresa(sede.empresa_id)
+            let empresaData = await obtenerNombreEmpresa(sede.empresa_id)
 
             fila.innerHTML = `
                 <td>${sede.nombre}</td>
@@ -45,7 +45,7 @@ async function getSedes() {
 }
 
 // Esta función será utilizada para que me devuelva el nombre de la empresa en el listado de Sedes
-async function obtenerDatosEmpresa(id) {
+async function obtenerNombreEmpresa(id) {
     try {
         const response = await fetch(`${API_BASE_URL}/empresas/${id}`)
         const empresaData = await response.json()
@@ -56,13 +56,13 @@ async function obtenerDatosEmpresa(id) {
     }
 }
 
-// Función para eliminar una candidatura
-async function deleteCandidatura(id) {
+// Función para eliminar una sede
+async function deleteSede(id) {
 
 }
 
-// Función para editar una candidatura
-async function putCandidatura(id) {
+// Función para editar una sede
+async function putSede(id) {
 
 }
 
