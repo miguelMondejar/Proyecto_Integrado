@@ -16,7 +16,6 @@ class Sede extends Model
         'provincia',
         'codigo_postal',
         'telefono',
-        'email',
         'empresa_id'	
     ];
 

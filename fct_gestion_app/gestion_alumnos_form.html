@@ -47,8 +47,8 @@
         
         <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5">Gestion de alumnos</h1>
-            <p class="lead mb-0">Gestione, crea y edita a su alumnado.</p>
+            <h1 class="mb-5">Gestion de usuarios</h1>
+            <p class="lead mb-0">Crea a un nuevo usuario, puede elegir entre alumno y docente.</p>
         </section>
 
         <!-- formulario -->
@@ -64,6 +64,11 @@
                         <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
                         <label for="correo">Correo eléctronico</label>
                         <input type="email" id="correo" name="correo">
+                        <label>Rol</label>
+                        <select id="select-rol">
+                            <option value="2">Alumno</option>
+                            <option value="1">Docente</option>
+                        </select>
                     </div>
                     <div class="form-column">
                         <label for="apellidos">Apellidos</label>
@@ -75,11 +80,10 @@
                         <label for="telefono">Teléfono</label>
                         <input type="text" id="telefono" name="telefono">
                     </div>
-
-                    <p id="errores"></p>
-
+                    <p id="errores"></p> 
                     <input type="submit" value="Enviar" class="btn btn-primary">
-                </form>                  
+                </form>   
+                              
             </div>                                 
         </section>
      

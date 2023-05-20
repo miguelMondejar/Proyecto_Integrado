@@ -6,7 +6,7 @@ async function getCandidaturaUsuario() {
     let tabla = document.createElement('table')
     tabla.classList.add('table')
 
-    let encabezadosTabla = ['Fecha Inicio', 'Fecha Fin', 'Alumno', 'Empresa', 'Estado']
+    let encabezadosTabla = ['Fecha Inicio', 'Fecha Fin', 'Empresa', 'Estado']
     let encabezadosFilas = document.createElement('tr')
 
     // Rellenamos el encabezado de la tabla
@@ -21,17 +21,16 @@ async function getCandidaturaUsuario() {
     try {
         const response = await fetch(`${API_BASE_URL}/candidaturas`)
         const responseData = await response.json()
+        let idAlumno = await obtenerIDUsuarioLogado()
 
         for (let candidatura of responseData) {
-            if(candidatura.usuario_id == 9) {
+            if(candidatura.usuario_id == idAlumno) {
                 let empresaData = await obtenerNombreEmpresa(candidatura.empresa_id)
-                let alumnoData = await obtenerNombreAlumno(candidatura.usuario_id)
-
+                
                 let fila = document.createElement('tr')
                 fila.innerHTML = `
                     <td>${candidatura.fecha_inicio}</td>
                     <td>${candidatura.fecha_fin}</td>
-                    <td>${alumnoData.nombre}</td>
                     <td>${empresaData.nombre}</td>
                     <td>${candidatura.estado}</td>`
                 tabla.appendChild(fila)
@@ -70,7 +69,7 @@ async function getCandidaturas() {
         for (let candidatura of responseData) {
             let empresaData = await obtenerNombreEmpresa(candidatura.empresa_id)
             let alumnoData = await obtenerNombreAlumno(candidatura.usuario_id)
-
+            
             let fila = document.createElement('tr')
             fila.innerHTML = `
                 <td>${candidatura.fecha_inicio}</td>

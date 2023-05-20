@@ -34,7 +34,7 @@ async function getSedes() {
                 <td>${sede.codigo_postal}</td>
                 <td>${sede.telefono}</td>
                 <td><input type='button' onclick='' value='✏' class='botonEditar'></td>
-                <td><input type='button' onclick='deleteUsuario(${sede.id})' value='❌' class='botonBorrar'></td>`
+                <td><input type='button' onclick='deleteSede(${sede.id})' value='❌' class='botonBorrar'></td>`
             tabla.appendChild(fila)
         }
 
@@ -56,9 +56,83 @@ async function obtenerNombreEmpresa(id) {
     }
 }
 
+// Función para registrar una sede a una empresa
+async function registerSede() {
+    const form = document.getElementById('formularioRegistro')
+  
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+        // cogemos el token del profesor
+        let token = localStorage.getItem('token')
+
+        let miHeaders = new Headers()
+        miHeaders.append("Content-Type", "application/json")
+        miHeaders.append(`Authorization`, `Bearer ${token}`)
+
+        // select
+        let selectEmpresa = document.getElementById('select-empresas')
+
+        // hacemos el registro
+        let datos = JSON.stringify({
+            "nombre": document.getElementById('nombre').value,
+            "direccion": document.getElementById('direccion').value,
+            "localidad": document.getElementById('localidad').value,
+            "provincia": document.getElementById('provincia').value,
+            "codigo_postal": document.getElementById('codigo_postal').value,
+            "telefono": document.getElementById('telefono').value,
+            "empresa_id": parseInt(selectEmpresa.options[selectEmpresa.selectedIndex].value)
+        })
+
+        let requestRegistro = {
+            method: 'POST',
+            headers: miHeaders,
+            body: datos,
+            redirect: 'follow'
+        }
+
+        try {
+            let response = await fetch(`${API_BASE_URL}/sedes`, requestRegistro)
+            if (response.ok) {
+                alert("Sede creada correctamente")
+                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_sedes.html"
+            } else {
+                alert("Datos erroneos, compruebelos.")
+                let error = await response.text()
+                console.log('Error:', error)
+            }
+        } catch (error) {
+            console.log('error', error)
+        }
+    })
+}
+
 // Función para eliminar una sede
 async function deleteSede(id) {
+    let mensajeConfirmacion = confirm("¿Está seguro que desea eliminar a esta sede?")
+    if (mensajeConfirmacion) {
+        let token = localStorage.getItem('token')
 
+        let miHeaders = new Headers()
+        miHeaders.append(`Authorization`, `Bearer ${token}`)
+    
+        let requestOptions = {
+            method: 'DELETE',
+            headers: miHeaders,
+            redirect: 'follow'
+        }
+
+        fetch(`${API_BASE_URL}/sedes/${id}`, requestOptions)
+            .then(response => {
+                if(response.ok) {
+                    alert("Sede borrada correctamente")
+                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_sedes.html"
+                }
+                console.log(response.text())
+            })
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error))
+    }
 }
 
 // Función para editar una sede

@@ -16,6 +16,8 @@
 }
 
 #formularioRegister form input[type=text],
+#formularioRegister form input[type=tel],
+#formularioRegister form input[type=number],
 #formularioRegister form input[type=email],
 #formularioRegister form input[type=password],
 #formularioRegister form input[type=date], select, option {

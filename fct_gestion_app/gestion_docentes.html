@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>FCT Gestion App - Perfil de usuario</title>
+        <title>FCT Gestion App - Gestión alumnos</title>
 
         <!-- Icono-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -45,55 +45,34 @@
             </div>
         </nav>
         
-        <!-- bienvenida-->
+        <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5" id="nombre-usuario">Bienvenido/a</h1>
-            <h3 class="mb-5">Perfil de usuario</h3>
+            <img src="assets/img/inico_estudiantes.png" width="150px">
+            <h1 class="mb-5">Gestion de docentes</h1>
+            <p class="lead mb-0">Gestione al resto de docentes.</p>
         </section>
 
-        <!-- formulario -->
+        <!-- Datos usuarios -->
         <section class="features-icons bg-light text-center">
-            <div class="text-center" class="perfil">
-                <table class="table">
-                    <tr>
-                      <th>Nombre</th>
-                      <td id="nombre"></td>
-                    </tr>
-                    <tr>
-                      <th>Apellidos</th>
-                      <td id="apellidos"></td>
-                    </tr>
-                    <tr>
-                      <th>Fecha Nacimiento</th>
-                      <td id="fecha_nacimiento"></td>
-                    </tr>
-                    <tr>
-                      <th>DNI</th>
-                      <td id="dni"></td>
-                    </tr>
-                    <tr>
-                      <th>Correo electrónico</th>
-                      <td id="email"></td>
-                    </tr>
-                    <tr>
-                      <th>Teléfono</th>
-                      <td id="telefono"></td>
-                    </tr>
-                    <tr>
-                        <th id="cvTitulo"></th>
-                        <td id="cv"></td>
-                    </tr>
-                </table>                
+            <div class="container" id="usuarios">
+                <script>getUsuarios(1)</script>
+            </div>         
+        </section>
+
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">FCT GESTION APP</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-
-        <!-- Botón editar perfil -->
-        <section class="features-icons bg-light text-center">
-            <form action="">
-                <input type="submit" value="Editar perfil" class="btn btn-primary">
-            </form>
-        </section>
-     
+        </header>
+                
         <!-- Footer-->
         <footer class="footer bg-dark">
             <div class="container">
@@ -137,7 +116,7 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-        <script>consultarToken()</script>
         <script>mostrarMenu()</script>
-    </body>    
+        <script>consultarToken()</script>
+    </body>
 </html>

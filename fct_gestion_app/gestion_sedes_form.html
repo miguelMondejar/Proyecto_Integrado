@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>FCT Gestion App - Perfil de usuario</title>
+        <title>FCT Gestion App - Gestión sedes</title>
 
         <!-- Icono-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -25,6 +25,8 @@
         <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
+        <script src="js/empresas_llamadasAPI.js"></script>
+        <script src="js/sedes_llamadasAPI.js"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -45,53 +47,41 @@
             </div>
         </nav>
         
-        <!-- bienvenida-->
+        <!-- bienvenida -->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5" id="nombre-usuario">Bienvenido/a</h1>
-            <h3 class="mb-5">Perfil de usuario</h3>
+            <h1 class="mb-5">Gestion de sedes</h1>
+            <p class="lead mb-0">Gestione, crea y edita la sede de una empresa.</p>
         </section>
 
         <!-- formulario -->
         <section class="features-icons bg-light text-center">
-            <div class="text-center" class="perfil">
-                <table class="table">
-                    <tr>
-                      <th>Nombre</th>
-                      <td id="nombre"></td>
-                    </tr>
-                    <tr>
-                      <th>Apellidos</th>
-                      <td id="apellidos"></td>
-                    </tr>
-                    <tr>
-                      <th>Fecha Nacimiento</th>
-                      <td id="fecha_nacimiento"></td>
-                    </tr>
-                    <tr>
-                      <th>DNI</th>
-                      <td id="dni"></td>
-                    </tr>
-                    <tr>
-                      <th>Correo electrónico</th>
-                      <td id="email"></td>
-                    </tr>
-                    <tr>
-                      <th>Teléfono</th>
-                      <td id="telefono"></td>
-                    </tr>
-                    <tr>
-                        <th id="cvTitulo"></th>
-                        <td id="cv"></td>
-                    </tr>
-                </table>                
-            </div>
-        </section>
+            <div class="text-center" id="formularioRegister">
+                <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
+                    <div class="form-column">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre">
+                        <label for="localidad">Localidad</label>
+                        <input type="text" id="localidad" name="localidad">
+                        <label for="codigo_postal">Código Postal</label>
+                        <input type="number" id="codigo_postal" name="codigo_postal">
+                        <label for="empresa">Empresa</label>
+                        <select id="select-empresas">
+                        </select>
+                    </div>
+                    <div class="form-column">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion">
+                        <label for="provincia">Provincia</label>
+                        <input type="text" id="provincia" name="provincia">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">    
+                    </div>
 
-        <!-- Botón editar perfil -->
-        <section class="features-icons bg-light text-center">
-            <form action="">
-                <input type="submit" value="Editar perfil" class="btn btn-primary">
-            </form>
+                    <p id="errores"></p>
+
+                    <input type="submit" value="Enviar" class="btn btn-primary">
+                </form>                  
+            </div>                                 
         </section>
      
         <!-- Footer-->
@@ -137,7 +127,9 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-        <script>consultarToken()</script>
         <script>mostrarMenu()</script>
+        <script>consultarToken()</script>
+        <script>registerSede()</script>
+        <script>getEmpresasNombre()</script>
     </body>    
 </html>

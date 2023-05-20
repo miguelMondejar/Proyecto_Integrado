@@ -48,9 +48,8 @@ CREATE TABLE Sedes (
   provincia VARCHAR(50) NOT NULL,
   codigo_postal VARCHAR(5) NOT NULL,
   telefono VARCHAR(9) NOT NULL,
-  email VARCHAR(30) NOT NULL,
   empresa_id INTEGER(5) NOT NULL,
-  FOREIGN KEY (empresa_id) REFERENCES Empresas(id)
+  FOREIGN KEY (empresa_id) REFERENCES Empresas(id) ON DELETE CASCADE
 );
 
 /* DDL Tabla Candidaturas */
@@ -61,6 +60,6 @@ CREATE TABLE Candidaturas (
   estado VARCHAR(15) NOT NULL,
   usuario_id INTEGER(5) NOT NULL,
   empresa_id INTEGER(5) NOT NULL,
-  FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
-  FOREIGN KEY (empresa_id) REFERENCES Empresas(id)
+  FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) ON DELETE CASCADE,
+  FOREIGN KEY (empresa_id) REFERENCES Empresas(id) ON DELETE CASCADE
 );

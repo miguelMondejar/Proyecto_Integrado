@@ -28,13 +28,13 @@ insert into Empresas (cif, nombre, email) values ('M60532685', 'Quimba', 'nsayno
 insert into Empresas (cif, nombre, email) values ('G40505483', 'Browsezoom', 'lzorzin4@nps.gov');
 
 /* Insertar sedes (https://www.mockaroo.com/) */
-insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, email, empresa_id) 
-values ('Sede Cogibox', '23 International Hill', 'Vitoria-Gasteiz', 'Pais Vasco', '01005', '913405312', 'lguidetti0@imageshack.us', 1);
-insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, email, empresa_id) 
-values ('Sede Eadel', '089 Forest Point', 'Ourense', 'Galicia', '32005', '980472076', 'cscalia1@vkontakte.ru', 2);
-insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, email, empresa_id) 
-values ('Sede Wikivu', '36 Bluejay Drive', 'Sevilla', 'Andalucia', '41020', '930819956', 'hdavidge2@usda.gov', 3);
-insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, email, empresa_id) 
-values ('Sede Mycat', '8123 Green Ridge Place', 'Castellon De La Plana/Castello De La Pla', 'Comunidad Valenciana', '12005', '931162180', 'cdjokic3@mail.ru', 4);
-insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, email, empresa_id) 
-values ('Sede Yabox', '8 Vahlen Center', 'Malaga', 'Andalucia', '29010', '909976936', 'jwhight4@elegantthemes.com', 5);
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Sede Cogibox', '23 International Hill', 'Vitoria-Gasteiz', 'Pais Vasco', '01005', '913405312', 1);
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Sede Eadel', '089 Forest Point', 'Ourense', 'Galicia', '32005', '980472076', 2);
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Sede Wikivu', '36 Bluejay Drive', 'Sevilla', 'Andalucia', '41020', '930819956', 3);
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Sede Mycat', '8123 Green Ridge Place', 'Castellon De La Plana/Castello De La Pla', 'Comunidad Valenciana', '12005', '931162180', 4);
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Sede Yabox', '8 Vahlen Center', 'Malaga', 'Andalucia', '29010', '909976936', 5);

@@ -41,7 +41,7 @@ class SedeController extends Controller
     {
         // Crear una sede nueva
         // Validamos los datos.
-        $data = $request->only('nombre', 'direccion', 'localidad', 'provincia','codigo_postal', 'telefono', 'email', 'empresa_id');
+        $data = $request->only('nombre', 'direccion', 'localidad', 'provincia','codigo_postal', 'telefono', 'empresa_id');
         $validador = Validator::make($data, [
             'nombre' => 'required|string|max:25',
             'direccion' => 'required|string|max:50',
@@ -49,7 +49,6 @@ class SedeController extends Controller
             'provincia' => 'required|string|max:50',
             'codigo_postal' => 'required|string|max:5',
             'telefono' => 'required|string|max:9',
-            'email' => 'required|email',
             'empresa_id' => 'required|numeric'
         ]);
 
@@ -65,7 +64,6 @@ class SedeController extends Controller
             'provincia' => $request->provincia,
             'codigo_postal' => $request->codigo_postal,
             'telefono' => $request->telefono,
-            'email' => $request->email,
             'empresa_id' => $request->empresa_id
         ]);
 
@@ -105,7 +103,7 @@ class SedeController extends Controller
     {
         // Actualizar una sede nueva
         // Validamos los datos.
-        $data = $request->only('nombre', 'direccion', 'localidad', 'provincia','codigo_postal', 'telefono', 'email', 'empresa_id');
+        $data = $request->only('nombre', 'direccion', 'localidad', 'provincia','codigo_postal', 'telefono', 'empresa_id');
         $validador = Validator::make($data, [
             'nombre' => 'required|string|max:25',
             'direccion' => 'required|string|max:50',
@@ -113,7 +111,6 @@ class SedeController extends Controller
             'provincia' => 'required|string|max:50',
             'codigo_postal' => 'required|string|max:5',
             'telefono' => 'required|string|max:9',
-            'email' => 'required|email',
             'empresa_id' => 'required|numeric'
         ]);
 
@@ -132,7 +129,6 @@ class SedeController extends Controller
             'provincia' => $request->provincia,
             'codigo_postal' => $request->codigo_postal,
             'telefono' => $request->telefono,
-            'email' => $request->email,
             'empresa_id' => $request->empresa_id
         ]);
 

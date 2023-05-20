@@ -28,20 +28,24 @@ async function getUsuarios(tipoUsuario) {
     try {
         const response = await fetch(`${API_BASE_URL}/usuarios`)
         const responseData = await response.json()
+        let idUsuario = await obtenerIDUsuarioLogado()
 
         responseData.forEach(usuario => {
             if(usuario.rol_id == tipoUsuario) {
-                let fila = document.createElement('tr')
-                fila.innerHTML = `
-                    <td>${usuario.nombre}</td>
-                    <td>${usuario.apellidos}</td>
-                    <td>${usuario.fecha_nacimiento}</td>
-                    <td>${usuario.dni}</td>
-                    <td>${usuario.email}</td>
-                    <td>${usuario.telefono}</td>
-                    <td><input type='button' onclick='' value='✏' class='botonEditar'></td>
-                    <td><input type='button' onclick='deleteUsuario(${usuario.id})' value='❌' class='botonBorrar'></td>`
-                tabla.appendChild(fila)
+                // El docente logeado NO saldrá en la lista, así no se podrá eliminar a sí mismo
+                if(idUsuario != usuario.id) {
+                    let fila = document.createElement('tr')
+                    fila.innerHTML = `
+                        <td>${usuario.nombre}</td>
+                        <td>${usuario.apellidos}</td>
+                        <td>${usuario.fecha_nacimiento}</td>
+                        <td>${usuario.dni}</td>
+                        <td>${usuario.email}</td>
+                        <td>${usuario.telefono}</td>
+                        <td><input type='button' onclick='' value='✏' class='botonEditar'></td>
+                        <td><input type='button' onclick='deleteUsuario(${usuario.id})' value='❌' class='botonBorrar'></td>`
+                    tabla.appendChild(fila)
+                }
             }
         })
 
@@ -65,16 +69,19 @@ async function registerUsuario() {
         miHeaders.append("Content-Type", "application/json")
         miHeaders.append(`Authorization`, `Bearer ${token}`)
 
+        // select
+        let selectRol = document.getElementById('select-rol')
+
         // hacemos el registro
         let datos = JSON.stringify({
-            "nombre": `${document.getElementById('nombre').value}`,
-            "apellidos": `${document.getElementById('apellidos').value}`,
-            "fecha_nacimiento": `${document.getElementById('fecha_nacimiento').value}`,
-            "dni": `${document.getElementById('dni').value}`,
-            "email": `${document.getElementById('correo').value}`,
-            "telefono": `${document.getElementById('telefono').value}`,
-            "password": `${document.getElementById('password2').value}`,
-            "rol_id": "2"
+            "nombre": document.getElementById('nombre').value,
+            "apellidos": document.getElementById('apellidos').value,
+            "fecha_nacimiento": document.getElementById('fecha_nacimiento').value,
+            "dni": document.getElementById('dni').value,
+            "email": document.getElementById('correo').value,
+            "telefono": document.getElementById('telefono').value,
+            "password": document.getElementById('password2').value,
+            "rol_id": selectRol.options[selectRol.selectedIndex].value
         })
 
         let requestRegistro = {
@@ -87,7 +94,7 @@ async function registerUsuario() {
         fetch(`${API_BASE_URL}/register`, requestRegistro)
             .then(response => {
                 if(response.ok) {
-                    alert("Alumno creado correctamente")
+                    alert("Usuario creado correctamente")
                     window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
                 }
                 response.text()
@@ -151,7 +158,7 @@ async function deleteUsuario(id) {
             .then(response => response.text())
             .then(result => {
                 console.log(result)
-                alert("Alumno borrado correctamente")
+                alert("Usuario borrado correctamente")
                 window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
             })
             .catch(error => console.log('error', error))
@@ -203,7 +210,7 @@ async function consultarToken() {
         headers: headers,
         redirect: 'follow'
     }
-    
+
     // Hacer la solicitud user POST
     fetch(`${API_BASE_URL}/user`, userRequest)
         .then(response => {
@@ -224,9 +231,52 @@ async function consultarToken() {
             document.getElementById('dni').textContent = resultadoUsuario.dni
             document.getElementById('email').textContent = resultadoUsuario.email
             document.getElementById('telefono').textContent = resultadoUsuario.telefono
+
+            // si el rol del usuario es 2, pintamos el CV en el perfil
+            if (resultadoUsuario.rol_id == 2) {
+                document.getElementById("cvTitulo").textContent = "CV"
+            } else {
+                document.getElementById("cv").remove()
+                document.getElementById("cvTitulo").remove()
+            }
+
             return result
         })
         .catch(error => console.log('Error al obtener usuario', error))
+}
+
+// función para obtener el ID del usuario que esté logado
+async function obtenerIDUsuarioLogado() {
+    try {
+        // Consultamos el token
+        let token = localStorage.getItem('token')
+
+        // Configuramos los encabezados para la solicitud POST
+        let headers = new Headers()
+        headers.append('Authorization', `Bearer ${token}`)
+        headers.append('Content-Type', 'application/json')
+
+        // Configuramos la solicitud POST
+        let userRequest = {
+            method: 'POST',
+            headers: headers,
+            redirect: 'follow'
+        }
+
+        // Hacemos la solicitud POST
+        const response = await fetch(`${API_BASE_URL}/user`, userRequest)
+        
+        // Verificamos si la respuesta del servidor es 200 OK
+        if (!response.ok) {
+            throw new Error('Error al obtener usuario')
+        }
+
+        const result = await response.json()
+        return result.usuario.id
+    } catch (error) {
+        console.log('Error al obtener usuario', error)
+        return null // Retornamos null en caso de error
+    }
 }
 
 // Función que servirá para pintar un select con todos los nombre de alumnos

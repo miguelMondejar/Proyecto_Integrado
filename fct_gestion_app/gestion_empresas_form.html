@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>FCT Gestion App - Gestión alumnos</title>
+        <title>FCT Gestion App - Gestión empresas</title>
 
         <!-- Icono-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -25,6 +25,7 @@
         <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
+        <script src="js/empresas_llamadasAPI.js"></script>
         <script src="js/sedes_llamadasAPI.js"></script>
     </head>
     <body>
@@ -55,20 +56,13 @@
         <!-- formulario -->
         <section class="features-icons bg-light text-center">
                 <div class="text-center" id="formularioRegister">
-                    <form action="gestion_alumnos.html">
-                        <div class="form-column">
+                    <form action="gestion_alumnos.html" id="formularioRegistro">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre">
                             <label for="cif">CIF</label>
                             <input type="text" id="cif" name="cif">
-                        </div>
-                        <div class="form-column">
-                            <label for="email">Email</label>
-                            <input type="text" id="email" name="email">
-                            <label for="sede">Sede</label>
-                            <select id="select-sedes">
-                            </select>
-                        </div>
+                            <label for="correo">Email</label>
+                            <input type="email" id="correo" name="correo">
                         <input type="submit" value="Enviar" class="btn btn-primary">
                     </form>                  
                 </div>                                 
@@ -118,9 +112,8 @@
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-        <script>getSedesNombre()</script>
         <script>mostrarMenu()</script>
         <script>consultarToken()</script>
-        <script>registerUsuario()</script>
+        <script>registerEmpresa()</script>
     </body>    
 </html>
