@@ -27,6 +27,7 @@
         <script src="js/usuarios_llamadasAPI.js"></script>
         <script src="js/sedes_llamadasAPI.js"></script>
         <script src="js/candidaturas_llamadasAPI.js"></script>
+        <script src="js/subirCV.js"></script>
     </head>
 
     <body>
@@ -56,7 +57,7 @@
 
         <!-- Icons de gestion-->
         <section class="features-icons bg-light text-center">
-            <h4 class="mb-5" id="nombre-usuario">Candidaturas</h4>
+            <h3 class="mb-5" id="nombre-usuario">Candidaturas 👀</h3>
             <div class="container" id="candidaturas">
                 <script>getCandidaturaUsuario()</script>
             </div>
@@ -64,9 +65,11 @@
 
         <!-- Boton subir CV-->
         <section class="features-icons bg-light text-center">
-            <div class="container">
-                <input class="btn btn-primary" type="button" value="Suba su CV desde aquí 📂">
-            </div>
+            <h4 class="mb-5" id="nombre-usuario">Suba su CV desde aquí 📂</h4>
+            <form id="cvForm" enctype="multipart/form-data">
+                <input class="btn btn-secundary" type="file" name="cvFile" id="cvFile">
+                <input class="btn btn-primary" type="submit" value="Subir" id="submitBtn">
+            </form>
         </section>
 
         <!-- Footer-->
@@ -114,5 +117,6 @@
     
         <script>mostrarMenu()</script>
         <script>consultarToken()</script>
+        <script>subirCV()</script>
     </body>
 </html>

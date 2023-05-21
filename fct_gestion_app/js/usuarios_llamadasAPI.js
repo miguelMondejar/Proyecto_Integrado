@@ -218,26 +218,44 @@ async function consultarToken() {
             if (!response.ok) {
                 throw new Error('Error al obtener usuario')
             }
+            
             // Extrae los datos del usuario del cuerpo de respuesta de la solicitud
             return response.json()
         })
         .then(result => {
+            let pagina = window.location.href
             let resultadoUsuario = result.usuario
             document.getElementById("nombre-usuario").textContent = `Bienvenido/a ${resultadoUsuario.nombre} 👋`
 
-            document.getElementById('nombre').textContent = resultadoUsuario.nombre
-            document.getElementById('apellidos').textContent = resultadoUsuario.apellidos
-            document.getElementById('fecha_nacimiento').textContent = resultadoUsuario.fecha_nacimiento
-            document.getElementById('dni').textContent = resultadoUsuario.dni
-            document.getElementById('email').textContent = resultadoUsuario.email
-            document.getElementById('telefono').textContent = resultadoUsuario.telefono
+            // para que no de error al gestionar los datos del perfil
+            if(pagina == "http://127.0.0.1:3000/fct_gestion_app/perfil_usuario.html") {
+                document.getElementById('nombre').textContent = resultadoUsuario.nombre
+                document.getElementById('apellidos').textContent = resultadoUsuario.apellidos
+                document.getElementById('fecha_nacimiento').textContent = resultadoUsuario.fecha_nacimiento
+                document.getElementById('dni').textContent = resultadoUsuario.dni
+                document.getElementById('email').textContent = resultadoUsuario.email
+                document.getElementById('telefono').textContent = resultadoUsuario.telefono
 
-            // si el rol del usuario es 2, pintamos el CV en el perfil
-            if (resultadoUsuario.rol_id == 2) {
-                document.getElementById("cvTitulo").textContent = "CV"
-            } else {
-                document.getElementById("cv").remove()
-                document.getElementById("cvTitulo").remove()
+                // si el rol del usuario es 2, pintamos el CV en el perfil
+                if (resultadoUsuario.rol_id == 2) {
+                    document.getElementById("cvTitulo").textContent = "CV"
+                } else {
+                    document.getElementById("cv").remove()
+                    document.getElementById("cvTitulo").remove()
+                }
+            }
+
+            // redireccionar por rol
+            // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige a su página de inicio
+            if (resultadoUsuario.rol_id == 2 && !(pagina.includes("inicio_alumno") || pagina.includes("perfil_usuario"))) {
+                alert("ACCESO DENEGADO")
+                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_alumno.html"
+            }
+
+            // si un profesor intenta acceder a la página "inicio_alumno", se le redirige a su página de inicio
+            if (resultadoUsuario.rol_id == 1 && pagina.includes("inicio_alumno") && !pagina.includes("perfil_usuario")) {
+                alert("ACCESO DENEGADO")
+                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_profesor.html"
             }
 
             return result

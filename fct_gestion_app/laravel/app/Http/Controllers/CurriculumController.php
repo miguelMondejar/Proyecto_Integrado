@@ -7,6 +7,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CurriculumController extends Controller
 {
@@ -19,6 +21,28 @@ class CurriculumController extends Controller
         }
     }
 
+    public function store(Request $request) {
+        // Verifica si se ha enviado un archivo
+        if ($request->hasFile('cv')) {
+            $cvFile = $request->file('cv');
+
+            // Guardar el archivo en el almacenamiento de Laravel (por ejemplo, en la carpeta "public/storage/cv")
+            $rutaArchivo = $cvFile->storeAs('public/cv', $cvFile->hashName());
+
+            // Guardar la ruta del archivo en la base de datos
+            $cv = Curriculum::create([
+                'ruta' => $rutaArchivo,
+                'usuario_id' => $this->user->id
+            ]);
+
+            return response()->json([
+                'message' => 'CV creado correctamente',
+                'data' => $cv
+            ], Response::HTTP_OK);
+        }
+        return response()->json(['mensaje' => 'No se ha enviado ningún archivo'], 400);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,38 +53,6 @@ class CurriculumController extends Controller
         // Listado de curriculums
         $curriculum = Curriculum::all();
         return response()->json($curriculum);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // Subir un curriculums
-        // Validamos los datos.
-        $data = $request->only('ruta', 'usuario_id');
-        $validador = Validator::make($data, [
-            'ruta' => 'required|string|max:25',
-            'usuario_id' => 'required|numeric'
-        ]);
-
-        // si hay algo mal
-        if($validador->fails()) {
-            return response()->json(['error' => $validador->messages()], 400);
-        }
-
-        $cv = Curriculum::create([
-            'ruta' => $request->ruta,
-            'usuario_id' => $request->usuario_id
-        ]);
-
-        return response()->json([
-            'message' => 'CV creado correctamente',
-            'data' => $cv
-        ], Response::HTTP_OK);
     }
 
     /**

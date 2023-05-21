@@ -66,7 +66,7 @@ Route::group(['middleware' => ["jwt.verify"]], function() {
    Route::delete("candidaturas/{id}", [CandidaturaController::class, "destroy"]);
 
    // cvs
-   Route::post("curriculums", [CurriculumController::class, "store"]);
    Route::put("curriculums/{id}", [CurriculumController::class, "update"]);
    Route::delete("curriculums/{id}", [CurriculumController::class, "destroy"]);
+   Route::post("curriculums", [CurriculumController::class, "store"]);
 });
