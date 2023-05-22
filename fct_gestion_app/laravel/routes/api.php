@@ -49,6 +49,7 @@ Route::group(['middleware' => ["jwt.verify"]], function() {
    Route::post("logout", [AuthController::class, "logout"]);
    Route::post("user", [AuthController::class, "getUser"]);
    Route::delete("usuarios/{id}", [AuthController::class, "destroy"]);
+   Route::put("usuarios/{id}", [AuthController::class, "update"]);
 
    // empresas
    Route::post("empresas", [EmpresaController::class, "store"]);

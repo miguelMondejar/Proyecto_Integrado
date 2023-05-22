@@ -64,6 +64,11 @@
   --bs-body-bg: #fff;
 }
 
+#errorMail, #errorVacio, #error-inicio-sesion, #errores {
+  color: var(--bs-danger);
+  font-weight: bold;
+}
+
 *,
 *::before,
 *::after {
@@ -324,17 +329,35 @@ tfoot,
 tr,
 td,
 th {
+  font-size: 20px;
   border-color: inherit;
   border-style: solid;
   border-width: 0;
 }
 
 label {
-  display: inline-block;
+  width: 400px;
 }
 
 button {
   border-radius: 0;
+}
+
+/* botones para la lista */
+.botonBorrar {
+  border: 0;
+}
+.botonBorrar:hover {
+  border-radius: 10px;
+  background-color: #ffb8b8;
+}
+
+.botonEditar {
+  border: 0;
+}
+.botonEditar:hover {
+  border-radius: 10px;
+  background-color: #ffffb8;
 }
 
 button:focus:not(:focus-visible) {
@@ -375,7 +398,8 @@ select:disabled {
 button,
 [type=button],
 [type=reset],
-[type=submit] {
+[type=submit],
+[type=date], select, option {
   -webkit-appearance: button;
 }
 button:not(:disabled),
@@ -2186,9 +2210,12 @@ progress {
 }
 
 .form-control {
+  margin-top: 2%;
   display: block;
   width: 100%;
   padding: 0.75rem 1rem;
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -2199,7 +2226,7 @@ progress {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  border-radius: 0.25rem;
+  border-radius: 2rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3007,7 +3034,7 @@ textarea.form-control-lg {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.75rem 1rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -4033,8 +4060,8 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -4052,10 +4079,11 @@ textarea.form-control-lg {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   text-decoration: none;
   white-space: nowrap;
 }
+
 .navbar-nav {
   display: flex;
   flex-direction: column;
@@ -4438,6 +4466,7 @@ textarea.form-control-lg {
 }
 
 .navbar-light .navbar-brand {
+  font-weight: bold;
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
@@ -11287,8 +11316,8 @@ textarea.form-control-lg {
   }
 }
 .features-icons {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 .features-icons .features-icons-item {
   max-width: 20rem;
@@ -11298,6 +11327,11 @@ textarea.form-control-lg {
 }
 .features-icons .features-icons-item .features-icons-icon i {
   font-size: 4.5rem;
+}
+
+.features-icons-item:hover {
+  border-radius: 20px;
+  background-color: white;
 }
 
 header.masthead {
@@ -11377,5 +11411,5 @@ header.masthead h1, header.masthead .h1 {
 
 footer.footer {
   padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
 }

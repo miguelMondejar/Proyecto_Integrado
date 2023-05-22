@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curriculum;
+use App\Models\User;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,19 +27,25 @@ class CurriculumController extends Controller
         if ($request->hasFile('cv')) {
             $cvFile = $request->file('cv');
 
-            // Guardar el archivo en el almacenamiento de Laravel (por ejemplo, en la carpeta "public/storage/cv")
-            $rutaArchivo = $cvFile->storeAs('public/cv', $cvFile->hashName());
+            // Verificar si el archivo es de tipo PDF
+            if ($cvFile->getClientOriginalExtension() === 'pdf') {
+                // Guardar el archivo en storage/app/public/cv
+                $rutaArchivo = $cvFile->storeAs('public/cv', $cvFile->hashName());
 
-            // Guardar la ruta del archivo en la base de datos
-            $cv = Curriculum::create([
-                'ruta' => $rutaArchivo,
-                'usuario_id' => $this->user->id
-            ]);
+                // Guardar la ruta del archivo en la base de datos
+                $cv = Curriculum::create([
+                    'ruta' => $rutaArchivo,
+                    'usuario_id' => $this->user->id
+                ]);
 
-            return response()->json([
-                'message' => 'CV creado correctamente',
-                'data' => $cv
-            ], Response::HTTP_OK);
+                return response()->json([
+                    'message' => 'CV creado correctamente',
+                    'data' => $cv
+                ], Response::HTTP_OK);
+            } else {
+                // El archivo no es de tipo PDF, devuelve un mensaje de error
+                return response()->json(['mensaje' => 'Solo se permiten archivos PDF'], 400);
+            }
         }
         return response()->json(['mensaje' => 'No se ha enviado ningún archivo'], 400);
     }
@@ -63,14 +70,21 @@ class CurriculumController extends Controller
      */
     public function show($id)
     {
-        // Buscamos la curriculum
-        $curriculum = Curriculum::findOrFail($id);
+        // Buscar el usuario por su ID
+        $user = User::find($id);
 
-        // comprobamos que exista
-        if(!$curriculum) {
-            return response()->json(['mensaje' => "Curriculum no encontrado"], 404);
+        if (!$user) {
+            return response()->json(['mensaje' => 'Usuario no encontrado'], 404);
         }
 
+        // Buscar el curriculum por el id del usuario
+        $curriculum = Curriculum::where('usuario_id', $user->id)->get();
+
+        if (!$curriculum) {
+            return response()->json(['mensaje' => 'Curriculum no encontrado'], 404);
+        }
+
+        // Retornar la respuesta con el curriculum encontrado
         return response()->json(['data' => $curriculum], Response::HTTP_OK);
     }
 

@@ -115,6 +115,45 @@ class AuthController extends Controller
         return response()->json($usuarios);
     }
 
+    public function update(Request $request, $id)
+    {
+        // Actualizar una sede nueva
+        // Validamos los datos.
+        $data = $request->only('nombre', 'apellidos', 'fecha_nacimiento', 'dni', 'email', 'telefono', 'password');
+        $validador = Validator::make($data, [
+            'nombre' => 'required|string|max:25',
+            'apellidos' => 'required|string|max:30',
+            'fecha_nacimiento' => 'required|string',
+            'dni' => 'required|string|min:8|max:10',
+            'email' => 'required|email',
+            'telefono' => 'required|string|max:9',
+            'password' => 'string|min:8|max:20'
+        ]);
+
+        // si hay algo mal
+        if($validador->fails()) {
+            return response()->json(['error' => $validador->messages()], 400);
+        }
+
+        $usuario = User::findOrFail($id);
+
+        // Si está todo el orden, actualizamos la sede
+        $usuario->update([
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos,
+            'fecha_nacimiento' => $request->fecha_nacimiento, 
+            'dni' => $request->dni, 
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return response()->json([
+            'message' => 'Usuario actualizado correctamente',
+            'data' => $usuario
+        ], Response::HTTP_OK);
+    }
+
     // Función para mostrar un usuario por su id
     public function show($id)
     {

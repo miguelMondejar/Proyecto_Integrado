@@ -42,7 +42,7 @@ async function getUsuarios(tipoUsuario) {
                         <td>${usuario.dni}</td>
                         <td>${usuario.email}</td>
                         <td>${usuario.telefono}</td>
-                        <td><input type='button' onclick='putUsuario(${usuario.id})' value='✏' class='botonEditar'></td>
+                        <td><input type='button' onclick='' value='✏' class='botonEditar'></td>
                         <td><input type='button' onclick='deleteUsuario(${usuario.id})' value='❌' class='botonBorrar'></td>`
                     tabla.appendChild(fila)
                 }
@@ -95,7 +95,7 @@ async function registerUsuario() {
             .then(response => {
                 if(response.ok) {
                     alert("Usuario creado correctamente")
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                    window.location.href = "http://127.0.0.1:8000/profesor/gestion/alumnos"
                 }
                 response.text()
             })
@@ -136,58 +136,8 @@ function validarRegistro() {
 
 // Función para editar un usuario
 async function putUsuario(id) {
-    let div = document.getElementById("editar")
-    let requestOptions = {}
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/usuarios/${id}`)
-        const responseData = await response.json()
-
-        let usuario = responseData.data
-        div.innerHTML = `<form action="" id="formularioRegister">
-            <input type="text" value="${usuario.nombre}" id="nombre">
-            <input type="text" value="${usuario.apellidos}" id="apellidos">
-            <input type="text" value="${usuario.fecha_nacimiento}" id="fecha_nacimiento">
-            <input type="text" value="${usuario.dni}" id="dni">
-            <input type="text" value="${usuario.email}" id="email">
-            <input type="text" value="${usuario.telefono}" id="telefono">`
-
-        let miHeaders = new Headers()
-        miHeaders.append("Content-Type", "application/json")
-
-        let datos = JSON.stringify({
-            "nombre": document.getElementById("nombre").value,
-            "apellidos": document.getElementById("apellidos").value,
-            "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
-            "dni": document.getElementById("dni").value,
-            "email": document.getElementById("email").value,
-            "telefono": document.getElementById("telefono").value
-        })
-
-        requestOptions = {
-            method: 'PUT',
-            headers: miHeaders,
-            body: datos,
-            redirect: 'follow'
-        }
-
-        div.innerHTML += `<br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
-        
-    } catch (error) {
-        console.log(`Something went wrong: ${error}`)
-    }
-
-    fetch(`${API_BASE_URL}/usuarios/${id}`, requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    alert("Usuario actualizado correctamente")
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
-                }
-                response.text()
-            })
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error))
-}  
+    
+}
   
 // Función para eliminar un usuario
 async function deleteUsuario(id) {
@@ -209,7 +159,7 @@ async function deleteUsuario(id) {
             .then(result => {
                 console.log(result)
                 alert("Usuario borrado correctamente")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                window.location.href = "http://127.0.0.1:8000/profesor/gestion/alumnos"
             })
             .catch(error => console.log('error', error))
     }
@@ -246,7 +196,7 @@ async function consultarToken() {
     let token = localStorage.getItem('token')
     // si no existe, redirigimos al inicio de sesión
     if(token == null || token == "") {
-        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/login.html"
+        window.location.href = "http://127.0.0.1:8000/login"
     }
 
     // Configurar los encabezados para la solicitud user POST
@@ -289,7 +239,6 @@ async function consultarToken() {
                 // si el rol del usuario es 2, pintamos el CV en el perfil
                 if (resultadoUsuario.rol_id == 2) {
                     document.getElementById("cvTitulo").textContent = "CV"
-                    getCV()
                 } else {
                     document.getElementById("cv").remove()
                     document.getElementById("cvTitulo").remove()
@@ -298,15 +247,15 @@ async function consultarToken() {
 
             // redireccionar por rol
             // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige a su página de inicio
-            if (resultadoUsuario.rol_id == 2 && !(pagina.includes("inicio_alumno") || pagina.includes("perfil_usuario"))) {
+            if (resultadoUsuario.rol_id == 2 && !(pagina.includes("alumno") || pagina.includes("perfil_usuario"))) {
                 alert("ACCESO DENEGADO")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_alumno.html"
+                window.location.href = "http://127.0.0.1:8000/alumno"
             }
 
             // si un profesor intenta acceder a la página "inicio_alumno", se le redirige a su página de inicio
-            if (resultadoUsuario.rol_id == 1 && pagina.includes("inicio_alumno") && !pagina.includes("perfil_usuario")) {
+            if (resultadoUsuario.rol_id == 1 && pagina.includes("alumno") && !pagina.includes("perfil_usuario")) {
                 alert("ACCESO DENEGADO")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_profesor.html"
+                window.location.href = "http://127.0.0.1:8000/profesor"
             }
 
             return result

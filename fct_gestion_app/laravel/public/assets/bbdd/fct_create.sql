@@ -18,7 +18,7 @@ CREATE TABLE Usuarios (
   dni VARCHAR(10) NOT NULL,
   email VARCHAR(50) NOT NULL,
   telefono VARCHAR(9) NOT NULL,
-  password VARCHAR(20) NOT NULL,
+  password VARCHAR(60) NOT NULL,
   rol_id INTEGER(5) NOT NULL,
   FOREIGN KEY (rol_id) REFERENCES Roles(id)
 );
@@ -27,7 +27,7 @@ CREATE TABLE Usuarios (
 CREATE TABLE Curriculums (
   id INTEGER(5) PRIMARY KEY AUTO_INCREMENT,
   ruta VARCHAR(20) NOT NULL,
-  usuario_id INTEGER(5) NOT NULL,
+  usuario_id INTEGER(5) NOT NULL UNIQUE,
   FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
 );
 
@@ -44,13 +44,12 @@ CREATE TABLE Sedes (
   id INTEGER(5) PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(25) NOT NULL,
   direccion VARCHAR(50) NOT NULL,
-  localidad VARCHAR(20) NOT NULL,
-  provincia VARCHAR(20) NOT NULL,
+  localidad VARCHAR(50) NOT NULL,
+  provincia VARCHAR(50) NOT NULL,
   codigo_postal VARCHAR(5) NOT NULL,
   telefono VARCHAR(9) NOT NULL,
-  email VARCHAR(30) NOT NULL,
   empresa_id INTEGER(5) NOT NULL,
-  FOREIGN KEY (empresa_id) REFERENCES Empresas(id)
+  FOREIGN KEY (empresa_id) REFERENCES Empresas(id) ON DELETE CASCADE
 );
 
 /* DDL Tabla Candidaturas */
@@ -61,6 +60,6 @@ CREATE TABLE Candidaturas (
   estado VARCHAR(15) NOT NULL,
   usuario_id INTEGER(5) NOT NULL,
   empresa_id INTEGER(5) NOT NULL,
-  FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
-  FOREIGN KEY (empresa_id) REFERENCES Empresas(id)
+  FOREIGN KEY (usuario_id) REFERENCES Usuarios(id) ON DELETE CASCADE,
+  FOREIGN KEY (empresa_id) REFERENCES Empresas(id) ON DELETE CASCADE
 );

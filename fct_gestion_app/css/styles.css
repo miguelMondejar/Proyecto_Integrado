@@ -4062,6 +4062,7 @@ textarea.form-control-lg {
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  border: 1px  #d1d1d1 solid;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -11342,6 +11343,7 @@ header.masthead {
   padding-top: 8rem;
   padding-bottom: 8rem;
 }
+
 header.masthead:before {
   content: "";
   position: absolute;
