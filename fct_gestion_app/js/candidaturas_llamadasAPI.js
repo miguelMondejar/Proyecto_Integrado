@@ -175,7 +175,7 @@ async function putCandidatura(id) {
         const responseData = await response.json()
 
         let candidatura = responseData.data
-        div.innerHTML = `<form id="formularioRegister">
+        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistro()">
             <input type="date" value="${candidatura.fecha_inicio}" id="fecha_inicio">
             <input type="date" value="${candidatura.fecha_fin}" id="fecha_fin">
             <select id="estado">
@@ -184,16 +184,20 @@ async function putCandidatura(id) {
                 <option value="Rechazada">Rechazada</option>
             </select>
             <select id="select-empresas"></select>
-            <select id="select-usuarios"></select>`
-
-        let miHeaders = new Headers()
-        miHeaders.append("Content-Type", "application/json")
-
-        div.innerHTML += `<br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+            <select id="select-usuarios"></select>
+            <p id="errores"></p>
+            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
             event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+            // token
+            let token = localStorage.getItem('token')
+
+            let miHeaders = new Headers()
+            miHeaders.append("Content-Type", "application/json")
+            miHeaders.append("Authorization", `Bearer ${token}`)
 
             // selects
             let selectEmpresa = document.getElementById('select-empresas')
@@ -220,12 +224,47 @@ async function putCandidatura(id) {
                     if (response.ok) {
                         alert("Candidatura actualizada correctamente")
                         window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_candidaturas.html"
+                    } else {
+                        alert("Compruebe los datos del formulario.")
                     }
                     response.text()
                 })
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error))
         })    
+
+        // Obtener las empresas y alumnos y pintarlas en los selects
+        await getEmpresasNombre()
+        await getUsuariosNombre()
+
+        // Cuando le des en editar salga la empresa que esté actualmente seleccionada
+        let selectEmpresa = document.getElementById('select-empresas');
+        for (let i = 0; i < selectEmpresa.options.length; i++) {
+            // se va a selecciona la opcion que coincida con candidatura.empresa_id
+            if (parseInt(selectEmpresa.options[i].value) === candidatura.empresa_id) {
+                selectEmpresa.options[i].selected = true
+                break
+            }
+        }
+
+        // Hacemos lo mismo con el alumno seleccionado
+        let selectUsuario = document.getElementById('select-usuarios');
+        for (let i = 0; i < selectUsuario.options.length; i++) {
+            if (parseInt(selectUsuario.options[i].value) === candidatura.usuario_id) {
+                selectUsuario.options[i].selected = true
+                break
+            }
+        }
+
+        // Y por último, con el estado
+        let selectEstado = document.getElementById('estado');
+        for (let i = 0; i < selectEstado.options.length; i++) {
+            if (selectEstado.options[i].value === candidatura.estado) {
+                selectEstado.options[i].selected = true
+                break
+            }
+        }
+        
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
     }
@@ -233,11 +272,12 @@ async function putCandidatura(id) {
 
 // Función para validar los campos de registros
 function validarRegistro() {
+    limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
     if (!validarCamposVacios(document.getElementById('fecha_inicio').value) || !validarCamposVacios(document.getElementById('fecha_inicio').value) || 
-    !validarCamposVacios(document.getElementById('estado').value) || !validarCamposVacios(document.getElementById('usuario_id').value) ||
-    !validarCamposVacios(document.getElementById('empresa_id').value))  {
+    !validarCamposVacios(document.getElementById('estado').value) || !validarCamposVacios(document.getElementById('select-usuarios').value) ||
+    !validarCamposVacios(document.getElementById('select-empresas').value))  {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
     }
 }

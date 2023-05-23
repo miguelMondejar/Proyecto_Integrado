@@ -144,23 +144,27 @@ async function putSede(id) {
         const responseData = await response.json()
 
         let sede = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onclick="validarRegistro()">
+        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistroSede()">
             <input type="text" value="${sede.nombre}" id="nombre">
             <input type="text" value="${sede.direccion}" id="direccion">
             <input type="text" value="${sede.localidad}" id="localidad">
             <input type="text" value="${sede.provincia}" id="provincia">
             <input type="number" value="${sede.codigo_postal}" id="codigo_postal">
             <input type="text" value="${sede.telefono}" id="telefono">
-            <select id="select-empresas"></select>`
-
-        let miHeaders = new Headers()
-        miHeaders.append("Content-Type", "application/json")
-
-        div.innerHTML += `<br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+            <select id="select-empresas"></select>
+            <p id="errores"></p>
+            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
             event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+            // token
+            let token = localStorage.getItem('token')
+
+            let miHeaders = new Headers()
+            miHeaders.append("Content-Type", "application/json")
+            miHeaders.append("Authorization", `Bearer ${token}`)
 
             // select empresa
             let selectEmpresa = document.getElementById('select-empresas')
@@ -187,12 +191,27 @@ async function putSede(id) {
                     if (response.ok) {
                         alert("Sede actualizada correctamente")
                         window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_sedes.html"
+                    } else {
+                        alert("Compruebe los datos del formulario.")
                     }
                     response.text()
                 })
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error))
         })    
+
+        // Obtener las empresas y pintarlas en el select
+        await getEmpresasNombre()
+
+        // Cuando le des en editar salga la empresa que esté actualmente seleccionada
+        let selectEmpresa = document.getElementById('select-empresas');
+        for (let i = 0; i < selectEmpresa.options.length; i++) {
+            // se va a selecciona la opcion que coincida con sede.empresa_id
+            if (parseInt(selectEmpresa.options[i].value) === sede.empresa_id) {
+                selectEmpresa.options[i].selected = true
+                break
+            }
+        }
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
     }
@@ -216,18 +235,18 @@ async function getSedesNombre() {
 }
 
 // Función para validar los campos de registros
-function validarRegistro() {
+function validarRegistroSede() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
     if (!validarCamposVacios(document.getElementById('nombre').value) || !validarCamposVacios(document.getElementById('direccion').value) || 
     !validarCamposVacios(document.getElementById('localidad').value) || !validarCamposVacios(document.getElementById('provincia').value) ||
     !validarCamposVacios(document.getElementById('codigo_postal').value) || !validarCamposVacios(document.getElementById('telefono').value) || 
-    !validarCamposVacios(document.getElementById('empresa_id').value))  {
+    !validarCamposVacios(document.getElementById('select-empresas').value))  {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
     }
 
-    if (!validarTamanio(document.getElementById('codigo_postal').value, 1, 5)) {
+    if (!validarTamanio(document.getElementById('codigo_postal').value, 5, 5)) {
         campoErrores.innerHTML += `${mensajeCP} <br>`
     }
 

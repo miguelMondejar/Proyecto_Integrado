@@ -136,22 +136,26 @@ async function putUsuario(id) {
         const responseData = await response.json()
 
         let usuario = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onclick="validarRegistro()">
+        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistro()">
             <input type="text" value="${usuario.nombre}" id="nombre">
             <input type="text" value="${usuario.apellidos}" id="apellidos">
             <input type="date" value="${usuario.fecha_nacimiento}" id="fecha_nacimiento">
             <input type="text" value="${usuario.dni}" id="dni">
             <input type="email" value="${usuario.email}" id="correo">
-            <input type="text" value="${usuario.telefono}" id="telefono">`
-
-        let miHeaders = new Headers()
-        miHeaders.append("Content-Type", "application/json")
-
-        div.innerHTML += `<br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+            <input type="text" value="${usuario.telefono}" id="telefono">
+            <p id="errores"></p>
+            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
             event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+            // token
+            let token = localStorage.getItem('token')
+
+            let miHeaders = new Headers()
+            miHeaders.append("Content-Type", "application/json")
+            miHeaders.append("Authorization", `Bearer ${token}`)
 
             let datos = JSON.stringify({
                 "nombre": document.getElementById("nombre").value,
@@ -174,6 +178,8 @@ async function putUsuario(id) {
                     if (response.ok) {
                         alert("Usuario actualizado correctamente")
                         window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                    } else {
+                        alert("Compruebe los datos del formulario.")
                     }
                     response.text()
                 })

@@ -85,7 +85,7 @@ async function registerEmpresa() {
 
 // Función para eliminar una empresa
 async function deleteEmpresa(id) {
-    let mensajeConfirmacion = confirm("¿Está seguro que desea eliminar a esta empresa? También eliminará sus empresas")
+    let mensajeConfirmacion = confirm("¿Está seguro que desea eliminar a esta empresa? También eliminará sus sedes")
     if (mensajeConfirmacion) {
         let token = localStorage.getItem('token')
 
@@ -118,19 +118,23 @@ async function putEmpresa(id) {
         const responseData = await response.json()
 
         let empresa = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onclick="validarRegistro()">
+        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistrosEmpresa()">
             <input type="text" value="${empresa.cif}" id="cif">
             <input type="text" value="${empresa.nombre}" id="nombre">
-            <input type="email" value="${empresa.email}" id="correo">`
-
-        let miHeaders = new Headers()
-        miHeaders.append("Content-Type", "application/json")
-
-        div.innerHTML += `<br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+            <input type="email" value="${empresa.email}" id="correo">
+            <p id="errores"></p>
+            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
             event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+            // token
+            let token = localStorage.getItem('token')
+
+            let miHeaders = new Headers()
+            miHeaders.append("Content-Type", "application/json")
+            miHeaders.append("Authorization", `Bearer ${token}`)
 
             let datos = JSON.stringify({
                 "cif": document.getElementById('cif').value,
@@ -150,6 +154,8 @@ async function putEmpresa(id) {
                     if (response.ok) {
                         alert("Empresa actualizada correctamente")
                         window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_empresas.html"
+                    } else {
+                        alert("Compruebe los datos del formulario.")
                     }
                     response.text()
                 })
@@ -180,7 +186,7 @@ async function getEmpresasNombre() {
 }
 
 // Función para validar los campos de registros
-function validarRegistro() {
+function validarRegistrosEmpresa() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
