@@ -50,6 +50,7 @@ async function getCV() {
         const response = await fetch(`${API_BASE_URL}/curriculums/${idUsuario}`)
         const responseData = await response.json()
         
+        // si no tiene cv subido, saldrá un enlace para ello
         if(cv.value == undefined) {
             cv.innerHTML = `<a href="http://127.0.0.1:3000/fct_gestion_app/inicio_alumno.html">Suba su CV</a>`
         }

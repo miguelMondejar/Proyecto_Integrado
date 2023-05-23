@@ -34,7 +34,7 @@ function mostrarMenu() {
     const enlaceMenu = document.getElementById('enlace-menu')
 
     enlaceMenu.addEventListener('click', function(event) {
-        event.preventDefault();
+        event.preventDefault()
         // Hacemos aparecer el menú
         let menu = document.getElementById("menu")
         if (menu.style.display === "none") {

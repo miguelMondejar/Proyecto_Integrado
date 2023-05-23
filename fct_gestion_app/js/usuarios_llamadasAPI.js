@@ -1,10 +1,3 @@
-// Mensajes
-const mensajeVacio = "Los campos no pueden estar vacíos."
-const mensajeCorreo = "El correo electrónico debe ser válido."
-const mensajeContrasena = "La contraseña debe tener al menos una longitud de 8 caracteres."
-const mensajePassRepetida = "La contraseñas son distintas."
-const mensajeDNITelefono = "Tanto el campo de DNI como el campo de Teléfono deben tener 9 caracteres."
-
 // Función para pintar usuarios en forma de tabla. Tipo de usuario es el rol
 async function getUsuarios(tipoUsuario) {
     let div = document.getElementById('usuarios')
@@ -137,56 +130,59 @@ function validarRegistro() {
 // Función para editar un usuario
 async function putUsuario(id) {
     let div = document.getElementById("editar")
-    let requestOptions = {}
 
     try {
         const response = await fetch(`${API_BASE_URL}/usuarios/${id}`)
         const responseData = await response.json()
 
         let usuario = responseData.data
-        div.innerHTML = `<form action="" id="formularioRegister">
+        div.innerHTML = `<form id="formularioRegister" onclick="validarRegistro()">
             <input type="text" value="${usuario.nombre}" id="nombre">
             <input type="text" value="${usuario.apellidos}" id="apellidos">
-            <input type="text" value="${usuario.fecha_nacimiento}" id="fecha_nacimiento">
+            <input type="date" value="${usuario.fecha_nacimiento}" id="fecha_nacimiento">
             <input type="text" value="${usuario.dni}" id="dni">
-            <input type="text" value="${usuario.email}" id="email">
+            <input type="email" value="${usuario.email}" id="correo">
             <input type="text" value="${usuario.telefono}" id="telefono">`
 
         let miHeaders = new Headers()
         miHeaders.append("Content-Type", "application/json")
 
-        let datos = JSON.stringify({
-            "nombre": document.getElementById("nombre").value,
-            "apellidos": document.getElementById("apellidos").value,
-            "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
-            "dni": document.getElementById("dni").value,
-            "email": document.getElementById("email").value,
-            "telefono": document.getElementById("telefono").value
-        })
-
-        requestOptions = {
-            method: 'PUT',
-            headers: miHeaders,
-            body: datos,
-            redirect: 'follow'
-        }
-
         div.innerHTML += `<br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
-        
+
+        let form = document.getElementById('formularioRegister')
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+            let datos = JSON.stringify({
+                "nombre": document.getElementById("nombre").value,
+                "apellidos": document.getElementById("apellidos").value,
+                "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
+                "dni": document.getElementById("dni").value,
+                "email": document.getElementById("correo").value,
+                "telefono": document.getElementById("telefono").value
+            })
+
+            let requestOptions = {
+                method: 'PUT',
+                headers: miHeaders,
+                body: datos,
+                redirect: 'follow'
+            }
+
+            fetch(`${API_BASE_URL}/usuarios/${id}`, requestOptions)
+                .then(response => {
+                    if (response.ok) {
+                        alert("Usuario actualizado correctamente")
+                        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                    }
+                    response.text()
+                })
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error))
+        })    
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
     }
-
-    fetch(`${API_BASE_URL}/usuarios/${id}`, requestOptions)
-            .then(response => {
-                if (response.ok) {
-                    alert("Usuario actualizado correctamente")
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
-                }
-                response.text()
-            })
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error))
 }  
   
 // Función para eliminar un usuario
@@ -283,7 +279,7 @@ async function consultarToken() {
                 document.getElementById('apellidos').textContent = resultadoUsuario.apellidos
                 document.getElementById('fecha_nacimiento').textContent = resultadoUsuario.fecha_nacimiento
                 document.getElementById('dni').textContent = resultadoUsuario.dni
-                document.getElementById('email').textContent = resultadoUsuario.email
+                document.getElementById('correo').textContent = resultadoUsuario.email
                 document.getElementById('telefono').textContent = resultadoUsuario.telefono
 
                 // si el rol del usuario es 2, pintamos el CV en el perfil

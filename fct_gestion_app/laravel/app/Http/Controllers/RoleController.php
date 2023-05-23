@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Función index para mostrar la lista de roles
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,7 +21,7 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Función para mostrar uno específico
      *
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response

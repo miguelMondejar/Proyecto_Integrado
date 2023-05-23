@@ -1,3 +1,4 @@
+// Función para hacer el login
 function loginUsuario() {
     const form = document.getElementById('login-formulario')
   
@@ -5,8 +6,8 @@ function loginUsuario() {
         event.preventDefault() // prevenir que el formulario se envíe por defecto
 
         // datos del login
-        const email = document.getElementById('correo').value
-        const password = document.getElementById('pass').value
+        let email = document.getElementById('correo').value
+        let password = document.getElementById('pass').value
 
         // lo pasamos en formato JSON
         let datos = JSON.stringify({

@@ -360,6 +360,17 @@ button {
   background-color: #ffffb8;
 }
 
+.botonAtras {
+  border: 1px #8f8f8f solid; 
+  border-radius: 9px;
+  width: 100px;
+  background-color: white;
+}
+
+.botonAtras:hover {
+  background-color: rgb(220, 220, 220);
+}
+
 button:focus:not(:focus-visible) {
   outline: 0;
 }

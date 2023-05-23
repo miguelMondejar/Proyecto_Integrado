@@ -20,7 +20,7 @@ class CandidaturaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Función index para mostrar la lista de candidaturas
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class CandidaturaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Función store para crear nueva candidatura
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -70,7 +70,7 @@ class CandidaturaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Función para mostrar uno específico
      *
      * @param  \App\Models\Candidatura  $candidatura
      * @return \Illuminate\Http\Response
@@ -86,33 +86,10 @@ class CandidaturaController extends Controller
         }
 
         return response()->json(['data' => $candidatura], Response::HTTP_OK);
-
-        /*
-        // Buscamos la candidatura
-        $candidatura = Candidatura::findOrFail($id);
-
-        if($idAumno == 0) {
-            // comprobamos que exista
-            if(!$candidatura) {
-                return response()->json(['mensaje' => "Candidatura no encontrado"], 404);
-            }
-
-            return response()->json(['data' => $candidatura], Response::HTTP_OK);
-        }
-
-        // si existe idAlumno
-        $alumno = User::with("candidaturas")->findOrFail($idAumno);
-        // comprobamos que exista
-        if(!$alumno) {
-            return response()->json(['mensaje' => "Candidaturas con alumno no encontrada"], 404);
-        }
-
-        return response()->json(['data' => $alumno], Response::HTTP_OK);
-         */
     }
 
     /**
-     * Update the specified resource in storage.
+     * Función para actualizar por ID
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Candidatura  $candidatura
@@ -154,7 +131,7 @@ class CandidaturaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Fución para eliminar por ID
      *
      * @param  \App\Models\Candidatura  $candidatura
      * @return \Illuminate\Http\Response

@@ -115,6 +115,7 @@ class AuthController extends Controller
         return response()->json($usuarios);
     }
 
+    // Función para poder actualizar un usuario concreto
     public function update(Request $request, $id)
     {
         // Actualizar una sede nueva
@@ -168,7 +169,7 @@ class AuthController extends Controller
         return response()->json(['data' => $user], Response::HTTP_OK);
     }
 
-    // función para eliminar un usuario
+    // Función para eliminar un usuario
     public function destroy($id)
     {
         // Eliminar una empresa

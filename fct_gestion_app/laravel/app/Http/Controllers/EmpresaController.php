@@ -20,7 +20,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Función index para mostrar la lista de empresas
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,7 +32,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Función store para crear nueva empresa
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -66,7 +66,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Función para mostrar uno específico
      *
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
@@ -85,7 +85,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Función para actualizar por ID
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Empresa  $empresa
@@ -123,7 +123,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Fución para eliminar por ID
      *
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response

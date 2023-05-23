@@ -56,13 +56,16 @@
         <!-- formulario -->
         <section class="features-icons bg-light text-center">
                 <div class="text-center" id="formularioRegister">
-                    <form action="gestion_empresas.html" id="formularioRegistro">
+                    <form action="gestion_empresas.html" id="formularioRegistro" onkeyup="validarRegistro()">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre">
                             <label for="cif">CIF</label>
                             <input type="text" id="cif" name="cif">
                             <label for="correo">Email</label>
                             <input type="email" id="correo" name="correo">
+
+                            <p id="errores"></p>
+
                         <input type="submit" value="Enviar" class="btn btn-primary">
                     </form>                  
                 </div>                                 
@@ -104,8 +107,6 @@
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->

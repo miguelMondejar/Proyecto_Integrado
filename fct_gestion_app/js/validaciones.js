@@ -1,5 +1,16 @@
+// mensajes
+const mensajeVacio = "Los campos no pueden estar vacíos."
+const mensajeCorreo = "El correo electrónico debe ser válido."
+const mensajeContrasena = "La contraseña debe tener al menos una longitud de 8 caracteres."
+const mensajePassRepetida = "La contraseñas son distintas."
+const mensajeDNITelefono = "Tanto el campo de DNI como el campo de Teléfono deben tener 9 caracteres."
+const mensajeCIF = "El campo CIF debe tener 9 caracteres."
+const mensajeCP = "El campo Código postal debe tener 5 caracteres."
+const mensajeTelefono = "El campo Telefono debe tener 9 caracteres."
+
 // Expresion regular correo
 let emailExpresion = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
+
 // Expresion regular contraseña
 let passExpresion = /^.{8,20}$/
 

@@ -22,6 +22,7 @@ class CurriculumController extends Controller
         }
     }
 
+    // Función store para subir y crear un curriculum
     public function store(Request $request) {
         // Verifica si se ha enviado un archivo
         if ($request->hasFile('cv')) {
@@ -51,7 +52,7 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Función index para mostrar la lista de curriculums
      *
      * @return \Illuminate\Http\Response
      */
@@ -63,7 +64,7 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Función para mostrar uno específico
      *
      * @param  \App\Models\Curriculum  $curriculum
      * @return \Illuminate\Http\Response
@@ -89,7 +90,7 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Función para actualizar por ID
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Curriculum  $curriculum
@@ -125,7 +126,7 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Fución para eliminar por ID
      *
      * @param  \App\Models\Curriculum  $curriculum
      * @return \Illuminate\Http\Response

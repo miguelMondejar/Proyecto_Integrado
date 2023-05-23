@@ -27,6 +27,8 @@ insert into Empresas (cif, nombre, email) values ('W37429598', 'Flashdog', 'ihay
 insert into Empresas (cif, nombre, email) values ('M60532685', 'Quimba', 'nsaynor3@php.net');
 insert into Empresas (cif, nombre, email) values ('G40505483', 'Browsezoom', 'lzorzin4@nps.gov');
 
+insert into Empresas (cif, nombre, email) values ('A12345678', 'Guadaltel', 'guadaltel@gmail.com');
+
 /* Insertar sedes (https://www.mockaroo.com/) */
 insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
 values ('Sede Cogibox', '23 International Hill', 'Vitoria-Gasteiz', 'Pais Vasco', '01005', '913405312', 1);
@@ -38,3 +40,6 @@ insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telef
 values ('Sede Mycat', '8123 Green Ridge Place', 'Castellon De La Plana/Castello De La Pla', 'Comunidad Valenciana', '12005', '931162180', 4);
 insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
 values ('Sede Yabox', '8 Vahlen Center', 'Malaga', 'Andalucia', '29010', '909976936', 5);
+
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Pastor y Landero', 'Pastor y Landero 19', 'Sevilla', 'Andalucia', '41001', '954562540', 6);

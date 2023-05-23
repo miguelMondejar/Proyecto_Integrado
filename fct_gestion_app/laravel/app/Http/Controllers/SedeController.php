@@ -20,19 +20,19 @@ class SedeController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Función index para mostrar la lista de sedes
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-       // Listado de sedes
-       $sedes = Sede::all();
-       return response()->json($sedes);
+        // Listado de sedes
+        $sedes = Sede::all();
+        return response()->json($sedes);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Función store para crear nueva sede
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -74,7 +74,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Función para mostrar uno específico
      *
      * @param  \App\Models\Sede  $sede
      * @return \Illuminate\Http\Response
@@ -93,7 +93,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Función para actualizar por ID
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Sede  $sede
@@ -139,7 +139,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Fución para eliminar por ID
      *
      * @param  \App\Models\Sede  $sede
      * @return \Illuminate\Http\Response
