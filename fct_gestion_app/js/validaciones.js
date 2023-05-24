@@ -7,6 +7,7 @@ const mensajeDNITelefono = "Tanto el campo de DNI como el campo de Teléfono deb
 const mensajeCIF = "El campo CIF debe tener 9 caracteres."
 const mensajeCP = "El campo Código postal debe tener 5 caracteres."
 const mensajeTelefono = "El campo Telefono debe tener 9 caracteres."
+const mensajeErrorGenerico = "Algo está fallando: "
 
 // Expresion regular correo
 let emailExpresion = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/

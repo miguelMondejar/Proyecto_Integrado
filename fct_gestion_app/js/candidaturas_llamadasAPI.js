@@ -38,7 +38,7 @@ async function getCandidaturaUsuario() {
         }
         div.appendChild(tabla)
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -83,7 +83,7 @@ async function getCandidaturas() {
         }
         div.appendChild(tabla)
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -133,7 +133,7 @@ async function registerCandidatura() {
                 console.log('Error:', error)
             }
         } catch (error) {
-            console.log('error', error)
+            console.log(mensajeErrorGenerico + error)
         }
     })
 }
@@ -175,18 +175,34 @@ async function putCandidatura(id) {
         const responseData = await response.json()
 
         let candidatura = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistro()">
-            <input type="date" value="${candidatura.fecha_inicio}" id="fecha_inicio">
-            <input type="date" value="${candidatura.fecha_fin}" id="fecha_fin">
-            <select id="estado">
-                <option value="Pendiente">Pendiente</option>
-                <option value="Aprobada">Aprobada</option>
-                <option value="Rechazada">Rechazada</option>
-            </select>
-            <select id="select-empresas"></select>
-            <select id="select-usuarios"></select>
-            <p id="errores"></p>
-            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+        div.innerHTML = `
+            <p class="lead mb-0">Vas a editar la candidatura con ID <strong>${candidatura.id}</strong></p>
+            <div class="text-center" id="formularioRegister">
+            <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
+                <label for="fecha_inicio">Fecha inicio</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" value="${candidatura.fecha_inicio}">
+
+                <label for="fecha_fin">Fecha fin</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" value="${candidatura.fecha_fin}">
+
+                <label>Empresa</label>
+                <select id="select-empresas">
+                </select>
+
+                <label for="alumno">Alumno</label>
+                <select id="select-usuarios">
+                </select>
+
+                <label for="estado">Estado</label>
+                <select id="estado">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Aprobada">Aprobada</option>
+                    <option value="Rechazada">Rechazada</option>
+                </select><p></p>
+                
+                <p id="errores"></p>
+                <br><input type="submit" value="Guardar" class="btn btn-dark">
+            </form></div>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
@@ -266,7 +282,7 @@ async function putCandidatura(id) {
         }
         
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 

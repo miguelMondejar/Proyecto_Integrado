@@ -37,8 +37,43 @@
     padding-right: 2%;
 }
 
+#login-formulario form {
+    display: inline-block;
+    max-width: 80%;
+    padding: 2%;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0px 0px 3px 0px #ccc;
+}
+
+#login-formulario form label {
+    text-align: left;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 4%;
+    font-weight: bold;
+}
+
+#login-formulario form input[type=text],
+#login-formulario form input[type=tel],
+#login-formulario form input[type=number],
+#login-formulario form input[type=email],
+#login-formulario form input[type=password],
+#login-formulario form input[type=date], select, option {
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 20px;
+    border: 1px solid #b3b3b3;
+    border-radius: 20px;
+}
+
 /* Menú perfil */
 #menu {
+    margin-left: 70%;
+    margin-right: 7%;
+    width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -48,14 +83,20 @@
 a {
     text-decoration: none;
 }
-  
+
+#enlace-menu {
+    width: 50px;
+}
+
 #menu ul {
+    text-align: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
   
 #menu li {
+    font-size: 18px;
     padding: 5px 0;
     border-bottom: 1px solid #ccc;
 }

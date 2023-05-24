@@ -1,4 +1,5 @@
-// Función para hacer el login
+// Función para hacer el login, una vez dentro mandará al usuario a una página u otra
+// dependiendo del rol
 function loginUsuario() {
     const form = document.getElementById('login-formulario')
   
@@ -13,19 +14,19 @@ function loginUsuario() {
         let datos = JSON.stringify({
             "email": email,
             "password": password
-        });
+        })
 
         // encabezados para el request
-        let header = new Headers();
-        header.append("Content-Type", "application/json");
+        let miHeaders = new Headers()
+        miHeaders.append("Content-Type", "application/json")
 
         // preparamos el request
         let requestOptions = {
             method: 'POST',
-            headers: header,
+            headers: miHeaders,
             body: datos,
             redirect: 'follow'
-        };
+        }
 
         // hacemos el fetch y guardamos el token
         fetch(`${API_BASE_URL}/login`, requestOptions)

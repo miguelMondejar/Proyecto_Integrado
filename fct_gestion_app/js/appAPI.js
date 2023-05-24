@@ -42,5 +42,5 @@ function mostrarMenu() {
         } else {
             menu.style.display = "none"
         }
-    });  
+    })
 }

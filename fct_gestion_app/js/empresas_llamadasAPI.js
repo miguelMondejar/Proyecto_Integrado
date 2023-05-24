@@ -35,7 +35,7 @@ async function getEmpresas() {
 
         div.appendChild(tabla)
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -78,7 +78,7 @@ async function registerEmpresa() {
                 console.log('Error:', error)
             }
         } catch (error) {
-            console.log('error', error)
+            console.log(mensajeErrorGenerico + error)
         }
     })
 }
@@ -118,12 +118,19 @@ async function putEmpresa(id) {
         const responseData = await response.json()
 
         let empresa = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistrosEmpresa()">
-            <input type="text" value="${empresa.cif}" id="cif">
-            <input type="text" value="${empresa.nombre}" id="nombre">
-            <input type="email" value="${empresa.email}" id="correo">
-            <p id="errores"></p>
-            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+        div.innerHTML = `
+            <p class="lead mb-0">Vas a editar la empresa con ID <strong>${empresa.id}</strong></p>
+            <div class="text-center" id="formularioRegister">
+            <form action="" id="formularioRegistro" onkeyup="validarRegistrosEmpresa()">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="${empresa.nombre}">
+                <label for="cif">CIF</label>
+                <input type="text" id="cif" name="cif" value="${empresa.cif}">
+                <label for="correo">Email</label>
+                <input type="email" id="correo" name="correo" value="${empresa.email}">
+                <p id="errores"></p>
+                <br><input type="submit" value="Guardar" class="btn btn-dark">
+            </form><div>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
@@ -163,7 +170,7 @@ async function putEmpresa(id) {
                 .catch(error => console.log('error', error))
         })    
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -181,7 +188,7 @@ async function getEmpresasNombre() {
         })
 
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 

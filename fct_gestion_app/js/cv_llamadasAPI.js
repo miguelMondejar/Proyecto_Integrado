@@ -63,7 +63,7 @@ async function getCV() {
             cv.innerHTML = `<a href="">${nombreArchivo}</a> <input type='button' onclick='deleteCV(${curriculum.id})' value='❌' class='botonBorrar'>`
         })
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 

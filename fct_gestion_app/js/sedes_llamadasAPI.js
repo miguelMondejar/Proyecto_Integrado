@@ -40,7 +40,7 @@ async function getSedes() {
 
         div.appendChild(tabla)
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -144,16 +144,32 @@ async function putSede(id) {
         const responseData = await response.json()
 
         let sede = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistroSede()">
-            <input type="text" value="${sede.nombre}" id="nombre">
-            <input type="text" value="${sede.direccion}" id="direccion">
-            <input type="text" value="${sede.localidad}" id="localidad">
-            <input type="text" value="${sede.provincia}" id="provincia">
-            <input type="number" value="${sede.codigo_postal}" id="codigo_postal">
-            <input type="text" value="${sede.telefono}" id="telefono">
-            <select id="select-empresas"></select>
-            <p id="errores"></p>
-            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+        div.innerHTML = `
+            <p class="lead mb-0">Vas a editar la sede con ID <strong>${sede.id}</strong></p>
+            <div class="text-center" id="formularioRegister">
+            <form action="" id="formularioRegistro" onkeyup="validarRegistroSede()">
+                <div class="form-column">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" value="${sede.nombre}">
+                    <label for="localidad">Localidad</label>
+                    <input type="text" id="localidad" name="localidad" value="${sede.localidad}">
+                    <label for="codigo_postal">Código Postal</label>
+                    <input type="number" id="codigo_postal" name="codigo_postal" value="${sede.codigo_postal}">
+                    <label for="empresa">Empresa</label>
+                    <select id="select-empresas">
+                    </select>
+                </div>
+                <div class="form-column">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" value="${sede.direccion}">
+                    <label for="provincia">Provincia</label>
+                    <input type="text" id="provincia" name="provincia" value="${sede.provincia}">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" value="${sede.telefono}">    
+                </div>
+                <p id="errores"></p>
+                <br><input type="submit" value="Guardar" class="btn btn-dark">
+            </form></div>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
@@ -213,7 +229,7 @@ async function putSede(id) {
             }
         }
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -230,7 +246,7 @@ async function getSedesNombre() {
         })
 
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 

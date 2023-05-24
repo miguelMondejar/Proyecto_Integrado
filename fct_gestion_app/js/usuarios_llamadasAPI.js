@@ -44,7 +44,7 @@ async function getUsuarios(tipoUsuario) {
 
         div.appendChild(tabla)
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -136,15 +136,29 @@ async function putUsuario(id) {
         const responseData = await response.json()
 
         let usuario = responseData.data
-        div.innerHTML = `<form id="formularioRegister" onkeyup="validarRegistro()">
-            <input type="text" value="${usuario.nombre}" id="nombre">
-            <input type="text" value="${usuario.apellidos}" id="apellidos">
-            <input type="date" value="${usuario.fecha_nacimiento}" id="fecha_nacimiento">
-            <input type="text" value="${usuario.dni}" id="dni">
-            <input type="email" value="${usuario.email}" id="correo">
-            <input type="text" value="${usuario.telefono}" id="telefono">
-            <p id="errores"></p>
-            <br><input type="submit" value="Guardar" class="btn btn-dark"></form>`
+        div.innerHTML = `
+            <p class="lead mb-0">Vas a editar al usuario con ID <strong>${usuario.id}</strong></p>
+            <div class="text-center" id="formularioRegister">
+            <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
+                <div class="form-column">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" value="${usuario.nombre}">
+                    <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="${usuario.fecha_nacimiento}">
+                    <label for="correo">Correo eléctronico</label>
+                    <input type="email" id="correo" name="correo" value="${usuario.email}">
+                </div>
+                <div class="form-column">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" value="${usuario.apellidos}">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" value="${usuario.dni}">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono" value="${usuario.telefono}">
+                </div>
+                <p id="errores"></p>
+                <br><input type="submit" value="Guardar" class="btn btn-dark">
+            </form><div>`
 
         let form = document.getElementById('formularioRegister')
         form.addEventListener('submit', async (event) => {
@@ -366,7 +380,7 @@ async function getUsuariosNombre() {
         })
 
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
