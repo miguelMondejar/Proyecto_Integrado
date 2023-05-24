@@ -291,7 +291,7 @@ function validarRegistro() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
-    if (!validarCamposVacios(document.getElementById('fecha_inicio').value) || !validarCamposVacios(document.getElementById('fecha_inicio').value) || 
+    if (!validarCamposVacios(document.getElementById('fecha_inicio').value) || !validarCamposVacios(document.getElementById('fecha_fin').value) || 
     !validarCamposVacios(document.getElementById('estado').value) || !validarCamposVacios(document.getElementById('select-usuarios').value) ||
     !validarCamposVacios(document.getElementById('select-empresas').value))  {
         campoErrores.innerHTML += `${mensajeVacio} <br>`

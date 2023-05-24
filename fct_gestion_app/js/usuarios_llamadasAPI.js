@@ -102,25 +102,25 @@ function validarRegistro() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
-    if (!validarCamposVacios(document.getElementById('nombre').value) || !validarCamposVacios(document.getElementById('apellidos').value) || 
-    !validarCamposVacios(document.getElementById('password1').value) || !validarCamposVacios(document.getElementById('password2').value) || 
+    if (!validarCamposVacios(document.getElementById('nombre').value) || !validarCamposVacios(document.getElementById('apellidos').value) ||  
     !validarCamposVacios(document.getElementById('fecha_nacimiento').value) || !validarCamposVacios(document.getElementById('dni').value) || 
     !validarCamposVacios(document.getElementById('telefono').value) || !validarCamposVacios(document.getElementById('correo').value)) {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
     }
 
+    // comprobamos que el campo password1 y 2 existan ya que esta función se usará también para editar un usuario
+    if(document.getElementById('password1') && document.getElementById('password2')) {
+        if (!validarPassword(document.getElementById('password1').value) || !validarPassword(document.getElementById('password2').value)) {
+            campoErrores.innerHTML += `${mensajeContrasena} <br>`
+        } else if (!validar2Password(document.getElementById('password1').value, document.getElementById('password2').value)) {
+            campoErrores.innerHTML += `${mensajePassRepetida} <br>`
+        }
+    }
+
     if (!validarCorreo(document.getElementById('correo').value)) {
         campoErrores.innerHTML += `${mensajeCorreo} <br>`
     }
-
-    if (!validarPassword(document.getElementById('password1').value)) {
-        campoErrores.innerHTML += `${mensajeContrasena} <br>`
-    }
-
-    if (!validar2Password(document.getElementById('password1').value, document.getElementById('password2').value)) {
-        campoErrores.innerHTML += `${mensajePassRepetida} <br>`
-    }
-
+    
     if (!validarTamanio(document.getElementById('dni').value, 9, 9) ||
     !validarTamanio(document.getElementById('telefono').value, 9, 9)) {
         campoErrores.innerHTML += `${mensajeDNITelefono} <br>`
