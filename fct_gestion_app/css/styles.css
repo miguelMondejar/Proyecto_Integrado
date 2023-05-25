@@ -4074,7 +4074,7 @@ textarea.form-control-lg {
   justify-content: space-between;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  border: 1px  #d1d1d1 solid;
+  border: 1.5px  #d1d1d1 solid;
 }
 .navbar > .container,
 .navbar > .container-fluid,
@@ -4089,6 +4089,7 @@ textarea.form-control-lg {
   justify-content: space-between;
 }
 .navbar-brand {
+  font-weight: bold;
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
@@ -4483,7 +4484,7 @@ textarea.form-control-lg {
   color: rgba(0, 0, 0, 0.9);
 }
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-  color: rgba(0, 0, 0, 0.9);
+  color: #0d6efd;
 }
 .navbar-light .navbar-nav .nav-link {
   color: rgba(0, 0, 0, 0.55);
@@ -11343,7 +11344,7 @@ textarea.form-control-lg {
 }
 
 .features-icons-item:hover {
-  border-radius: 20px;
+  border-radius: 30px;
   background-color: white;
 }
 

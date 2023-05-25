@@ -66,7 +66,7 @@ class EmpresaController extends Controller
     }
 
     /**
-     * Función para mostrar uno específico
+     * Función para mostrar una específica
      *
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
@@ -93,7 +93,6 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Actualizar empresas
         // Validamos los datos.
         $data = $request->only('cif', 'nombre', 'email');
         $validador = Validator::make($data, [
@@ -130,7 +129,6 @@ class EmpresaController extends Controller
      */
     public function destroy($id)
     {
-        // Eliminar una empresa
         // buscamos la empresa
         $empresa = Empresa::findOrFail($id);
 

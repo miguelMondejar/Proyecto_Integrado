@@ -39,7 +39,6 @@ class CandidaturaController extends Controller
      */
     public function store(Request $request)
     {
-        // Crear una candidatura
         // Validamos los datos.
         $data = $request->only('fecha_inicio', 'fecha_fin', 'estado', 'usuario_id', 'empresa_id');
         $validador = Validator::make($data, [
@@ -70,7 +69,7 @@ class CandidaturaController extends Controller
     }
 
     /**
-     * Función para mostrar uno específico
+     * Función para mostrar una candidatura específica
      *
      * @param  \App\Models\Candidatura  $candidatura
      * @return \Illuminate\Http\Response
@@ -97,7 +96,6 @@ class CandidaturaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Actualizar una candidatura
         // Validamos los datos.
         $data = $request->only('fecha_inicio', 'fecha_fin', 'estado', 'usuario_id', 'empresa_id');
         $validador = Validator::make($data, [
@@ -138,7 +136,6 @@ class CandidaturaController extends Controller
      */
     public function destroy($id)
     {
-        // Eliminar una candidatura
         // buscamos la candidatura
         $candidatura = Candidatura::findOrFail($id);
 

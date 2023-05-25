@@ -98,7 +98,6 @@ class CurriculumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Subir un curriculums
         // Validamos los datos.
         $data = $request->only('ruta', 'usuario_id');
         $validador = Validator::make($data, [
@@ -126,14 +125,13 @@ class CurriculumController extends Controller
     }
 
     /**
-     * Fución para eliminar por ID
+     * Función para eliminar por ID
      *
      * @param  \App\Models\Curriculum  $curriculum
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        // Eliminar un cv
         // buscamos el cv
         $cv = Curriculum::findOrFail($id);
 
@@ -141,6 +139,10 @@ class CurriculumController extends Controller
         if(!$cv) {
             return response()->json(['mensaje' => "CV no encontrado"], 404);
         }
+
+        // Si existe el cv, también se borrará del storage el pdf
+        $CVpdf = $cv->ruta;
+        Storage::delete($CVpdf);
 
         $cv->delete();
         return response()->json(['mensaje' => "CV borrado perfectamente."], Response::HTTP_OK);

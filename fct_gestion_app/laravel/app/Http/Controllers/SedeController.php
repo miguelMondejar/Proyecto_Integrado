@@ -74,7 +74,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Función para mostrar uno específico
+     * Función para mostrar una sede específica
      *
      * @param  \App\Models\Sede  $sede
      * @return \Illuminate\Http\Response
