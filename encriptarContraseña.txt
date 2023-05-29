@@ -1,0 +1,8 @@
+php artisan tinker
+
+$users = App\Models\User::all();
+
+foreach ($users as $user) {
+    $user->password = bcrypt($user->password);
+    $user->save();
+}

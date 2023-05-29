@@ -16,7 +16,7 @@ CREATE TABLE Usuarios (
   apellidos VARCHAR(30) NOT NULL,
   fecha_nacimiento DATE NOT NULL,
   dni VARCHAR(10) NOT NULL,
-  email VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL UNIQUE,
   telefono VARCHAR(9) NOT NULL,
   password VARCHAR(60) NOT NULL,
   rol_id INTEGER(5) NOT NULL,

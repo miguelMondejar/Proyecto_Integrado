@@ -203,7 +203,90 @@ async function putUsuario(id) {
     } catch (error) {
         console.log(`Something went wrong: ${error}`)
     }
-}  
+}
+
+// Función para editar un usuario desde el perfil de usuario
+async function putPerfilUsuario() {
+    let div = document.getElementById("editar")
+    let id = await obtenerIDUsuarioLogado()
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/usuarios/${id}`)
+        const responseData = await response.json()
+
+        let usuario = responseData.data
+        div.innerHTML = `
+            <div class="text-center" id="formularioRegister">
+            <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
+                <div class="form-column">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" value="${usuario.nombre}">
+                    <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="${usuario.fecha_nacimiento}">
+                    <label for="correo">Correo eléctronico</label>
+                    <input type="email" id="correo" name="correo" value="${usuario.email}">
+                    <label for="password1">Contraseña</label>
+                    <input type="text" id="password1" name="password1" value="">
+                </div>
+                <div class="form-column">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" value="${usuario.apellidos}">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" value="${usuario.dni}">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono" value="${usuario.telefono}">
+                    <label for="password2">Repite contraseña</label>
+                    <input type="password" id="password2" name="password2" value="">
+                </div>
+                <p id="errores"></p>
+                <br><input type="submit" value="Guardar" class="btn btn-dark">
+            </form><div>`
+
+        let form = document.getElementById('formularioRegistro')
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault() // prevenir que el formulario se envíe por defecto
+
+            // token
+            let token = localStorage.getItem('token')
+
+            let miHeaders = new Headers()
+            miHeaders.append("Content-Type", "application/json")
+            miHeaders.append("Authorization", `Bearer ${token}`)
+
+            let datos = JSON.stringify({
+                "nombre": document.getElementById("nombre").value,
+                "apellidos": document.getElementById("apellidos").value,
+                "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
+                "dni": document.getElementById("dni").value,
+                "email": document.getElementById("correo").value,
+                "telefono": document.getElementById("telefono").value,
+                "password": document.getElementById("password2").value
+            })
+
+            let requestOptions = {
+                method: 'PUT',
+                headers: miHeaders,
+                body: datos,
+                redirect: 'follow'
+            }
+
+            fetch(`${API_BASE_URL}/usuarios/${id}`, requestOptions)
+                .then(response => {
+                    if (response.ok) {
+                        alert("Usuario actualizado correctamente")
+                        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/perfil_usuario.html"
+                    } else {
+                        alert("Compruebe los datos del formulario.")
+                    }
+                    response.text()
+                })
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error))
+        })    
+    } catch (error) {
+        console.log(`Something went wrong: ${error}`)
+    }
+}
   
 // Función para eliminar un usuario
 async function deleteUsuario(id) {
@@ -295,12 +378,12 @@ async function consultarToken() {
 
             // para que no de error al gestionar los datos del perfil
             if(pagina == "http://127.0.0.1:3000/fct_gestion_app/perfil_usuario.html") {
-                document.getElementById('nombre').textContent = resultadoUsuario.nombre
-                document.getElementById('apellidos').textContent = resultadoUsuario.apellidos
-                document.getElementById('fecha_nacimiento').textContent = resultadoUsuario.fecha_nacimiento
-                document.getElementById('dni').textContent = resultadoUsuario.dni
-                document.getElementById('correo').textContent = resultadoUsuario.email
-                document.getElementById('telefono').textContent = resultadoUsuario.telefono
+                document.getElementById('nombre_perfil').textContent = resultadoUsuario.nombre
+                document.getElementById('apellidos_perfil').textContent = resultadoUsuario.apellidos
+                document.getElementById('fecha_nacimiento_perfil').textContent = resultadoUsuario.fecha_nacimiento
+                document.getElementById('dni_perfil').textContent = resultadoUsuario.dni
+                document.getElementById('correo_perfil').textContent = resultadoUsuario.email
+                document.getElementById('telefono_perfil').textContent = resultadoUsuario.telefono
 
                 // si el rol del usuario es 2, pintamos el CV en el perfil
                 if (resultadoUsuario.rol_id == 2) {

@@ -29,20 +29,20 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
+        <nav class="navbar navbar-light bg-white static-top">
             <div class="container">
                 <a class="navbar-brand" href="index.html">FCT GESTION APP</a>  
                 <!-- Abrir menú desplegable-->            
                 <a class="navbar-brand" href="" id="enlace-menu">
                     <img src="assets/img/inicio_sesion.png" alt="icono estudiantes" width="50px">
                 </a>
-                <!-- menu-->
-                <div id="menu" style="display:none">
-                    <ul>
-                        <li><a href="perfil_usuario.html">Perfil</a></li> 
-                        <li><a href="" onclick="logout()">Cerrar sesión</a></li>
-                    </ul>
-                </div>
+            </div>
+            <!-- menu-->
+            <div id="menu" style="display:none">
+                <ul>
+                    <li><a href="perfil_usuario.html">Perfil</a></li> 
+                    <li><a href="" onclick="logout()">Cerrar sesión</a></li>
+                </ul>
             </div>
         </nav>
         
@@ -58,27 +58,27 @@
                 <table class="table">
                     <tr>
                       <th>Nombre</th>
-                      <td id="nombre"></td>
+                      <td id="nombre_perfil"></td>
                     </tr>
                     <tr>
                       <th>Apellidos</th>
-                      <td id="apellidos"></td>
+                      <td id="apellidos_perfil"></td>
                     </tr>
                     <tr>
                       <th>Fecha Nacimiento</th>
-                      <td id="fecha_nacimiento"></td>
+                      <td id="fecha_nacimiento_perfil"></td>
                     </tr>
                     <tr>
                       <th>DNI</th>
-                      <td id="dni"></td>
+                      <td id="dni_perfil"></td>
                     </tr>
                     <tr>
                       <th>Correo electrónico</th>
-                      <td id="correo"></td>
+                      <td id="correo_perfil"></td>
                     </tr>
                     <tr>
                       <th>Teléfono</th>
-                      <td id="telefono"></td>
+                      <td id="telefono_perfil"></td>
                     </tr>
                     <tr>
                         <th id="cvTitulo"></th>
@@ -90,7 +90,7 @@
 
         <!-- Botón editar perfil -->
         <section class="features-icons bg-light text-center">
-            <input type="submit" value="Editar perfil" class="btn btn-primary" onclick="putUsuario(await obtenerIDUsuarioLogado())">
+            <input type="submit" value="Editar perfil" class="btn btn-primary" onclick="putPerfilUsuario()">
         </section>
 
         <!-- Este section saldrá si se requiere editar -->
