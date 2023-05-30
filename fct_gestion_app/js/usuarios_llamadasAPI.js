@@ -1,3 +1,12 @@
+// constantes
+const nombre = document.getElementById('nombre')
+const apellidos = document.getElementById('apellidos')
+const fecha_nacimiento = document.getElementById('fecha_nacimiento')
+const dni = document.getElementById('dni')
+const email = document.getElementById('email')
+const telefono = document.getElementById('telefono')
+const password = document.getElementById('password2')
+
 // Función para pintar usuarios en forma de tabla. Tipo de usuario es el rol
 async function getUsuarios(tipoUsuario) {
     let div = document.getElementById('usuarios')
@@ -67,13 +76,13 @@ async function registerUsuario() {
 
         // hacemos el registro
         let datos = JSON.stringify({
-            "nombre": document.getElementById('nombre').value,
-            "apellidos": document.getElementById('apellidos').value,
-            "fecha_nacimiento": document.getElementById('fecha_nacimiento').value,
-            "dni": document.getElementById('dni').value,
-            "email": document.getElementById('correo').value,
-            "telefono": document.getElementById('telefono').value,
-            "password": document.getElementById('password2').value,
+            "nombre": nombre.value,
+            "apellidos": apellidos.value,
+            "fecha_nacimiento": fecha_nacimiento.value,
+            "dni": dni.value,
+            "email": email.value,
+            "telefono": telefono.value,
+            "password": password.value,
             "rol_id": selectRol.options[selectRol.selectedIndex].value
         })
 
@@ -102,9 +111,9 @@ function validarRegistro() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
-    if (!validarCamposVacios(document.getElementById('nombre').value) || !validarCamposVacios(document.getElementById('apellidos').value) ||  
-    !validarCamposVacios(document.getElementById('fecha_nacimiento').value) || !validarCamposVacios(document.getElementById('dni').value) || 
-    !validarCamposVacios(document.getElementById('telefono').value) || !validarCamposVacios(document.getElementById('correo').value)) {
+    if (!validarCamposVacios(nombre.value) || !validarCamposVacios(apellidos.value) ||  
+    !validarCamposVacios(fecha_nacimiento.value) || !validarCamposVacios(dni.value) || 
+    !validarCamposVacios(telefono.value) || !validarCamposVacios(email.value)) {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
     }
 
@@ -117,12 +126,12 @@ function validarRegistro() {
         }
     }
 
-    if (!validarCorreo(document.getElementById('correo').value)) {
+    if (!validarCorreo(email.value)) {
         campoErrores.innerHTML += `${mensajeCorreo} <br>`
     }
     
-    if (!validarTamanio(document.getElementById('dni').value, 9, 9) ||
-    !validarTamanio(document.getElementById('telefono').value, 9, 9)) {
+    if (!validarTamanio(dni.value, 9, 9) ||
+    !validarTamanio(telefono.value, 9, 9)) {
         campoErrores.innerHTML += `${mensajeDNITelefono} <br>`
     }
 }
@@ -172,12 +181,12 @@ async function putUsuario(id) {
             miHeaders.append("Authorization", `Bearer ${token}`)
 
             let datos = JSON.stringify({
-                "nombre": document.getElementById("nombre").value,
-                "apellidos": document.getElementById("apellidos").value,
-                "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
-                "dni": document.getElementById("dni").value,
-                "email": document.getElementById("correo").value,
-                "telefono": document.getElementById("telefono").value
+                "nombre": nombre.value,
+                "apellidos": apellidos.value,
+                "fecha_nacimiento": fecha_nacimiento.value,
+                "dni": dni.value,
+                "email": email.value,
+                "telefono": telefono.value
             })
 
             let requestOptions = {
@@ -254,13 +263,13 @@ async function putPerfilUsuario() {
             miHeaders.append("Authorization", `Bearer ${token}`)
 
             let datos = JSON.stringify({
-                "nombre": document.getElementById("nombre").value,
-                "apellidos": document.getElementById("apellidos").value,
-                "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
-                "dni": document.getElementById("dni").value,
-                "email": document.getElementById("correo").value,
-                "telefono": document.getElementById("telefono").value,
-                "password": document.getElementById("password2").value
+                "nombre": nombre.value,
+                "apellidos": apellidos.value,
+                "fecha_nacimiento": fecha_nacimiento.value,
+                "dni": dni.value,
+                "email": email.value,
+                "telefono": telefono.value,
+                "password": password.value
             })
 
             let requestOptions = {
@@ -398,14 +407,12 @@ async function consultarToken() {
             // redireccionar por rol
             // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige a su página de inicio
             if (resultadoUsuario.rol_id == 2 && !(pagina.includes("inicio_alumno") || pagina.includes("perfil_usuario"))) {
-                alert("ACCESO DENEGADO")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_alumno.html"
+                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
             }
 
             // si un profesor intenta acceder a la página "inicio_alumno", se le redirige a su página de inicio
             if (resultadoUsuario.rol_id == 1 && pagina.includes("inicio_alumno") && !pagina.includes("perfil_usuario")) {
-                alert("ACCESO DENEGADO")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/inicio_profesor.html"
+                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
             }
 
             return result

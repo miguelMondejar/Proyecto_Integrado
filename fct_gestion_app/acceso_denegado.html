@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>FCT Gestion App</title>
+
+        <!-- Icono-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+
+        <!-- CSS (incluido Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/forms.css" rel="stylesheet">
+
+        <!-- Scripts JS -->
+        <script src="js/form.js"></script>
+        <script src="js/validaciones.js"></script>
+        <script src="js/appAPI.js"></script>
+        <script src="js/usuarios_llamadasAPI.js"></script>
+        <script src="js/sedes_llamadasAPI.js"></script>
+        <script src="js/candidaturas_llamadasAPI.js"></script>
+        <script src="js/cv_llamadasAPI.js"></script>
+    </head>
+
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-light bg-white static-top">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">FCT GESTION APP</a>  
+                <!-- Abrir menú desplegable-->            
+                <a class="navbar-brand" href="" id="enlace-menu">
+                    <img src="assets/img/inicio_sesion.png" alt="icono estudiantes" width="50px">
+                </a>
+            </div>
+            <!-- menu-->
+            <div id="menu" style="display:none">
+                <ul>
+                    <li><a href="perfil_usuario.html">Perfil</a></li> 
+                    <li><a href="" onclick="logout()">Cerrar sesión</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="features-icons bg-light text-center">
+            <h1 class="mb-5">ACCESO DENEGADO</h1>
+            <p>No tienes acceso al sitio que quieres entrar.</p>
+        </section>
+
+        <!-- Footer-->
+        <footer class="footer bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item"><a href="#!">Sobre nosotros</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="https://github.com/miguelMondejar">Contacto</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="https://policies.google.com/terms?hl=es">Terminos de uso</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="https://policies.google.com/privacy?hl=es">Politica de privacidad</a></li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; FCT Gestion App 2023. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item me-4">
+                                <a href="https://www.facebook.com/"><i class="bi-facebook fs-3"></i></a>
+                            </li>
+                            <li class="list-inline-item me-4">
+                                <a href="https://www.twitter.com/"><i class="bi-twitter fs-3"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="https://www.instagram.com/"><i class="bi-instagram fs-3"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>mostrarMenu()</script>
+        <script>consultarToken()</script>
+    </body>
+</html>
