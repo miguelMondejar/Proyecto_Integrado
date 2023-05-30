@@ -220,7 +220,7 @@ async function putSede(id) {
         await getEmpresasNombre()
 
         // Cuando le des en editar salga la empresa que esté actualmente seleccionada
-        let selectEmpresa = document.getElementById('select-empresas');
+        let selectEmpresa = document.getElementById('select-empresas')
         for (let i = 0; i < selectEmpresa.options.length; i++) {
             // se va a selecciona la opcion que coincida con sede.empresa_id
             if (parseInt(selectEmpresa.options[i].value) === sede.empresa_id) {

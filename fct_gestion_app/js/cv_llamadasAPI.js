@@ -4,7 +4,7 @@ async function subirCV() {
         e.preventDefault()
 
         // Obtiene el archivo seleccionado por el alumno
-        let cvFile = document.getElementById('cvFile').files[0];
+        let cvFile = document.getElementById('cvFile').files[0]
         if (cvFile) {
             // Crea un objeto FormData para enviar el archivo al servidor
             let formData = new FormData()
@@ -29,7 +29,7 @@ async function subirCV() {
                         alert('Error al subir el CV. Compruebe que sea en formato pdf.')
                         throw new Error('Error en la solicitud: ' + response.status)
                     }
-                    return response.json();
+                    return response.json()
                 })
                 .then(result => {
                     console.log(result)

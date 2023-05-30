@@ -254,7 +254,7 @@ async function putCandidatura(id) {
         await getUsuariosNombre()
 
         // Cuando le des en editar salga la empresa que esté actualmente seleccionada
-        let selectEmpresa = document.getElementById('select-empresas');
+        let selectEmpresa = document.getElementById('select-empresas')
         for (let i = 0; i < selectEmpresa.options.length; i++) {
             // se va a selecciona la opcion que coincida con candidatura.empresa_id
             if (parseInt(selectEmpresa.options[i].value) === candidatura.empresa_id) {
@@ -264,7 +264,7 @@ async function putCandidatura(id) {
         }
 
         // Hacemos lo mismo con el alumno seleccionado
-        let selectUsuario = document.getElementById('select-usuarios');
+        let selectUsuario = document.getElementById('select-usuarios')
         for (let i = 0; i < selectUsuario.options.length; i++) {
             if (parseInt(selectUsuario.options[i].value) === candidatura.usuario_id) {
                 selectUsuario.options[i].selected = true
@@ -273,7 +273,7 @@ async function putCandidatura(id) {
         }
 
         // Y por último, con el estado
-        let selectEstado = document.getElementById('estado');
+        let selectEstado = document.getElementById('estado')
         for (let i = 0; i < selectEstado.options.length; i++) {
             if (selectEstado.options[i].value === candidatura.estado) {
                 selectEstado.options[i].selected = true

@@ -1,12 +1,3 @@
-// constantes
-const nombre = document.getElementById('nombre')
-const apellidos = document.getElementById('apellidos')
-const fecha_nacimiento = document.getElementById('fecha_nacimiento')
-const dni = document.getElementById('dni')
-const email = document.getElementById('email')
-const telefono = document.getElementById('telefono')
-const password = document.getElementById('password2')
-
 // Función para pintar usuarios en forma de tabla. Tipo de usuario es el rol
 async function getUsuarios(tipoUsuario) {
     let div = document.getElementById('usuarios')
@@ -76,13 +67,13 @@ async function registerUsuario() {
 
         // hacemos el registro
         let datos = JSON.stringify({
-            "nombre": nombre.value,
-            "apellidos": apellidos.value,
-            "fecha_nacimiento": fecha_nacimiento.value,
-            "dni": dni.value,
-            "email": email.value,
-            "telefono": telefono.value,
-            "password": password.value,
+            "nombre": document.getElementById('nombre').value,
+            "apellidos": document.getElementById('apellidos').value,
+            "fecha_nacimiento": document.getElementById('fecha_nacimiento').value,
+            "dni": document.getElementById('dni').value,
+            "email": document.getElementById('correo').value,
+            "telefono": document.getElementById('telefono').value,
+            "password": document.getElementById('password2').value,
             "rol_id": selectRol.options[selectRol.selectedIndex].value
         })
 
@@ -111,27 +102,24 @@ function validarRegistro() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
-    if (!validarCamposVacios(nombre.value) || !validarCamposVacios(apellidos.value) ||  
-    !validarCamposVacios(fecha_nacimiento.value) || !validarCamposVacios(dni.value) || 
-    !validarCamposVacios(telefono.value) || !validarCamposVacios(email.value)) {
+    if (!validarCamposVacios(document.getElementById('nombre').value) || !validarCamposVacios(document.getElementById('apellidos').value) ||  
+    !validarCamposVacios(document.getElementById('fecha_nacimiento').value) || !validarCamposVacios(document.getElementById('dni').value) || 
+    !validarCamposVacios(document.getElementById('telefono').value) || !validarCamposVacios(document.getElementById('correo').value)) {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
     }
 
-    // comprobamos que el campo password1 y 2 existan ya que esta función se usará también para editar un usuario
-    if(document.getElementById('password1') && document.getElementById('password2')) {
-        if (!validarPassword(document.getElementById('password1').value) || !validarPassword(document.getElementById('password2').value)) {
-            campoErrores.innerHTML += `${mensajeContrasena} <br>`
-        } else if (!validar2Password(document.getElementById('password1').value, document.getElementById('password2').value)) {
-            campoErrores.innerHTML += `${mensajePassRepetida} <br>`
-        }
+    if (!validarPassword(document.getElementById('password1').value) || !validarPassword(document.getElementById('password2').value)) {
+        campoErrores.innerHTML += `${mensajeContrasena} <br>`
+    } else if (!validar2Password(document.getElementById('password1').value, document.getElementById('password2').value)) {
+        campoErrores.innerHTML += `${mensajePassRepetida} <br>`
     }
-
-    if (!validarCorreo(email.value)) {
+    
+    if (!validarCorreo(document.getElementById('correo').value)) {
         campoErrores.innerHTML += `${mensajeCorreo} <br>`
     }
     
-    if (!validarTamanio(dni.value, 9, 9) ||
-    !validarTamanio(telefono.value, 9, 9)) {
+    if (!validarTamanio(document.getElementById('dni').value, 9, 9) ||
+    !validarTamanio(document.getElementById('telefono').value, 9, 9)) {
         campoErrores.innerHTML += `${mensajeDNITelefono} <br>`
     }
 }
@@ -146,7 +134,7 @@ async function putUsuario(id) {
 
         let usuario = responseData.data
         div.innerHTML = `
-            <p class="lead mb-0">Vas a editar al usuario con ID <strong>${usuario.id}</strong></p>
+            <p class="lead mb-0">Vas a editar al usuario con ID ${usuario.id}</p>
             <div class="text-center" id="formularioRegister">
             <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
                 <div class="form-column">
@@ -156,6 +144,8 @@ async function putUsuario(id) {
                     <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="${usuario.fecha_nacimiento}">
                     <label for="correo">Correo eléctronico</label>
                     <input type="email" id="correo" name="correo" value="${usuario.email}">
+                    <label for="password1">Contraseña</label>
+                    <input type="password" id="password1" name="password1" value="">
                 </div>
                 <div class="form-column">
                     <label for="apellidos">Apellidos</label>
@@ -164,6 +154,8 @@ async function putUsuario(id) {
                     <input type="text" id="dni" name="dni" value="${usuario.dni}">
                     <label for="telefono">Teléfono</label>
                     <input type="text" id="telefono" name="telefono" value="${usuario.telefono}">
+                    <label for="password2">Repite contraseña</label>
+                    <input type="password" id="password2" name="password2" value="">
                 </div>
                 <p id="errores"></p>
                 <br><input type="submit" value="Guardar" class="btn btn-dark">
@@ -181,12 +173,13 @@ async function putUsuario(id) {
             miHeaders.append("Authorization", `Bearer ${token}`)
 
             let datos = JSON.stringify({
-                "nombre": nombre.value,
-                "apellidos": apellidos.value,
-                "fecha_nacimiento": fecha_nacimiento.value,
-                "dni": dni.value,
-                "email": email.value,
-                "telefono": telefono.value
+                "nombre": document.getElementById("nombre").value,
+                "apellidos": document.getElementById("apellidos").value,
+                "fecha_nacimiento": document.getElementById("fecha_nacimiento").value,
+                "dni": document.getElementById("dni").value,
+                "email": document.getElementById("correo").value,
+                "telefono": document.getElementById("telefono").value,
+                "password": document.getElementById("password2").value,
             })
 
             let requestOptions = {
@@ -216,85 +209,8 @@ async function putUsuario(id) {
 
 // Función para editar un usuario desde el perfil de usuario
 async function putPerfilUsuario() {
-    let div = document.getElementById("editar")
     let id = await obtenerIDUsuarioLogado()
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/usuarios/${id}`)
-        const responseData = await response.json()
-
-        let usuario = responseData.data
-        div.innerHTML = `
-            <div class="text-center" id="formularioRegister">
-            <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
-                <div class="form-column">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" value="${usuario.nombre}">
-                    <label for="fecha_nacimiento">Fecha Nacimiento</label>
-                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" value="${usuario.fecha_nacimiento}">
-                    <label for="correo">Correo eléctronico</label>
-                    <input type="email" id="correo" name="correo" value="${usuario.email}">
-                    <label for="password1">Contraseña</label>
-                    <input type="text" id="password1" name="password1" value="">
-                </div>
-                <div class="form-column">
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" id="apellidos" name="apellidos" value="${usuario.apellidos}">
-                    <label for="dni">DNI</label>
-                    <input type="text" id="dni" name="dni" value="${usuario.dni}">
-                    <label for="telefono">Teléfono</label>
-                    <input type="text" id="telefono" name="telefono" value="${usuario.telefono}">
-                    <label for="password2">Repite contraseña</label>
-                    <input type="password" id="password2" name="password2" value="">
-                </div>
-                <p id="errores"></p>
-                <br><input type="submit" value="Guardar" class="btn btn-dark">
-            </form><div>`
-
-        let form = document.getElementById('formularioRegistro')
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault() // prevenir que el formulario se envíe por defecto
-
-            // token
-            let token = localStorage.getItem('token')
-
-            let miHeaders = new Headers()
-            miHeaders.append("Content-Type", "application/json")
-            miHeaders.append("Authorization", `Bearer ${token}`)
-
-            let datos = JSON.stringify({
-                "nombre": nombre.value,
-                "apellidos": apellidos.value,
-                "fecha_nacimiento": fecha_nacimiento.value,
-                "dni": dni.value,
-                "email": email.value,
-                "telefono": telefono.value,
-                "password": password.value
-            })
-
-            let requestOptions = {
-                method: 'PUT',
-                headers: miHeaders,
-                body: datos,
-                redirect: 'follow'
-            }
-
-            fetch(`${API_BASE_URL}/usuarios/${id}`, requestOptions)
-                .then(response => {
-                    if (response.ok) {
-                        alert("Usuario actualizado correctamente")
-                        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/perfil_usuario.html"
-                    } else {
-                        alert("Compruebe los datos del formulario.")
-                    }
-                    response.text()
-                })
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error))
-        })    
-    } catch (error) {
-        console.log(`Something went wrong: ${error}`)
-    }
+    putUsuario(id)
 }
   
 // Función para eliminar un usuario
@@ -310,7 +226,7 @@ async function deleteUsuario(id) {
             method: 'DELETE',
             headers: miHeaders,
             redirect: 'follow'
-        };
+        }
     
         fetch(`${API_BASE_URL}/usuarios/${id}`, requestOptions)
             .then(response => response.text())
@@ -333,7 +249,7 @@ async function logout() {
     // lo pasamos en formato JSON
     let datos = JSON.stringify({
         "token": `${token}`
-    });
+    })
     
     let requestOptions = {
         method: 'POST',
@@ -404,15 +320,19 @@ async function consultarToken() {
                 }
             }
 
-            // redireccionar por rol
-            // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige a su página de inicio
-            if (resultadoUsuario.rol_id == 2 && !(pagina.includes("inicio_alumno") || pagina.includes("perfil_usuario"))) {
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
+            // Redireccionar por rol
+            // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige 
+            if (resultadoUsuario.rol_id === 2) {
+                if (!pagina.includes("inicio_alumno") && !pagina.includes("perfil_usuario")) {
+                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
+                }
             }
 
-            // si un profesor intenta acceder a la página "inicio_alumno", se le redirige a su página de inicio
-            if (resultadoUsuario.rol_id == 1 && pagina.includes("inicio_alumno") && !pagina.includes("perfil_usuario")) {
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
+            // Si un profesor intenta acceder a la página "inicio_alumno", se le redirige
+            if (resultadoUsuario.rol_id === 1) {
+                if (pagina.includes("inicio_alumno")) {
+                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
+                }
             }
 
             return result
