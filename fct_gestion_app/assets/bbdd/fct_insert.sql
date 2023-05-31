@@ -42,4 +42,6 @@ insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telef
 values ('Sede Yabox', '8 Vahlen Center', 'Malaga', 'Andalucia', '29010', '909976936', 5);
 
 insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
-values ('Pastor y Landero', 'Pastor y Landero 19', 'Sevilla', 'Andalucia', '41001', '954562540', 6);
+values ('Sede Pastor y Landero', 'Pastor y Landero 19', 'Sevilla', 'Andalucia', '41001', '954562540', 6);
+insert into Sedes (nombre, direccion, localidad, provincia, codigo_postal, telefono, empresa_id) 
+values ('Sede Colón', 'Paseo colón 8', 'Sevilla', 'Andalucia', '41001', '954562540', 6);

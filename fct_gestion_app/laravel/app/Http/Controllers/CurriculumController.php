@@ -24,19 +24,28 @@ class CurriculumController extends Controller
 
     // Función store para subir y crear un curriculum
     public function store(Request $request) {
-        // Verifica si se ha enviado un archivo
+        // Comprobar si se ha enviado un archivo
         if ($request->hasFile('cv')) {
             $cvFile = $request->file('cv');
 
-            // Verificar si el archivo es de tipo PDF
+            // Comprobar si el archivo es de tipo PDF
             if ($cvFile->getClientOriginalExtension() === 'pdf') {
+                // Comprobar si el usuario ya tiene un currículum
+                $usuarioId = $this->user->id;
+                $curriculumExiste = Curriculum::where('usuario_id', $usuarioId)->exists();
+
+                // Si el usuario ya tiene un currículum, devuelve un mensaje de error
+                if ($curriculumExiste) {
+                    return response()->json(['error' => 'El usuario ya tiene un currículum subido'], 400);
+                }
+
                 // Guardar el archivo en storage/app/public/cv
                 $rutaArchivo = $cvFile->storeAs('public/cv', $cvFile->hashName());
 
                 // Guardar la ruta del archivo en la base de datos
                 $cv = Curriculum::create([
                     'ruta' => $rutaArchivo,
-                    'usuario_id' => $this->user->id
+                    'usuario_id' => $usuarioId
                 ]);
 
                 return response()->json([
@@ -45,10 +54,10 @@ class CurriculumController extends Controller
                 ], Response::HTTP_OK);
             } else {
                 // El archivo no es de tipo PDF, devuelve un mensaje de error
-                return response()->json(['mensaje' => 'Solo se permiten archivos PDF'], 400);
+                return response()->json(['error' => 'Solo se permiten archivos PDF'], 400);
             }
         }
-        return response()->json(['mensaje' => 'No se ha enviado ningún archivo'], 400);
+        return response()->json(['error' => 'No se ha enviado ningún archivo'], 400);
     }
 
     /**
@@ -75,14 +84,14 @@ class CurriculumController extends Controller
         $user = User::find($id);
 
         if (!$user) {
-            return response()->json(['mensaje' => 'Usuario no encontrado'], 404);
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
 
         // Buscar el curriculum por el id del usuario
         $curriculum = Curriculum::where('usuario_id', $user->id)->get();
 
         if (!$curriculum) {
-            return response()->json(['mensaje' => 'Curriculum no encontrado'], 404);
+            return response()->json(['error' => 'Curriculum no encontrado'], 404);
         }
 
         // Retornar la respuesta con el curriculum encontrado
@@ -137,7 +146,7 @@ class CurriculumController extends Controller
 
         // si no existe
         if(!$cv) {
-            return response()->json(['mensaje' => "CV no encontrado"], 404);
+            return response()->json(['error' => "CV no encontrado"], 404);
         }
 
         // Si existe el cv, también se borrará del storage el pdf

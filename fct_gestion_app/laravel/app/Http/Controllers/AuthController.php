@@ -128,7 +128,7 @@ class AuthController extends Controller
             'dni' => 'required|string|min:8|max:10',
             'email' => 'required|email',
             'telefono' => 'required|string|max:9',
-            'password' => 'string|min:8|max:20'
+            'password' => 'required|string|min:8|max:20'
         ]);
 
         // si hay algo mal
@@ -163,7 +163,7 @@ class AuthController extends Controller
 
         // comprobamos que exista
         if(!$user) {
-            return response()->json(['mensaje' => "Usuario no encontrado"], 404);
+            return response()->json(['error' => "Usuario no encontrado"], 404);
         }
 
         return response()->json(['data' => $user], Response::HTTP_OK);
@@ -178,7 +178,7 @@ class AuthController extends Controller
 
         // si no existe
         if(!$usuario) {
-            return response()->json(['mensaje' => "Usuario no encontrado"], 404);
+            return response()->json(['error' => "Usuario no encontrado"], 404);
         }
 
         $usuario->delete();

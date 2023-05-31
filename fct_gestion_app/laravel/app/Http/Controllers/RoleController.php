@@ -33,7 +33,7 @@ class RoleController extends Controller
 
         // comprobamos que exista
         if(!$rol) {
-            return response()->json(['mensaje' => "Rol no encontrado"], 404);
+            return response()->json(['error' => "Rol no encontrado"], 404);
         }
 
         return response()->json(['data' => $rol], Response::HTTP_OK);

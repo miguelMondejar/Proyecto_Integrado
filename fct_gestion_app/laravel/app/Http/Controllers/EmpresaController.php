@@ -78,7 +78,7 @@ class EmpresaController extends Controller
         
         // comprobamos que exista
         if(!$empresa) {
-            return response()->json(['mensaje' => "Empresa no encontrado"], 404);
+            return response()->json(['error' => "Empresa no encontrada"], 404);
         }
 
         return response()->json(['data' => $empresa], Response::HTTP_OK);
@@ -134,7 +134,7 @@ class EmpresaController extends Controller
 
         // si no existe
         if(!$empresa) {
-            return response()->json(['mensaje' => "Empresa no encontrada"], 404);
+            return response()->json(['error' => "Empresa no encontrada"], 404);
         }
 
         $empresa->delete();

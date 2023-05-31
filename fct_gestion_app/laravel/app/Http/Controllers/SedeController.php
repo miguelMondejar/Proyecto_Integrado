@@ -86,7 +86,7 @@ class SedeController extends Controller
 
         // comprobamos que exista
         if(!$sede) {
-            return response()->json(['mensaje' => "Sede no encontrado"], 404);
+            return response()->json(['error' => "Sede no encontrado"], 404);
         }
 
         return response()->json(['data' => $sede], Response::HTTP_OK);
@@ -152,7 +152,7 @@ class SedeController extends Controller
 
         // si no existe
         if(!$sede) {
-            return response()->json(['mensaje' => "Sede no encontrada"], 404);
+            return response()->json(['error' => "Sede no encontrada"], 404);
         }
 
         $sede->delete();

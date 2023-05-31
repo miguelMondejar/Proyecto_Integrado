@@ -54,6 +54,16 @@ class CandidaturaController extends Controller
             return response()->json(['error' => $validador->messages()], 400);
         }
 
+        // Verificamos si el usuario tiene una candidatura aceptada
+        $usuarioId = $request->usuario_id;
+        $candidaturaAceptada = Candidatura::where('usuario_id', $usuarioId)->where('estado', 'Aprobada')->exists();
+
+        // Si tiene una candidatura aceptada, no se podría crear dicha candidatura
+        if ($candidaturaAceptada) {
+            return response()->json(['error' => 'El usuario ya tiene una candidatura aceptada.'], 400);
+        }
+
+        // Si no tiene una candidatura aceptada, creamos la candidatura
         $candidatura = Candidatura::create([
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_fin' => $request->fecha_fin,
@@ -141,7 +151,7 @@ class CandidaturaController extends Controller
 
         // si no existe
         if(!$candidatura) {
-            return response()->json(['mensaje' => "Candidatura no encontrada"], 404);
+            return response()->json(['error' => "Candidatura no encontrada"], 404);
         }
 
         $candidatura->delete();
