@@ -6,7 +6,7 @@ async function getCandidaturaUsuario() {
     let tabla = document.createElement('table')
     tabla.classList.add('table')
 
-    let encabezadosTabla = ['Fecha Inicio', 'Fecha Fin', 'Empresa', 'Estado']
+    let encabezadosTabla = ['Fecha Inicio 📆', 'Fecha Fin 🔚', 'Empresa 🏢', 'Estado 👀']
     let encabezadosFilas = document.createElement('tr')
 
     // Rellenamos el encabezado de la tabla

@@ -11357,6 +11357,15 @@ header.masthead {
   padding-bottom: 8rem;
 }
 
+header.masthead2 {
+  position: relative;
+  background-color: #343a40;
+  background: url("../assets/img/informatica-2.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
 header.masthead:before {
   content: "";
   position: absolute;
@@ -11367,15 +11376,31 @@ header.masthead:before {
   left: 0;
   opacity: 0.5;
 }
+
+header.masthead2:before {
+  content: "";
+  position: absolute;
+  background-color: #1c375e;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
 header.masthead h1, header.masthead .h1 {
   font-size: 2rem;
 }
+header.masthead2 h1, header.masthead2 .h1 {
+  font-size: 2rem;
+}
+
 @media (min-width: 768px) {
-  header.masthead {
+  header.masthead, header.masthead2 {
     padding-top: 12rem;
     padding-bottom: 12rem;
   }
-  header.masthead h1, header.masthead .h1 {
+  header.masthead h1, header.masthead2 h1, header.masthead .h1, header.masthead2 .h1 {
     font-size: 3rem;
   }
 }

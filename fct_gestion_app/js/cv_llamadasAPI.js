@@ -26,14 +26,13 @@ async function subirCV() {
             fetch(`${API_BASE_URL}/curriculums`, requestOptions)
                 .then(response => {
                     if (!response.ok) {
-                        alert('Error al subir el CV. Compruebe que sea en formato pdf.')
+                        alert('Error al subir el CV. Compruebe que sea formato pdf y/o que no tenga uno subido actualmente.')
                         throw new Error('Error en la solicitud: ' + response.status)
                     }
                     return response.json()
                 })
                 .then(result => {
                     console.log(result)
-                    alert('CV subido correctamente')
                 })
                 .catch(error => console.log('Error al subir el CV', error))
         } else {

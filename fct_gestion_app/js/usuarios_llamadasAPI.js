@@ -322,7 +322,7 @@ async function consultarToken() {
 
             // Redireccionar por rol
             // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige 
-            if (resultadoUsuario.rol_id === 2) {
+            if (resultadoUsuario.rol_id == 2) {
                 if (pagina.includes("gestion_alumnos") || pagina.includes("gestion_candidaturas") || pagina.includes("gestion_docentes") 
                 || pagina.includes("gestion_empresas") || pagina.includes("gestion_sedes")) {
                     window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
@@ -330,7 +330,7 @@ async function consultarToken() {
             }
 
             // Si un profesor intenta acceder a la página "inicio_alumno", se le redirige
-            if (resultadoUsuario.rol_id === 1) {
+            if (resultadoUsuario.rol_id == 1) {
                 if (pagina.includes("inicio_alumno")) {
                     window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
                 }
@@ -410,10 +410,10 @@ async function getUsuariosNombreCandidaturas() {
         const reponseDataCandidaturas = await reponseCandidaturas.json()
 
         responseData.forEach(usuario => {
-            if (usuario.rol_id === "2") {
+            if (usuario.rol_id == "2") {
                 // Comprobamos si el usuario tiene una candidatura aceptada
                 const candidaturaUsuarioAceptada = reponseDataCandidaturas.some(candidatura => 
-                    candidatura.usuario_id === usuario.id && candidatura.estado === "Aprobada"
+                    candidatura.usuario_id == usuario.id && candidatura.estado == "Aprobada"
                 )
                 
                 // Si tiene alguna aceptada, saldrá como disabled 

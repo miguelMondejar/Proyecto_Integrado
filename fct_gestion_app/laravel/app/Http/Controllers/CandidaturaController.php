@@ -58,7 +58,7 @@ class CandidaturaController extends Controller
         $usuarioId = $request->usuario_id;
         $candidaturaAceptada = Candidatura::where('usuario_id', $usuarioId)->where('estado', 'Aprobada')->exists();
 
-        // Si tiene una candidatura aceptada, no se podría crear dicha candidatura
+        // Si tiene una candidatura aceptada, no se podría crear la candidatura
         if ($candidaturaAceptada) {
             return response()->json(['error' => 'El usuario ya tiene una candidatura aceptada.'], 400);
         }
@@ -119,6 +119,15 @@ class CandidaturaController extends Controller
         // si hay algo mal
         if($validador->fails()) {
             return response()->json(['error' => $validador->messages()], 400);
+        }
+
+        // Verificamos si el usuario tiene una candidatura aceptada
+        $usuarioId = $request->usuario_id;
+        $candidaturaAceptada = Candidatura::where('usuario_id', $usuarioId)->where('estado', 'Aprobada')->exists();
+
+        // Si tiene una candidatura aceptada, no se podría crear la candidatura
+        if ($candidaturaAceptada && $request->estado == "Aprobada") {
+            return response()->json(['error' => 'El usuario ya tiene una candidatura aceptada.'], 400);
         }
 
         $candidatura = Candidatura::findOrFail($id);
