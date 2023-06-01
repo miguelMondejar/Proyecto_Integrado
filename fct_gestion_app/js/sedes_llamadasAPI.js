@@ -95,7 +95,7 @@ async function registerSede() {
             let response = await fetch(`${API_BASE_URL}/sedes`, requestRegistro)
             if (response.ok) {
                 alert("Sede creada correctamente")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_sedes.html"
+                window.location.href = `${WEB_URL}/gestion_sedes.html`
             } else {
                 alert("Datos erroneos, compruebelos.")
                 let error = await response.text()
@@ -126,7 +126,7 @@ async function deleteSede(id) {
             .then(response => {
                 if(response.ok) {
                     alert("Sede borrada correctamente")
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_sedes.html"
+                    window.location.href = `${WEB_URL}/gestion_sedes.html`
                 }
                 console.log(response.text())
             })
@@ -206,7 +206,7 @@ async function putSede(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Sede actualizada correctamente")
-                        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_sedes.html"
+                        window.location.href = `${WEB_URL}/gestion_sedes.html`
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }

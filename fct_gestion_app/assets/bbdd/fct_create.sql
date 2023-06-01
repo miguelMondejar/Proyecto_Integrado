@@ -55,8 +55,6 @@ CREATE TABLE Sedes (
 /* DDL Tabla Candidaturas */
 CREATE TABLE Candidaturas (
   id INTEGER(5) PRIMARY KEY AUTO_INCREMENT,
-  fecha_inicio DATE NOT NULL,
-  fecha_fin DATE NOT NULL,
   estado VARCHAR(15) NOT NULL,
   usuario_id INTEGER(5) NOT NULL,
   empresa_id INTEGER(5) NOT NULL,

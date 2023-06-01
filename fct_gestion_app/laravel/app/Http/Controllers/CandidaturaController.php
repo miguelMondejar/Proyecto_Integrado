@@ -40,10 +40,8 @@ class CandidaturaController extends Controller
     public function store(Request $request)
     {
         // Validamos los datos.
-        $data = $request->only('fecha_inicio', 'fecha_fin', 'estado', 'usuario_id', 'empresa_id');
+        $data = $request->only('estado', 'usuario_id', 'empresa_id');
         $validador = Validator::make($data, [
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date',
             'estado' => 'required|string|max:15',
             'usuario_id' => 'required|numeric',
             'empresa_id' => 'required|numeric'
@@ -65,8 +63,6 @@ class CandidaturaController extends Controller
 
         // Si no tiene una candidatura aceptada, creamos la candidatura
         $candidatura = Candidatura::create([
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
             'estado' => $request->estado,
             'usuario_id' => $request->usuario_id,
             'empresa_id' => $request->empresa_id
@@ -107,10 +103,8 @@ class CandidaturaController extends Controller
     public function update(Request $request, $id)
     {
         // Validamos los datos.
-        $data = $request->only('fecha_inicio', 'fecha_fin', 'estado', 'usuario_id', 'empresa_id');
+        $data = $request->only('estado', 'usuario_id', 'empresa_id');
         $validador = Validator::make($data, [
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date',
             'estado' => 'required|string|max:15',
             'usuario_id' => 'required|numeric',
             'empresa_id' => 'required|numeric'
@@ -134,8 +128,6 @@ class CandidaturaController extends Controller
 
         // Si está todo el orden, actualizamos la candidatura
         $candidatura->update([
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
             'estado' => $request->estado,
             'usuario_id' => $request->usuario_id,
             'empresa_id' => $request->empresa_id

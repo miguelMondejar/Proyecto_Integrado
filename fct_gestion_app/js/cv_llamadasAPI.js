@@ -51,7 +51,7 @@ async function getCV() {
         
         // si no tiene cv subido, saldrá un enlace para ello
         if(cv.value == undefined) {
-            cv.innerHTML = `<a href="http://127.0.0.1:3000/fct_gestion_app/inicio_alumno.html">Suba su CV</a>`
+            cv.innerHTML = `<a href="${WEB_URL}/inicio_alumno.html">Suba su CV</a>`
         }
         responseData.data.forEach(curriculum => {
             let ruta = curriculum.ruta
@@ -86,7 +86,7 @@ async function deleteCV(id) {
             .then(result => {
                 console.log(result)
                 alert("CV borrado correctamente")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/perfil_usuario.html"
+                window.location.href = `${WEB_URL}/perfil_usuario.html`
             })
             .catch(error => console.log('error', error))
     }

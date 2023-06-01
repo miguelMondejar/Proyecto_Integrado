@@ -10,8 +10,6 @@ class Candidatura extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'fecha_inicio', 
-        'fecha_fin', 
         'estado',
         'usuario_id',
         'empresa_id'

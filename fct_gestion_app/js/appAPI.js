@@ -1,5 +1,7 @@
 // ruta API
 const API_BASE_URL = "http://127.0.0.1:8000/api"
+// ruta web
+const WEB_URL = "http://127.0.0.1:3000/fct_gestion_app"
 
 // Funciones de ayuda
 // Función para recargar la página

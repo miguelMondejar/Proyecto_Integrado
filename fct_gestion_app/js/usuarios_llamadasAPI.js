@@ -88,7 +88,7 @@ async function registerUsuario() {
             .then(response => {
                 if(response.ok) {
                     alert("Usuario creado correctamente")
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                    window.location.href = `${WEB_URL}/gestion_alumnos.html`
                 }
                 response.text()
             })
@@ -193,7 +193,7 @@ async function putUsuario(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Usuario actualizado correctamente")
-                        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                        window.location.href = `${WEB_URL}/gestion_alumnos.html`
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }
@@ -233,7 +233,7 @@ async function deleteUsuario(id) {
             .then(result => {
                 console.log(result)
                 alert("Usuario borrado correctamente")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_alumnos.html"
+                window.location.href = `${WEB_URL}/gestion_alumnos.html`
             })
             .catch(error => console.log('error', error))
     }
@@ -270,7 +270,7 @@ async function consultarToken() {
     let token = localStorage.getItem('token')
     // si no existe, redirigimos al inicio de sesión
     if(token == null || token == "") {
-        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/login.html"
+        window.location.href = `${WEB_URL}/login.html`
     }
 
     // Configurar los encabezados para la solicitud user POST
@@ -302,7 +302,7 @@ async function consultarToken() {
             document.getElementById("nombre-usuario").textContent = `Bienvenido/a ${resultadoUsuario.nombre} 👋`
 
             // para que no de error al gestionar los datos del perfil
-            if(pagina == "http://127.0.0.1:3000/fct_gestion_app/perfil_usuario.html") {
+            if(pagina == `${WEB_URL}/perfil_usuario.html`) {
                 document.getElementById('nombre_perfil').textContent = resultadoUsuario.nombre
                 document.getElementById('apellidos_perfil').textContent = resultadoUsuario.apellidos
                 document.getElementById('fecha_nacimiento_perfil').textContent = resultadoUsuario.fecha_nacimiento
@@ -325,14 +325,14 @@ async function consultarToken() {
             if (resultadoUsuario.rol_id == 2) {
                 if (pagina.includes("gestion_alumnos") || pagina.includes("gestion_candidaturas") || pagina.includes("gestion_docentes") 
                 || pagina.includes("gestion_empresas") || pagina.includes("gestion_sedes")) {
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
+                    window.location.href = `${WEB_URL}/acceso_denegado.html`
                 }
             }
 
             // Si un profesor intenta acceder a la página "inicio_alumno", se le redirige
             if (resultadoUsuario.rol_id == 1) {
                 if (pagina.includes("inicio_alumno")) {
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/acceso_denegado.html"
+                    window.location.href = `${WEB_URL}/acceso_denegado.html`
                 }
             }
 

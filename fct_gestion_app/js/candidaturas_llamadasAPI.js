@@ -6,7 +6,7 @@ async function getCandidaturaUsuario() {
     let tabla = document.createElement('table')
     tabla.classList.add('table')
 
-    let encabezadosTabla = ['Fecha Inicio 📆', 'Fecha Fin 🔚', 'Empresa 🏢', 'Estado 👀']
+    let encabezadosTabla = ['Empresa 🏢', 'Estado 👀']
     let encabezadosFilas = document.createElement('tr')
 
     // Rellenamos el encabezado de la tabla
@@ -29,8 +29,6 @@ async function getCandidaturaUsuario() {
                 
                 let fila = document.createElement('tr')
                 fila.innerHTML = `
-                    <td>${candidatura.fecha_inicio}</td>
-                    <td>${candidatura.fecha_fin}</td>
                     <td>${empresaData.nombre}</td>
                     <td>${candidatura.estado}</td>`
                 tabla.appendChild(fila)
@@ -50,7 +48,7 @@ async function getCandidaturas() {
     let tabla = document.createElement('table')
     tabla.classList.add('table')
 
-    let encabezadosTabla = ['Fecha Inicio', 'Fecha Fin', 'Alumno', 'Empresa', 'Estado', 'Editar', 'Borrar']
+    let encabezadosTabla = ['Alumno', 'Empresa', 'Estado', 'Editar', 'Borrar']
     let encabezadosFilas = document.createElement('tr')
 
     // rellenamos el encabezado de la tabla
@@ -72,8 +70,6 @@ async function getCandidaturas() {
             
             let fila = document.createElement('tr')
             fila.innerHTML = `
-                <td>${candidatura.fecha_inicio}</td>
-                <td>${candidatura.fecha_fin}</td>
                 <td>${alumnoData.nombre}</td>
                 <td>${empresaData.nombre}</td>
                 <td>${candidatura.estado}</td>
@@ -108,8 +104,6 @@ async function registerCandidatura() {
         
         // hacemos el registro
         let datos = JSON.stringify({
-            "fecha_inicio": document.getElementById('fecha_inicio').value,
-            "fecha_fin": document.getElementById('fecha_fin').value,
             "estado": selectEstado.options[selectEstado.selectedIndex].value,
             "usuario_id": parseInt(selectAlumno.options[selectAlumno.selectedIndex].value),
             "empresa_id": parseInt(selectEmpresa.options[selectEmpresa.selectedIndex].value)
@@ -126,7 +120,7 @@ async function registerCandidatura() {
             let response = await fetch(`${API_BASE_URL}/candidaturas`, requestRegistro)
             if (response.ok) {
                 alert("Candidatura creada correctamente")
-                window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_candidaturas.html"
+                window.location.href = `${WEB_URL}/gestion_candidaturas.html`
             } else {
                 alert("Datos erroneos, compruebelos.")
                 let error = await response.text()
@@ -157,7 +151,7 @@ async function deleteCandidatura(id) {
             .then(response => {
                 if(response.ok) {
                     alert("Candidatura borrada correctamente")
-                    window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_candidaturas.html"
+                    window.location.href = `${WEB_URL}/gestion_candidaturas.html`
                 }
                 console.log(response.text())
             })
@@ -179,12 +173,6 @@ async function putCandidatura(id) {
             <p class="lead mb-0">Vas a editar la candidatura con ID <strong>${candidatura.id}</strong></p>
             <div class="text-center" id="formularioRegister">
             <form action="" id="formularioRegistro" onkeyup="validarRegistro()">
-                <label for="fecha_inicio">Fecha inicio</label>
-                <input type="date" id="fecha_inicio" name="fecha_inicio" value="${candidatura.fecha_inicio}">
-
-                <label for="fecha_fin">Fecha fin</label>
-                <input type="date" id="fecha_fin" name="fecha_fin" value="${candidatura.fecha_fin}">
-
                 <label>Empresa</label>
                 <select id="select-empresas">
                 </select>
@@ -221,8 +209,6 @@ async function putCandidatura(id) {
             let selectEstado = document.getElementById('estado')
 
             let datos = JSON.stringify({
-                "fecha_inicio": document.getElementById('fecha_inicio').value,
-                "fecha_fin": document.getElementById('fecha_fin').value,
                 "estado": selectEstado.options[selectEstado.selectedIndex].value,
                 "usuario_id": parseInt(selectAlumno.options[selectAlumno.selectedIndex].value),
                 "empresa_id": parseInt(selectEmpresa.options[selectEmpresa.selectedIndex].value)
@@ -239,7 +225,7 @@ async function putCandidatura(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Candidatura actualizada correctamente")
-                        window.location.href = "http://127.0.0.1:3000/fct_gestion_app/gestion_candidaturas.html"
+                        window.location.href = `${WEB_URL}/gestion_candidaturas.html`
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }
@@ -291,8 +277,7 @@ function validarRegistro() {
     limpiarOutput("errores")
     let campoErrores = document.getElementById("errores")
 
-    if (!validarCamposVacios(document.getElementById('fecha_inicio').value) || !validarCamposVacios(document.getElementById('fecha_fin').value) || 
-    !validarCamposVacios(document.getElementById('estado').value) || !validarCamposVacios(document.getElementById('select-usuarios').value) ||
+    if (!validarCamposVacios(document.getElementById('estado').value) || !validarCamposVacios(document.getElementById('select-usuarios').value) ||
     !validarCamposVacios(document.getElementById('select-empresas').value))  {
         campoErrores.innerHTML += `${mensajeVacio} <br>`
     }
