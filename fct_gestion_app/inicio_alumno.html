@@ -42,16 +42,14 @@
             </div>
             <!-- menu-->
             <div id="menu" style="display:none">
-                <ul>
-                    <li><a href="perfil_usuario.html">Perfil</a></li> 
-                    <li><a href="" onclick="logout()">Cerrar sesión</a></li>
-                </ul>
+                <a href="perfil_usuario.html">Perfil </a>
+                <a href="" onclick="logout()"> Cerrar sesión</a>
             </div>
         </nav>
 
         <!-- bienvenida-->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5" id="nombre-usuario">Bienvenido/a</h1>
+            <h1 class="mb-5" id="nombre-usuario">¡Hola! 👋</h1>
             <p class="lead mb-0">Puede visualizar sus candidaturas activas, gestionar su perfil y subir su CV.</p>
         </section>
 
@@ -67,10 +65,11 @@
         <!-- Boton subir CV-->
         <section class="features-icons bg-white text-center">
             <h4 class="mb-5" id="nombre-usuario">Suba su CV desde aquí 📂</h4>
-            <form id="cvForm" enctype="multipart/form-data">
-                <input class="btn btn-secundary" type="file" name="cvFile" id="cvFile">
-                <input class="btn btn-primary" type="submit" value="Subir" id="submitBtn">
-            </form>
+            <div class="container">
+                <a href="gestion_cv.html">
+                    <input type="button" height="33" width="100" value="Gestión CV" class="btn btn-primary">
+                </a>
+            </div>
         </section>
 
         <!-- Masthead-->

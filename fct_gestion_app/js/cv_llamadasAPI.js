@@ -51,7 +51,7 @@ async function getCV() {
         
         // si no tiene cv subido, saldrá un enlace para ello
         if(cv.value == undefined) {
-            cv.innerHTML = `<a href="${WEB_URL}/inicio_alumno.html">Suba su CV</a>`
+            cv.innerHTML = `<a href="${WEB_URL}/gestion_cv.html">Suba su CV</a>`
         }
         responseData.data.forEach(curriculum => {
             let ruta = curriculum.ruta

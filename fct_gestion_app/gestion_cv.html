@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>FCT Gestion App - Gestión alumnos</title>
+        <title>FCT Gestion App - CV Alumno</title>
 
         <!-- Icono-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -25,7 +25,11 @@
         <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
+        <script src="js/sedes_llamadasAPI.js"></script>
+        <script src="js/candidaturas_llamadasAPI.js"></script>
+        <script src="js/cv_llamadasAPI.js"></script>
     </head>
+
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-white static-top">
@@ -38,67 +42,41 @@
             </div>
             <!-- menu-->
             <div id="menu" style="display:none">
-                <a href="gestion_alumnos.html"> Gestión Usuarios </a> 
-                <a href="gestion_empresas.html"> Gestión Empresas </a>
-                <a href="gestion_sedes.html"> Gestión Sedes </a></li> 
-                <a href="gestion_candidaturas.html"> Gestión Candidaturas </a>
                 <a href="perfil_usuario.html">Perfil </a>
                 <a href="" onclick="logout()"> Cerrar sesión</a>
             </div>
         </nav>
-        
-        <!-- bienvenida -->
+
+        <!-- bienvenida-->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5">Gestion de usuarios</h1>
-            <p class="lead mb-0">Crea a un nuevo usuario, puede elegir entre alumno y docente.</p>
+            <h1 class="mb-5">Suba su CV 📂</h1>
+            <p class="lead mb-5">El alumno podrá subir o borrar su Curriculum</p>
         </section>
 
-        <!-- formulario -->
+        <!-- Boton subir CV-->
         <section class="features-icons bg-light text-center">
-            <div class="text-center" id="formularioRegister">
-                <form action="gestion_alumnos.html" id="formularioRegistro" onkeyup="validarRegistro()">
-                    <div class="form-column">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre">
-                        <label for="password1">Contraseña</label>
-                        <input type="password" id="password1" name="password1">
-                        <label for="fecha_nacimiento">Fecha Nacimiento</label>
-                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
-                        <label for="correo">Correo eléctronico</label>
-                        <input type="email" id="correo" name="correo">
-                        <label>Rol</label>
-                        <select id="select-rol">
-                            <option value="2">Alumno</option>
-                            <option value="1">Docente</option>
-                        </select>
-                    </div>
-                    <div class="form-column">
-                        <label for="apellidos">Apellidos</label>
-                        <input type="text" id="apellidos" name="apellidos">
-                        <label for="password2">Repetir contraseña</label>
-                        <input type="password" id="password2" name="password2">
-                        <label for="dni">DNI</label>
-                        <input type="text" id="dni" name="dni">
-                        <label for="telefono">Teléfono</label>
-                        <input type="text" id="telefono" name="telefono">
-                    </div>
-
-                    <p id="errores"></p> 
-                    
-                    <input type="submit" value="Enviar" class="btn btn-primary">
-                </form>   
-            </div>                                 
+            <form id="cvForm" enctype="multipart/form-data">
+                <input class="btn btn-secundary" type="file" name="cvFile" id="cvFile">
+                <input class="btn btn-primary" type="submit" value="Subir" id="submitBtn">
+            </form>
         </section>
 
-        <!-- botón volver atrás -->
+        <!-- Ver o borrar cv -->
+        <section class="features-icons bg-light text-center">
+            <div class="lead mb-5" id="cvTitulo"></div>
+            <div class="lead mb-5" id="cv"></div>
+        </section>
+
+        <!-- boton -->
         <section class="features-icons bg-light text-center">
             <div class="container">
-                <a href="gestion_alumnos.html">
+                <!-- botón volver atrás -->
+                <a href="inicio_alumno.html">
                     <input type="button" height="33" width="100" value="🡰 Ir atrás" class="btn btn-dark">
-                </a>  
-            </div>   
+                </a>
+            </div>
         </section>
-     
+
         <!-- Footer-->
         <footer class="footer bg-dark">
             <div class="container">
@@ -131,9 +109,8 @@
                 </div>
             </div>
         </footer>
-
+        
+        <script></script>
         <script>mostrarMenu()</script>
-        <script>consultarToken()</script>
-        <script>registerUsuario()</script>
-    </body>    
+    </body>
 </html>

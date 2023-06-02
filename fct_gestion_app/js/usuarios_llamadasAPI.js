@@ -299,7 +299,7 @@ async function consultarToken() {
         .then(result => {
             let pagina = window.location.href
             let resultadoUsuario = result.usuario
-            document.getElementById("nombre-usuario").textContent = `Bienvenido/a ${resultadoUsuario.nombre} 👋`
+            document.getElementById("nombre-usuario").textContent = `¡Hola, ${resultadoUsuario.nombre}! 👋`
 
             // para que no de error al gestionar los datos del perfil
             if(pagina == `${WEB_URL}/perfil_usuario.html`) {
@@ -331,7 +331,7 @@ async function consultarToken() {
 
             // Si un profesor intenta acceder a la página "inicio_alumno", se le redirige
             if (resultadoUsuario.rol_id == 1) {
-                if (pagina.includes("inicio_alumno")) {
+                if (pagina.includes("inicio_alumno") || pagina.includes("gestion_cv")) {
                     window.location.href = `${WEB_URL}/acceso_denegado.html`
                 }
             }
