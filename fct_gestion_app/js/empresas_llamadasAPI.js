@@ -71,7 +71,7 @@ async function registerEmpresa() {
             let response = await fetch(`${API_BASE_URL}/empresas`, requestRegistro)
             if (response.ok) {
                 alert("Empresa creada correctamente")
-                window.location.href = `${WEB_URL}/gestion_empresas.html`
+                window.location.href = `gestion_empresas.html`
             } else {
                 alert("Datos erroneos, compruebelos.")
                 let error = await response.text()
@@ -103,7 +103,7 @@ async function deleteEmpresa(id) {
             .then(result => {
                 console.log(result)
                 alert("Empresa borrada correctamente")
-                window.location.href = `${WEB_URL}/gestion_empresas.html`
+                window.location.href = `gestion_empresas.html`
             })
             .catch(error => console.log('error', error))
     }
@@ -160,7 +160,7 @@ async function putEmpresa(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Empresa actualizada correctamente")
-                        window.location.href = `${WEB_URL}/gestion_empresas.html`
+                        window.location.href = `gestion_empresas.html`
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }

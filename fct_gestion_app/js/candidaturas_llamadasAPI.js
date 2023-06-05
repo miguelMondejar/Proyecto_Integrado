@@ -120,7 +120,7 @@ async function registerCandidatura() {
             let response = await fetch(`${API_BASE_URL}/candidaturas`, requestRegistro)
             if (response.ok) {
                 alert("Candidatura creada correctamente")
-                window.location.href = `${WEB_URL}/gestion_candidaturas.html`
+                window.location.href = `gestion_candidaturas.html`
             } else {
                 alert("Datos erroneos, compruebelos.")
                 let error = await response.text()
@@ -151,7 +151,7 @@ async function deleteCandidatura(id) {
             .then(response => {
                 if(response.ok) {
                     alert("Candidatura borrada correctamente")
-                    window.location.href = `${WEB_URL}/gestion_candidaturas.html`
+                    window.location.href = `gestion_candidaturas.html`
                 }
                 console.log(response.text())
             })
@@ -225,7 +225,7 @@ async function putCandidatura(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Candidatura actualizada correctamente")
-                        window.location.href = `${WEB_URL}/gestion_candidaturas.html`
+                        window.location.href = `gestion_candidaturas.html`
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }

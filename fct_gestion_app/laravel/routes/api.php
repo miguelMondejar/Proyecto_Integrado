@@ -32,7 +32,6 @@ Route::get("sedes", [SedeController::class, "index"]);
 Route::get("sedes/{id}", [SedeController::class, "show"]);
 
 Route::get("curriculums", [CurriculumController::class, "index"]);
-Route::get("curriculums/{id}", [CurriculumController::class, "show"]);
 
 Route::get("roles", [RoleController::class, "index"]);
 Route::get("roles/{id}", [RoleController::class, "show"]);
@@ -68,4 +67,5 @@ Route::group(['middleware' => ["jwt.verify"]], function() {
    Route::put("curriculums/{id}", [CurriculumController::class, "update"]);
    Route::delete("curriculums/{id}", [CurriculumController::class, "destroy"]);
    Route::post("curriculums", [CurriculumController::class, "store"]);
+   Route::get("curriculums/{id}", [CurriculumController::class, "show"]);  
 });

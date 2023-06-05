@@ -1,7 +1,7 @@
 // ruta API
 const API_BASE_URL = "http://127.0.0.1:8000/api"
 // ruta web
-const WEB_URL = "http://127.0.0.1:3000/fct_gestion_app"
+const WEB_URL = "http://localhost/fct_gestion_app"
 
 // Funciones de ayuda
 // Función para recargar la página
@@ -10,7 +10,7 @@ const recargaPagina = () => {
 }
 
 // Función para desplegar un menú al hacer clic en el perfil
-function mostrarMenu() {
+async function mostrarMenu() {
     const enlaceMenu = document.getElementById('enlace-menu')
 
     enlaceMenu.addEventListener('click', function(event) {

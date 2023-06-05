@@ -21,12 +21,8 @@
         <link href="css/forms.css" rel="stylesheet">
 
         <!-- Scripts JS -->
-        <script src="js/form.js"></script>
-        <script src="js/validaciones.js"></script>
         <script src="js/appAPI.js"></script>
         <script src="js/usuarios_llamadasAPI.js"></script>
-        <script src="js/sedes_llamadasAPI.js"></script>
-        <script src="js/candidaturas_llamadasAPI.js"></script>
         <script src="js/cv_llamadasAPI.js"></script>
     </head>
 
@@ -43,18 +39,19 @@
             <!-- menu-->
             <div id="menu" style="display:none">
                 <a href="perfil_usuario.html">Perfil </a>
+                <a href="gestion_cv.html"> CV </a>
                 <a href="" onclick="logout()"> Cerrar sesión</a>
             </div>
         </nav>
 
         <!-- bienvenida-->
         <section class="features-icons bg-light text-center">
-            <h1 class="mb-5">Suba su CV 📂</h1>
-            <p class="lead mb-5">El alumno podrá subir o borrar su Curriculum</p>
+            <h1 class="mb-5">Suba su CV 📄</h1>
+            <p class="lead mb-5">Puedes subir o borrar tu curriculum</p>
         </section>
 
         <!-- Boton subir CV-->
-        <section class="features-icons bg-light text-center">
+        <section id="subirCV" class="features-icons bg-light text-center">
             <form id="cvForm" enctype="multipart/form-data">
                 <input class="btn btn-secundary" type="file" name="cvFile" id="cvFile">
                 <input class="btn btn-primary" type="submit" value="Subir" id="submitBtn">
@@ -63,8 +60,11 @@
 
         <!-- Ver o borrar cv -->
         <section class="features-icons bg-light text-center">
-            <div class="lead mb-5" id="cvTitulo"></div>
-            <div class="lead mb-5" id="cv"></div>
+            <div>
+                <p class="lead mb-0" id="no-cv"></p>
+                <embed id="embed-curriculum" type="application/pdf" width="100%" height="600px">
+            </div>
+            <br><div class="lead mb-5" id="cv"></div>
         </section>
 
         <!-- boton -->
@@ -110,7 +110,9 @@
             </div>
         </footer>
         
-        <script></script>
+        <script>consultarToken()</script>
+        <script>getCV()</script>
+        <script>subirCV()</script>
         <script>mostrarMenu()</script>
     </body>
 </html>

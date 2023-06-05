@@ -88,7 +88,7 @@ async function registerUsuario() {
             .then(response => {
                 if(response.ok) {
                     alert("Usuario creado correctamente")
-                    window.location.href = `${WEB_URL}/gestion_alumnos.html`
+                    window.location.href = `gestion_alumnos.html`
                 }
                 response.text()
             })
@@ -193,7 +193,7 @@ async function putUsuario(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Usuario actualizado correctamente")
-                        window.location.href = `${WEB_URL}/gestion_alumnos.html`
+                        window.location.href = `gestion_alumnos.html`
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }
@@ -233,7 +233,7 @@ async function deleteUsuario(id) {
             .then(result => {
                 console.log(result)
                 alert("Usuario borrado correctamente")
-                window.location.href = `${WEB_URL}/gestion_alumnos.html`
+                window.location.href = `gestion_alumnos.html`
             })
             .catch(error => console.log('error', error))
     }
@@ -270,7 +270,7 @@ async function consultarToken() {
     let token = localStorage.getItem('token')
     // si no existe, redirigimos al inicio de sesión
     if(token == null || token == "") {
-        window.location.href = `${WEB_URL}/login.html`
+        window.location.href = `login.html`
     }
 
     // Configurar los encabezados para la solicitud user POST
@@ -302,37 +302,53 @@ async function consultarToken() {
             document.getElementById("nombre-usuario").textContent = `¡Hola, ${resultadoUsuario.nombre}! 👋`
 
             // para que no de error al gestionar los datos del perfil
-            if(pagina == `${WEB_URL}/perfil_usuario.html`) {
+            if (pagina.includes('perfil_usuario.html')) {
                 document.getElementById('nombre_perfil').textContent = resultadoUsuario.nombre
                 document.getElementById('apellidos_perfil').textContent = resultadoUsuario.apellidos
                 document.getElementById('fecha_nacimiento_perfil').textContent = resultadoUsuario.fecha_nacimiento
                 document.getElementById('dni_perfil').textContent = resultadoUsuario.dni
                 document.getElementById('correo_perfil').textContent = resultadoUsuario.email
                 document.getElementById('telefono_perfil').textContent = resultadoUsuario.telefono
-
-                // si el rol del usuario es 2, pintamos el CV en el perfil
                 if (resultadoUsuario.rol_id == 2) {
-                    document.getElementById("cvTitulo").textContent = "CV"
-                    getCV()
+                    document.getElementById('perfil-usuario').textContent = "Perfil de alumno"
                 } else {
-                    document.getElementById("cv").remove()
-                    document.getElementById("cvTitulo").remove()
+                    document.getElementById('perfil-usuario').textContent = "Perfil de docente" 
                 }
             }
 
+            // Pintar enlaces en menú dependiendo del rol que tengas
+            let menu = document.getElementById('menu')
+
+            if (resultadoUsuario.rol_id == 2) {
+                menu.innerHTML = `
+                <a href="perfil_usuario.html">Perfil </a>
+                <a href="gestion_cv.html"> CV </a>
+                <a href="" onclick="logout()"> Cerrar sesión</a>`
+            }
+
+            if(resultadoUsuario.rol_id == 1) {
+                menu.innerHTML = `
+                <a href="gestion_alumnos.html"> Gestión Usuarios </a> 
+                <a href="gestion_empresas.html"> Gestión Empresas </a>
+                <a href="gestion_sedes.html"> Gestión Sedes </a></li> 
+                <a href="gestion_candidaturas.html"> Gestión Candidaturas </a>
+                <a href="perfil_usuario.html">Perfil </a>
+                <a href="" onclick="logout()"> Cerrar sesión</a>`
+            }
+            
             // Redireccionar por rol
             // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige 
             if (resultadoUsuario.rol_id == 2) {
                 if (pagina.includes("gestion_alumnos") || pagina.includes("gestion_candidaturas") || pagina.includes("gestion_docentes") 
                 || pagina.includes("gestion_empresas") || pagina.includes("gestion_sedes")) {
-                    window.location.href = `${WEB_URL}/acceso_denegado.html`
+                    window.location.href = `acceso_denegado.html`
                 }
             }
 
             // Si un profesor intenta acceder a la página "inicio_alumno", se le redirige
             if (resultadoUsuario.rol_id == 1) {
                 if (pagina.includes("inicio_alumno") || pagina.includes("gestion_cv")) {
-                    window.location.href = `${WEB_URL}/acceso_denegado.html`
+                    window.location.href = `acceso_denegado.html`
                 }
             }
 

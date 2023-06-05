@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class CurriculumController extends Controller
 {
@@ -88,14 +87,21 @@ class CurriculumController extends Controller
         }
 
         // Buscar el curriculum por el id del usuario
-        $curriculum = Curriculum::where('usuario_id', $user->id)->get();
+        $curriculum = Curriculum::where('usuario_id', $user->id)->first();
 
         if (!$curriculum) {
             return response()->json(['error' => 'Curriculum no encontrado'], 404);
         }
 
-        // Retornar la respuesta con el curriculum encontrado
-        return response()->json(['data' => $curriculum], Response::HTTP_OK);
+        // Obtener la ruta del archivo de curriculum
+        $rutaArchivo = storage_path('app/' . $curriculum->ruta);
+
+        if (!file_exists($rutaArchivo)) {
+            return response()->json(['error' => 'Archivo de curriculum no encontrado'], 404);
+        }
+
+        // Devolver el archivo como respuesta
+        return response()->file($rutaArchivo);
     }
 
     /**
@@ -139,21 +145,23 @@ class CurriculumController extends Controller
      * @param  \App\Models\Curriculum  $curriculum
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idUsuario)
     {
-        // buscamos el cv
-        $cv = Curriculum::findOrFail($id);
+        // Buscamos el currículum del usuario
+        $cv = Curriculum::where('usuario_id', $idUsuario)->first();
 
-        // si no existe
-        if(!$cv) {
-            return response()->json(['error' => "CV no encontrado"], 404);
+        // Si no existe
+        if (!$cv) {
+            return response()->json(['error' => 'Currículum no encontrado'], 404);
         }
 
-        // Si existe el cv, también se borrará del storage el pdf
-        $CVpdf = $cv->ruta;
-        Storage::delete($CVpdf);
+        // Eliminar el archivo del almacenamiento (storage) si existe
+        if (Storage::exists($cv->ruta)) {
+            Storage::delete($cv->ruta);
+        }
 
         $cv->delete();
-        return response()->json(['mensaje' => "CV borrado perfectamente."], Response::HTTP_OK);
+
+        return response()->json(['mensaje' => 'Currículum borrado correctamente'], 200);
     }
 }

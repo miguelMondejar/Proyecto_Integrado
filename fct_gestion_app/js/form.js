@@ -70,12 +70,12 @@ function loginUsuario() {
                             // guardamos token en localStorage
                             localStorage.setItem('token', token)
                             // enviamos a inicio de la página profesor
-                            window.location.href = `${WEB_URL}/inicio_profesor.html`
+                            window.location.href = `inicio_profesor.html`
                         } else if (result.usuario.rol_id == 2) {
                             // guardamos token en localStorage
                             localStorage.setItem('token', token)
                             // enviamos a inicio de la página profesor
-                            window.location.href = `${WEB_URL}/inicio_alumno.html`
+                            window.location.href = `inicio_alumno.html`
                         } else {
                             console.log('Rol no válido')
                         }
