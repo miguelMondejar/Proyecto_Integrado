@@ -193,7 +193,7 @@ async function putUsuario(id) {
                 .then(response => {
                     if (response.ok) {
                         alert("Usuario actualizado correctamente")
-                        window.location.href = `gestion_alumnos.html`
+                        recargaPagina()
                     } else {
                         alert("Compruebe los datos del formulario.")
                     }
@@ -203,7 +203,7 @@ async function putUsuario(id) {
                 .catch(error => console.log('error', error))
         })    
     } catch (error) {
-        console.log(`Something went wrong: ${error}`)
+        console.log(mensajeErrorGenerico + error)
     }
 }
 
@@ -299,7 +299,10 @@ async function consultarToken() {
         .then(result => {
             let pagina = window.location.href
             let resultadoUsuario = result.usuario
-            document.getElementById("nombre-usuario").textContent = `¡Hola, ${resultadoUsuario.nombre}! 👋`
+
+            if(document.getElementById("nombre-usuario")) {
+                document.getElementById("nombre-usuario").textContent = `¡Hola, ${resultadoUsuario.nombre}! 👋`
+            }
 
             // para que no de error al gestionar los datos del perfil
             if (pagina.includes('perfil_usuario.html')) {
@@ -339,8 +342,8 @@ async function consultarToken() {
             // Redireccionar por rol
             // si un alumno intenta acceder a una página diferente a "inicio_alumno" o "perfil_usuario", se le redirige 
             if (resultadoUsuario.rol_id == 2) {
-                if (pagina.includes("gestion_alumnos") || pagina.includes("gestion_candidaturas") || pagina.includes("gestion_docentes") 
-                || pagina.includes("gestion_empresas") || pagina.includes("gestion_sedes")) {
+                if (pagina.includes("inicio_profesor") || pagina.includes("gestion_alumnos") || pagina.includes("gestion_candidaturas") 
+                || pagina.includes("gestion_docentes") || pagina.includes("gestion_empresas") || pagina.includes("gestion_sedes")) {
                     window.location.href = `acceso_denegado.html`
                 }
             }
