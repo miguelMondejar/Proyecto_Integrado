@@ -1,8 +1,17 @@
-php artisan tinker
+El usuario inicial es el usuario de Antonio
+email = agagesp006@g.educaand.es
+contraseña = contraseña123
 
-$users = App\Models\User::all();
+Para encriptar la contraseña, hay que seguir estos pasos
 
+1. Abre terminal de la carpeta de laravel del proyecto
+2. php artisan tinker
+*enter*
+3. $users = App\Models\User::all();
+*enter*
+4.
 foreach ($users as $user) {
     $user->password = bcrypt($user->password);
     $user->save();
 }
+*enter*

@@ -89,6 +89,8 @@ async function registerUsuario() {
                 if(response.ok) {
                     alert("Usuario creado correctamente")
                     window.location.href = `gestion_alumnos.html`
+                } else {
+                    alert("Verifique los datos en el formulario")
                 }
                 response.text()
             })
@@ -195,7 +197,7 @@ async function putUsuario(id) {
                         alert("Usuario actualizado correctamente")
                         recargaPagina()
                     } else {
-                        alert("Compruebe los datos del formulario.")
+                        alert("Verifique los datos en el formulario")
                     }
                     response.text()
                 })

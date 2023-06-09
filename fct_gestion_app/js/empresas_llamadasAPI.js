@@ -162,7 +162,7 @@ async function putEmpresa(id) {
                         alert("Empresa actualizada correctamente")
                         window.location.href = `gestion_empresas.html`
                     } else {
-                        alert("Compruebe los datos del formulario.")
+                        alert("Verifique los datos del formulario.")
                     }
                     response.text()
                 })

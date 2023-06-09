@@ -208,7 +208,7 @@ async function putSede(id) {
                         alert("Sede actualizada correctamente")
                         window.location.href = `gestion_sedes.html`
                     } else {
-                        alert("Compruebe los datos del formulario.")
+                        alert("Verifique los datos del formulario.")
                     }
                     response.text()
                 })

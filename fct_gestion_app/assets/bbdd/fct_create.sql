@@ -26,7 +26,7 @@ CREATE TABLE Usuarios (
 /* DDL Tabla Curriculums */
 CREATE TABLE Curriculums (
   id INTEGER(5) PRIMARY KEY AUTO_INCREMENT,
-  ruta VARCHAR(20) NOT NULL,
+  ruta VARCHAR(100) NOT NULL,
   usuario_id INTEGER(5) NOT NULL UNIQUE,
   FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
 );
